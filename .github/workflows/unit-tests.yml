@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 env:
-  PYTHON_VERSION: 3.10.8
+  PYTHON_VERSION: 3.11.2
 
 jobs:
 
@@ -16,6 +16,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ inputs.git_ref }}
+          lfs: True
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -47,3 +48,8 @@ jobs:
       - name: Report
         run: |
           make report-coverage
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
