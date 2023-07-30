@@ -9,11 +9,6 @@ from Bio import SeqIO
 from pacbio_qc.phred_scores import expected_number_of_errors
 
 
-@pytest.fixture(name='example_fastq_file')
-def fixture_example_fastq_file():
-    return 'tests/fixtures/example_ccs.fastq.gz'
-
-
 def test_expected_number_of_errors(example_fastq_file, snapshot):
     actual_expected_errors = []
     with gzip.open(example_fastq_file, 'rt') as fq:
