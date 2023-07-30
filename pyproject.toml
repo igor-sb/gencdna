@@ -1,14 +1,16 @@
 [tool.poetry]
-name = "cicd-template"
+name = "pacbio_qc"
 version = "0.1.0"
-description = "A template for CI/CD development tools."
-authors = ["nicklamiller <nicklamiller@gmail.com>"]
+description = "PacBio sequencing quality control"
+authors = ["igor-sb <84479009+igor-sb@users.noreply.github.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
-pygame = "^2.1.2"
+python = "^3.11"
 mypy = "^0.991"
+pytest = "^7.4.0"
+pytest-snapshot = "^0.9.0"
+biopython = "^1.81"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2.0"
@@ -19,6 +21,7 @@ isort = "^5.10.1"
 flake8 = "4.0.1"
 pre-commit = "^2.20.0"
 coverage = "^6.5.0"
+ipykernel = "^6.25.0"
 
 [build-system]
 requires = ["poetry-core"]
