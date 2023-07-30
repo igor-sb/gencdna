@@ -13,7 +13,7 @@ def test_expected_number_of_errors(example_fastq_file, snapshot):
     with gzip.open(example_fastq_file, 'rt') as fq:
         for fq_record in SeqIO.parse(fq, 'fastq'):
             actual_expected_errors.append(
-                expected_number_of_errors(fq_record),
+                '{:.2E}'.format(expected_number_of_errors(fq_record)),
             )
     snapshot.snapshot_dir = 'tests/snapshots'
     snapshot.assert_match(
