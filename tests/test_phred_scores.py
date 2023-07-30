@@ -14,7 +14,7 @@ def test_expected_number_of_errors(example_fastq_file, snapshot):
         example_fastq_file=example_fastq_file,
     ))
     print('First two bytes: {head}'.format(
-        head=open(example_fastq_file, 'rb').read(2)
+        head=open(example_fastq_file, 'rb').read()
     ))
     with gzip.open(example_fastq_file, 'rt') as fq:
         for fq_record in SeqIO.parse(fq, 'fastq'):
