@@ -1,3 +1,5 @@
+"""Test fixtures."""
+
 import os
 import pytest
 
