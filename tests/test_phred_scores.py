@@ -1,7 +1,7 @@
 """Test phred score manipulation functions."""
 
 import gzip
-import pickle
+import json
 
 from Bio import SeqIO
 
@@ -17,6 +17,6 @@ def test_expected_number_of_errors(example_fastq_file, snapshot):
             )
     snapshot.snapshot_dir = 'tests/snapshots'
     snapshot.assert_match(
-        pickle.dumps(actual_expected_errors),
-        'example_ccs_expected_errors.pkl',
+        json.dumps(actual_expected_errors),
+        'example_ccs_expected_errors.json',
     )
