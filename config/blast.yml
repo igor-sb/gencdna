@@ -1,0 +1,6 @@
+word_size: 13
+gap_open: 0
+gap_extend: 2
+dust: 'no'
+strand: 'plus'
+outfmt: 6
