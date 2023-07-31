@@ -1,3 +1,4 @@
+executable_path: 'blastn'
 word_size: 13
 gap_open: 0
 gap_extend: 2
