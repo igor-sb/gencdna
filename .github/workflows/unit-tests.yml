@@ -21,8 +21,7 @@ jobs:
       - name: Install NCBI blast+
         run: |
           curl -o ncbi-blast-2.14.0+-x64-linux.tar.gz "ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.14.0/ncbi-blast-2.14.0+-x64-linux.tar.gz"
-          echo $PATH
-          tar -xzf ncbi-blast-2.14.0+-x64-linux.tar.gz --strip-components=2 -C /usr/bin/ ncbi-blast-2.14.0+/bin/
+          tar -xzf ncbi-blast-2.14.0+-x64-linux.tar.gz --strip-components=2 -C /home/runner/.local/bin/ ncbi-blast-2.14.0+/bin/
 
       - name: Set up Python
         uses: actions/setup-python@v4
