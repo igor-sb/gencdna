@@ -18,7 +18,7 @@ def flag_lowqual_repeated_bases(
 
     Find repeated bases in a FASTQ record. If the first base has a quality
     score less than a threshold, flag the sequence by replacing the rest of the
-    repeated bases with a flag_base character and assig it a flag_quality_score
+    repeated bases with a flag_base character and assign it flag_quality_score.
     For example, replace ATTTTTG with ATNG, based on the quality score of the
     first T.
     """
