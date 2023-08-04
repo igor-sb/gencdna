@@ -13,9 +13,9 @@ outfmt6_column_names:
   - alignment_overlap_length
   - n_mismatches
   - n_gapopen
-  - query_alignment_start
-  - query_alignment_end
-  - subject_alignment_start
-  - subject_alignment_end
+  - query_start
+  - query_end
+  - subject_start
+  - subject_end
   - e_value
   - bit_score

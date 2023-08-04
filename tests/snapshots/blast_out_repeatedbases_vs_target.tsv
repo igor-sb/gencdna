@@ -1,4 +1,4 @@
-query_id	subject_id	percent_identical	alignment_overlap_length	n_mismatches	n_gapopen	query_alignment_start	query_alignment_end	subject_alignment_start	subject_alignment_end	e_value	bit_score
+query_id	subject_id	percent_identical	alignment_overlap_length	n_mismatches	n_gapopen	query_start	query_end	subject_start	subject_end	e_value	bit_score
 sequence_with_qscore25_at_3rd_position_and_qscore31_at_13th_position	combination_of_both_sequences_with_spacing_CTCTCT	100.0	7	0	0	5	11	7	13	0.021	13.6
 sequence_with_qscore25_at_3rd_position_and_qscore31_at_13th_position	combination_of_both_sequences_with_spacing_CTCTCT	100.0	4	0	0	6	9	32	35	0.75	8.4
 sequence_with_qscore32_at_4th_position_and_qscore23_at_10th_position_and_qscore14_at_16th_position	combination_of_both_sequences_with_spacing_CTCTCT	92.857	14	1	0	1	14	20	33	7.29e-05	22.2
