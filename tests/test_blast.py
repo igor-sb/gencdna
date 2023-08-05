@@ -15,12 +15,12 @@ def test_blast_run(
     blast_output_from_repeated_bases_vs_target,
     snapshot,
 ):
-    blast = Blast(
+    blast = Blast()
+    blast.config['alignment']['word_size'] = 4
+    blast_output = blast.run(
         query=repeated_bases_flagged_fasta_file,
         subject=target_with_repeated_bases_fasta_file,
     )
-    blast.config['alignment']['word_size'] = 4
-    blast_output = blast.run()
     blast_output_df = BlastOutputParser(blast_output).output_as_dataframe()
     snapshot.snapshot_dir = os.path.dirname(
         blast_output_from_repeated_bases_vs_target,

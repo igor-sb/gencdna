@@ -16,8 +16,6 @@ class Blast(object):
 
     def __init__(
         self,
-        query: str,
-        subject: str,
         config_yml: str = 'config/blast.yml',
         executable_path: str = 'blastn',
     ) -> None:
@@ -26,8 +24,6 @@ class Blast(object):
         if not is_executable_available(executable_path):
             raise FileNotFoundError(executable_path)
         self.executable_path = executable_path
-        self.query = query
-        self.subject = subject
 
     def create_blast_command(self) -> list[str]:
         cmd = [self.executable_path]
@@ -36,11 +32,11 @@ class Blast(object):
                 '-{arg_flag}'.format(arg_flag=arg_flag),
                 str(arg_value),
             ])
-        cmd.extend(['-query', self.query, '-subject', self.subject])
         return cmd
 
-    def run(self) -> subprocess.CompletedProcess:
+    def run(self, query: str, subject: str) -> subprocess.CompletedProcess:
         cmd = self.create_blast_command()
+        cmd.extend(['-query', query, '-subject', subject])
         return subprocess.run(cmd, capture_output=True)  # noqa: S603
 
 
