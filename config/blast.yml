@@ -1,21 +1,9 @@
-alignment:
+arguments:
+  reward: 1
+  penalty: -2
   word_size: 13
   gapopen: 0
   gapextend: 2
   dust: 'no'
   strand: 'plus'
   outfmt: 6
-
-outfmt6_column_names:
-  - query_id
-  - subject_id
-  - percent_identical
-  - alignment_overlap_length
-  - n_mismatches
-  - n_gapopen
-  - query_start
-  - query_end
-  - subject_start
-  - subject_end
-  - e_value
-  - bit_score

@@ -1,8 +1,10 @@
 """Test blastn subprocess calls and output parsing."""
 import os
+
 import pytest
 
-from pacbio_qc.blast import Blast, BlastOutputParser, is_executable_available
+from pacbio_qc.bash import BinaryExecWithYamlArgs, is_executable_available
+from pacbio_qc.blast import BlastOutputParser
 
 
 @pytest.mark.skipif(
@@ -15,11 +17,13 @@ def test_blast_run(
     blast_output_from_repeated_bases_vs_target,
     snapshot,
 ):
-    blast = Blast()
-    blast.config['alignment']['word_size'] = 4
+    blast = BinaryExecWithYamlArgs('blastn', 'config/blast.yml')
+    blast.config['arguments']['word_size'] = 4
     blast_output = blast.run(
-        query=repeated_bases_flagged_fasta_file,
-        subject=target_with_repeated_bases_fasta_file,
+        '-query',
+        repeated_bases_flagged_fasta_file,
+        '-subject',
+        target_with_repeated_bases_fasta_file,
     )
     blast_output_df = BlastOutputParser(blast_output).output_as_dataframe()
     snapshot.snapshot_dir = os.path.dirname(
