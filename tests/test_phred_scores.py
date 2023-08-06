@@ -42,7 +42,7 @@ def test_filter_fastq_reads_by_expected_errors(
         snapshot.snapshot_dir = os.path.dirname(
             example_reads_with_exons_filtered_fastq_file,
         )
-        _ = SeqIO.write(filtered_records, fastq_output, 'fastq')
+        SeqIO.write(filtered_records, fastq_output, 'fastq')
         snapshot.assert_match(
             fastq_output.getvalue(),
             example_reads_with_exons_filtered_fastq_file,
