@@ -322,6 +322,33 @@ files = [
 toml = ["tomli"]
 
 [[package]]
+name = "cutadapt"
+version = "4.4"
+description = "Adapter trimming and other preprocessing of high-throughput sequencing reads"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "cutadapt-4.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d6f3232ca5e6be9a154d853f8dcb0e3439fd9946e54c18119207731daa13a9ad"},
+    {file = "cutadapt-4.4-cp310-cp310-win_amd64.whl", hash = "sha256:796802b2bf32439c7d6eff0b01166861b68460dec2bb4c6661afc3734e1618c4"},
+    {file = "cutadapt-4.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:dd6926d766ad71d901d7f7eafb81bb6ead1261370a69bcc0cabc68dfe7d7c3b6"},
+    {file = "cutadapt-4.4-cp311-cp311-win_amd64.whl", hash = "sha256:d71a2be58d3a90f901547cf57b82ac76933d2871daea512f8782b70b2d5277d1"},
+    {file = "cutadapt-4.4-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2e78f6884963bb1fefeb0c74ccd73cd90452bcffbe1add37ddce42496c9dc855"},
+    {file = "cutadapt-4.4-cp37-cp37m-win_amd64.whl", hash = "sha256:2af99b4516f8efcb8a59ad41ff4423b7dc34ccc1817ed685be93140c8c834909"},
+    {file = "cutadapt-4.4-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6f91f80b95a52b9d4599afe53b39eb1c1421b373adfb7e85ecb1365a7e32f1b4"},
+    {file = "cutadapt-4.4-cp38-cp38-win_amd64.whl", hash = "sha256:6f950f32285dfd215aa9a65e59a4b58c77fcd3a625c34117d71bc6e461618c8d"},
+    {file = "cutadapt-4.4-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6b2286939095d73c79cb89a6e4bf9ecdf6ddaaa4c3a4ff0f0714f51a047ed464"},
+    {file = "cutadapt-4.4-cp39-cp39-win_amd64.whl", hash = "sha256:bcbed70c22a5b9760220eef9511253a64756bf793a5dba561f9dabeb292d8c6b"},
+    {file = "cutadapt-4.4.tar.gz", hash = "sha256:4554157c673022e1c433fcd6e3b803008fef60c8e71c01215e4aa04b0f09fe83"},
+]
+
+[package.dependencies]
+dnaio = ">=0.10.0"
+xopen = ">=1.6.0"
+
+[package.extras]
+dev = ["Cython", "pytest", "pytest-mock", "pytest-timeout", "sphinx", "sphinx-better-subsection", "sphinx-issues"]
+
+[[package]]
 name = "darglint"
 version = "1.8.1"
 description = "A utility for ensuring Google-style docstrings stay up to date with the source code."
@@ -380,6 +407,37 @@ files = [
     {file = "distlib-0.3.7-py2.py3-none-any.whl", hash = "sha256:2e24928bc811348f0feb63014e97aaae3037f2cf48712d51ae61df7fd6075057"},
     {file = "distlib-0.3.7.tar.gz", hash = "sha256:9dafe54b34a028eafd95039d5e5d4851a13734540f1331060d31c9916e7147a8"},
 ]
+
+[[package]]
+name = "dnaio"
+version = "0.10.0"
+description = "Read and write FASTA and FASTQ files efficiently"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "dnaio-0.10.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:f9ff5cd7166b5d8c260c24c4f8e922e6e04c77310b743705072fb2d543c31314"},
+    {file = "dnaio-0.10.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:aa38e2215a2774929207f7a8da906fdd831d468a555e635b6ec570f2acf2e82d"},
+    {file = "dnaio-0.10.0-cp310-cp310-win_amd64.whl", hash = "sha256:baf3a9be3b14a444c51011711365234efa26d2e57574579c0f46e6a61bbed84c"},
+    {file = "dnaio-0.10.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:f9dc2171e777e3d35391fdcd09e92bdaa121cb7fe426c50633372da1bef93961"},
+    {file = "dnaio-0.10.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:47232242cf8ddb7df3da26006b22fc28ff87e08d8b36f4f84dc1e2a60bb6f354"},
+    {file = "dnaio-0.10.0-cp311-cp311-win_amd64.whl", hash = "sha256:eb75552d373669ca205b2f98d374f960a448da59eeb8f6977c57df52924c2caf"},
+    {file = "dnaio-0.10.0-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:dd10fb44dd23829c006dd4d9201b4c7fff7e06b617655f9b453155dbb85f5058"},
+    {file = "dnaio-0.10.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a2cd08f600bded04fbe35eeb18345d5a1be2a830a3c655f136739ee11adfe82c"},
+    {file = "dnaio-0.10.0-cp37-cp37m-win_amd64.whl", hash = "sha256:7b980099c591f870c224ee5158641b8ed65853eb01e4dac7d84f58f1c567623f"},
+    {file = "dnaio-0.10.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:044c1170ee5a5680c7932e28b9b4b0bc21c481b1a7ef1ce016ece772b321ebe7"},
+    {file = "dnaio-0.10.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5b11e0dec5195db7206a1a5bb1adfa31054757bb5354c90e933c43753edd05be"},
+    {file = "dnaio-0.10.0-cp38-cp38-win_amd64.whl", hash = "sha256:630d7f5cd07a3536deb5d31d3f03c9acfab609d211cd5c51d9ab8e046fa2f805"},
+    {file = "dnaio-0.10.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:93e46cb77b0012af380824f9f6b274425afa52b588c699fbb75dbb3a7ebcf94c"},
+    {file = "dnaio-0.10.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9c1dea14ce39268f4f7b958fac402d7e6387e6594b68a8283f8f82a37c104104"},
+    {file = "dnaio-0.10.0-cp39-cp39-win_amd64.whl", hash = "sha256:1448d222cb942ff28b8e99ee1c615204be160be3db395aa5f4ca19ab4cca496f"},
+    {file = "dnaio-0.10.0.tar.gz", hash = "sha256:de51a50948f00b864297d74eddb588fbee5ac229855754e77564d18b24619d18"},
+]
+
+[package.dependencies]
+xopen = ">=1.4.0"
+
+[package.extras]
+dev = ["Cython", "pytest"]
 
 [[package]]
 name = "docutils"
@@ -769,6 +827,62 @@ parallel = ["ipyparallel"]
 qtconsole = ["qtconsole"]
 test = ["pytest (<7.1)", "pytest-asyncio", "testpath"]
 test-extra = ["curio", "matplotlib (!=3.2.0)", "nbformat", "numpy (>=1.21)", "pandas", "pytest (<7.1)", "pytest-asyncio", "testpath", "trio"]
+
+[[package]]
+name = "isal"
+version = "1.2.0"
+description = "Faster zlib and gzip compatible compression and decompression by providing python bindings for the ISA-L library."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "isal-1.2.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:39273d4549f8d0c356f47eecbee4fa6ceab29e60995ee45e9b1fbbcceb202cd7"},
+    {file = "isal-1.2.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:bf292a37a69efe1f1acd724c4502055a235ffbabced4f88ae052da23d32fc3e8"},
+    {file = "isal-1.2.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b2cb7cd5ec5af06a94e6ea98caf20019d180a5caa53d96f9c5cc504e7cd905d3"},
+    {file = "isal-1.2.0-cp310-cp310-musllinux_1_1_aarch64.whl", hash = "sha256:e0f9c4659afe13fb26d8a5dc458271cb8461f9852dae346d8e1a2d941eef8179"},
+    {file = "isal-1.2.0-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:e89e6c1a6e1b81a8e6f4ea1a19d6d1c7c07daacfae19f2a57b869ba9b12b0442"},
+    {file = "isal-1.2.0-cp310-cp310-win_amd64.whl", hash = "sha256:f2fa7ce5c070fc18ed7f10f22978560353553596c8944bb65ae7e3113c9f8681"},
+    {file = "isal-1.2.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:3c6e672c7d70bb0ba3fc1d1ff9b5c8c44c49c74507173f43bc4f97f358a31bfd"},
+    {file = "isal-1.2.0-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:7fb62411f6f72e8002833413d25df9a031d2cb31a96094cec3ae0a87d1e2e631"},
+    {file = "isal-1.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d4a462817de6fdfcc85f7d0166734d489c7e4f1cf4631c17fca3ca620bb329a2"},
+    {file = "isal-1.2.0-cp311-cp311-musllinux_1_1_aarch64.whl", hash = "sha256:910f8a2f55b46f8eb8496f0553275913e823471d322bff529d7355f810472032"},
+    {file = "isal-1.2.0-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:9a7d11b29ef1545126bb6fe4fcd3ac9b15d60774de2f6af6a1bf62558a31c665"},
+    {file = "isal-1.2.0-cp311-cp311-win_amd64.whl", hash = "sha256:a7e5da39149bb14187eafdab7d12bc7d7c36f3a84a5887dfbe5d00ea8414f343"},
+    {file = "isal-1.2.0-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:f1b7b6fa45f3e06dc3eee81d9778fecc1a835687442a04e6f8faac24bc4abc94"},
+    {file = "isal-1.2.0-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:cf7908dfd0fa64d443a52e3722f3bb8bcbc490039688d863243ec3f3626cb361"},
+    {file = "isal-1.2.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5524dc53bfb37161c354635e7aa6d9f9741a65cbb44c3966c34c65c149509a3c"},
+    {file = "isal-1.2.0-cp37-cp37m-musllinux_1_1_aarch64.whl", hash = "sha256:17479b40b3b858a9c36da0e13e89544015d18a1675dd3cb5f33b7820f5139b94"},
+    {file = "isal-1.2.0-cp37-cp37m-musllinux_1_1_x86_64.whl", hash = "sha256:7d85a8432cc1711e0763ce7d2c5c51a298ca25daf6df99139d0deec2dab822b2"},
+    {file = "isal-1.2.0-cp37-cp37m-win_amd64.whl", hash = "sha256:6eaff16360956f912b03c73bf53ed5319f08c41d1c2aea3a7af81a8773f2acb6"},
+    {file = "isal-1.2.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:c31aeb02046751be460ab38b486812d37f9bd6f88b57f19ffd56902da9d7c3d1"},
+    {file = "isal-1.2.0-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:b7dc39645f9d0877456f7279484e811dcad7f590fa9f4ad1d579a2c5164d2c9b"},
+    {file = "isal-1.2.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c797b1da93613af7b5021eefb46d1817ef62f3868ea52ab4f7e91b19cd88b26c"},
+    {file = "isal-1.2.0-cp38-cp38-musllinux_1_1_aarch64.whl", hash = "sha256:a3d088ab787566a70563dac6fc1ece49bf18211baff654efcbbff498e3378aee"},
+    {file = "isal-1.2.0-cp38-cp38-musllinux_1_1_x86_64.whl", hash = "sha256:01b28ae207a11206afff4d7cf596ce9a695cc7b914d11f6cc3daa4f28c00271f"},
+    {file = "isal-1.2.0-cp38-cp38-win_amd64.whl", hash = "sha256:3bfce618d05647dc7854f47efbc5ff320797fa9490fb58bb6a196266b3a6cb50"},
+    {file = "isal-1.2.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:bc083ba4fd1e00ac5f219589371facc9cf01172eae04cb3dc9b93a4541445ad9"},
+    {file = "isal-1.2.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e94454fc195746e471827a6e6be3a947edbb017c29e54d05da0457c4e0d75eef"},
+    {file = "isal-1.2.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6e1325edd146afdfa8797da2a0ebe96908daa748bd912b48feb313c7cd80414c"},
+    {file = "isal-1.2.0-cp39-cp39-musllinux_1_1_aarch64.whl", hash = "sha256:424e2d9c63c3402078a38fd74996e43a16a0234a53a0b2ba17c92a3ad15b9508"},
+    {file = "isal-1.2.0-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:ed8365d1e50a030ef7973dc1a5f94980fa5b1ee1ad361d56cdbb78c2077b63d8"},
+    {file = "isal-1.2.0-cp39-cp39-win_amd64.whl", hash = "sha256:b36049656b160feee3116c702749cdcbbe03fc38a4ba63781db2378bda62bd31"},
+    {file = "isal-1.2.0-pp310-pypy310_pp73-macosx_10_9_x86_64.whl", hash = "sha256:242131ef94fff4dfb821fc37a94c424aebb740f24c1ec8fc6d023f53eab185cb"},
+    {file = "isal-1.2.0-pp310-pypy310_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:1b6cbd66d180d18580555150db1721b306befd79b2b8196e3527d955c4d85221"},
+    {file = "isal-1.2.0-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a8c40791fe02bcf33bf0eac4c582c67177b3e84fd4aec91b58250cbf4db0e385"},
+    {file = "isal-1.2.0-pp310-pypy310_pp73-win_amd64.whl", hash = "sha256:724f1c7d450ba15382dd84ddbabe50485e55513169bdde2371e05e49858296ab"},
+    {file = "isal-1.2.0-pp37-pypy37_pp73-macosx_10_9_x86_64.whl", hash = "sha256:b111dd6a42311b9cff479a10c2ed98a0dd8598ad854aa55733d4d944715462c3"},
+    {file = "isal-1.2.0-pp37-pypy37_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:ac5b98ea3a36eb6a348ebf6727a8b4096093cccfdf7889204185e551ff75bf58"},
+    {file = "isal-1.2.0-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:50ac263faf4ad3ec8bc1853dec07d714b6f217d68d648a241a8fdff5fdc3faed"},
+    {file = "isal-1.2.0-pp37-pypy37_pp73-win_amd64.whl", hash = "sha256:054cb2572c803bf2939abcd40799647ee4e9f62fe8165c0f7301a69ac64e56c6"},
+    {file = "isal-1.2.0-pp38-pypy38_pp73-macosx_10_9_x86_64.whl", hash = "sha256:c95a38e7def77bae1ba4b68feeee04a5f393aee64dc2106ab379b6b8de4224b9"},
+    {file = "isal-1.2.0-pp38-pypy38_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f0eaf3aa54bfddde924434701fbbda465c0c8c4f07e0ab9f3234e62cfeebdcda"},
+    {file = "isal-1.2.0-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:33d0b8dabb60fadeebc249939056520f6165449ff8e4e4b666c11e6190ea34bf"},
+    {file = "isal-1.2.0-pp38-pypy38_pp73-win_amd64.whl", hash = "sha256:7b6a088b174b676555fc49b36c9cad597e273c10650cfad54a4549bca818d3cc"},
+    {file = "isal-1.2.0-pp39-pypy39_pp73-macosx_10_9_x86_64.whl", hash = "sha256:cd4faf8d5aa08fb6b663b38c8d2b5bc9503dc05d36ec51af68c0e879fb6b08fe"},
+    {file = "isal-1.2.0-pp39-pypy39_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3ca08c8d0752b6cbd9cdc87f6bbdd0eb7d52be72242a3ffec2f08fd37eb55ee7"},
+    {file = "isal-1.2.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5ab539fd9433e17205dc0ac730abc6abb7590a5530cf2afd5255f1976350b5ea"},
+    {file = "isal-1.2.0-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:9421f00996d366d293849e3d67bc5e43e2be6e85bb6797fd5463417706445cb4"},
+    {file = "isal-1.2.0.tar.gz", hash = "sha256:7e968efcb628a69ea990894d2b6cd8cc8afc4e86fb648001ae0ba6dd2e79042a"},
+]
 
 [[package]]
 name = "isort"
@@ -1845,7 +1959,25 @@ pep8-naming = ">=0.11,<0.13"
 pygments = ">=2.4,<3.0"
 typing_extensions = ">=3.6,<5.0"
 
+[[package]]
+name = "xopen"
+version = "1.7.0"
+description = "Open compressed files transparently"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "xopen-1.7.0-py3-none-any.whl", hash = "sha256:c4c6c978bb5f6f2a4364438da09f4f8fde078b6df4de18e3f72fccc472d1ee33"},
+    {file = "xopen-1.7.0.tar.gz", hash = "sha256:901f9c8298e95ed74767a4bd76d9f4cf71d8de27b8cf296ac3e7bc1c11520d9f"},
+]
+
+[package.dependencies]
+isal = {version = ">=1.0.0", markers = "platform_python_implementation == \"CPython\" and (platform_machine == \"x86_64\" or platform_machine == \"AMD64\")"}
+
+[package.extras]
+dev = ["pytest"]
+zstd = ["zstandard (<1)"]
+
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "f76cda9412debe9d7f8fd9aef607237e2052a816bf892b2d75d30c8bb8fb1b61"
+content-hash = "4ee0f31aa521a82215c546424e91cc8e163fdec87846ba124ac663ebd2b7eeff"

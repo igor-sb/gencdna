@@ -1,16 +1,10 @@
 """Test blastn subprocess calls and output parsing."""
 import os
 
-import pytest
-
-from pacbio_qc.bash import BinaryExecWithYamlArgs, is_executable_available
+from pacbio_qc.bash import BinaryExecWithYamlArgs
 from pacbio_qc.blast import BlastOutputParser
 
 
-@pytest.mark.skipif(
-    not is_executable_available('blastn'),
-    reason='blastn not in path or not installed',
-)
 def test_blast_run(
     repeated_bases_flagged_fasta_file,
     target_with_repeated_bases_fasta_file,
@@ -18,7 +12,7 @@ def test_blast_run(
     snapshot,
 ):
     blast = BinaryExecWithYamlArgs('blastn', 'config/blast.yml')
-    blast.config['arguments']['word_size'] = 4
+    blast.config['arguments']['-word_size'] = 4
     blast_output = blast.run(
         '-query',
         repeated_bases_flagged_fasta_file,
