@@ -7,6 +7,15 @@ def find_reads_with_pcr_primers(
     input_fastx_file: str,
     cutadapt_args: dict[str, str],
 ) -> str:
+    """Load FASTA/FASTQ file and keep only reads with PCR primers.
+
+    Standard output is returned as a string. To suppress summary statistics,
+    add --quiet in cutadapt_args. To output sequences in FASTA/FASTQ, add
+    --output filename.fasta to cutadapt_args.
+
+    Raises:
+        RuntimeError: If cutadapt throws a standard error.
+    """
     cutadapt = BinaryExecWithYamlArgs('cutadapt')
     cutadapt.config['arguments'] = cutadapt_args
     cutadapt_output = cutadapt.run(input_fastx_file)
