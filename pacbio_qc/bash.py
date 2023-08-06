@@ -6,18 +6,20 @@ import yaml
 
 class BinaryExecWithYamlArgs(object):
 
-    def __init__(self, executable: str, config_yml: str) -> None:
-        with open(config_yml) as config_file:
-            self.config = yaml.safe_load(config_file)
+    def __init__(self, executable: str, config_yml: str = '') -> None:
+        if config_yml == '':
+            self.config = {}
+        else:
+            with open(config_yml) as config_file:
+                self.config = yaml.safe_load(config_file)
         self.executable = executable
 
     def create_command(self) -> list[str]:
         cmd = [self.executable]
         for arg_flag, arg_value in self.config['arguments'].items():
-            cmd.extend([
-                '{arg_flag}'.format(arg_flag=arg_flag),
-                str(arg_value),
-            ])
+            cmd.append('{arg_flag}'.format(arg_flag=arg_flag))
+            if str(arg_value):
+                cmd.append(str(arg_value))
         return cmd
 
     def run(self, *args) -> subprocess.CompletedProcess:

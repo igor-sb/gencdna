@@ -1,4 +1,4 @@
->pass_read_flanked_with_both_primers_in_5to3_direction
+>pass_read_flanked_with_both_primers_ATGG_and_GATT_in_5to3_direction
 ATGGCGATCGATCGAGCTGATT
 >pass_read_flanked_with_both_primers_in_3to5_direction
 AATCTCAGATGCAAACGTCCAT

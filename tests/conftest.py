@@ -59,3 +59,17 @@ def blast_output_from_repeated_bases_vs_target():
     return '{snapshot_path}/blast_out_repeatedbases_vs_target.tsv'.format(
         snapshot_path=snapshot_path,
     )
+
+
+@pytest.fixture()
+def mock_pcr_experiment_fasta_file():
+    return '{fixture_path}/mock_pcr_experiment.fasta'.format(
+        fixture_path=fixture_path,
+    )
+
+
+@pytest.fixture()
+def mock_pcr_experiment_pcr_filtered_fasta_file():
+    return '{snapshot_path}/mock_pcr_experiment_pcr_filtered.fasta'.format(
+        snapshot_path=snapshot_path,
+    )
