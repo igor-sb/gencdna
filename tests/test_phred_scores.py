@@ -33,10 +33,11 @@ def test_filter_fastq_reads_by_expected_errors(
     example_reads_with_exons_fastq_file,
     example_reads_with_exons_filtered_fastq_file,
     snapshot,
+    max_errors=0.01,
 ):
     filtered_records = filter_fastq_reads_by_expected_errors(
         example_reads_with_exons_fastq_file,
-        maximum_expected_errors=0.01,
+        maximum_expected_errors=max_errors,
     )
     with io.StringIO() as fastq_output:
         snapshot.snapshot_dir = os.path.dirname(
