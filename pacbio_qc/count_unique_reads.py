@@ -13,7 +13,10 @@ def count_unique_sequences_in_fastq(input_fastq_file: str) -> pd.DataFrame:
         list(sequence_counts.items()),
         columns=['sequence', 'count'],
     )
-    return sequence_counts_df.sort_values(by=['count'], ascending=False)
+    return sequence_counts_df.sort_values(
+        by=['count', 'sequence'],
+        ascending=[False, True],
+    )
 
 
 def dump_sequence_counts_to_fasta(sequence_counts_df: pd.DataFrame) -> str:
