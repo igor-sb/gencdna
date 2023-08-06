@@ -27,6 +27,20 @@ def example_fastq_file():
 
 
 @pytest.fixture()
+def example_ccs_sequence_counts_file():
+    return '{snapshot_path}/example_ccs_sequence_counts.csv'.format(
+        snapshot_path=snapshot_path,
+    )
+
+
+@pytest.fixture()
+def example_ccs_unique_reads_fasta_file():
+    return '{snapshot_path}/example_ccs_unique_reads.fasta'.format(
+        snapshot_path=snapshot_path,
+    )
+
+
+@pytest.fixture()
 def repeated_bases_fastq_file():
     return '{fixture_path}/repeated_bases.fastq'.format(
         fixture_path=fixture_path,
