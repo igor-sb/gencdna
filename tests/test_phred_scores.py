@@ -4,7 +4,7 @@ import gzip
 import io
 import json
 import os
-
+import pytest
 from Bio import SeqIO
 
 from pacbio_qc.phred_scores import (
@@ -29,14 +29,21 @@ def test_expected_number_of_errors(example_fastq_file, snapshot):
     )
 
 
+@pytest.mark.parametrize(
+    'example_reads_with_exons_file',
+    (
+        'tests/fixtures/example_reads_with_exons.fastq',
+        'tests/fixtures/example_reads_with_exons.fastq.gz',
+    ),
+)
 def test_filter_fastq_reads_by_expected_errors(
-    example_reads_with_exons_fastq_file,
+    example_reads_with_exons_file,
     example_reads_with_exons_filtered_fastq_file,
     snapshot,
     max_errors=0.01,
 ):
     filtered_records = filter_fastq_reads_by_expected_errors(
-        example_reads_with_exons_fastq_file,
+        example_reads_with_exons_file,
         maximum_expected_errors=max_errors,
     )
     with io.StringIO() as fastq_output:

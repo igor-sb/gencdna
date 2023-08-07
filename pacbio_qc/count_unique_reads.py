@@ -3,16 +3,19 @@
 import pandas as pd
 from Bio import SeqIO
 
+from pacbio_qc.fastx import open_fastx_or_fastxgz
 
-def count_unique_sequences_in_fastq(input_fastq_file: str) -> pd.DataFrame:
+
+def count_unique_sequences_in_fastq(fastq_file: str) -> pd.DataFrame:
     sequence_counts: dict[str, int] = {}
-    for record in SeqIO.parse(input_fastq_file, 'fastq'):
-        sequence = str(record.seq)
-        sequence_counts[sequence] = sequence_counts.get(sequence, 0) + 1
-    sequence_counts_df = pd.DataFrame(
-        list(sequence_counts.items()),
-        columns=['sequence', 'count'],
-    )
+    with open_fastx_or_fastxgz(fastq_file) as fastq_handle:
+        for record in SeqIO.parse(fastq_handle, 'fastq'):
+            sequence = str(record.seq)
+            sequence_counts[sequence] = sequence_counts.get(sequence, 0) + 1
+        sequence_counts_df = pd.DataFrame(
+            list(sequence_counts.items()),
+            columns=['sequence', 'count'],
+        )
     return sequence_counts_df.sort_values(
         by=['count', 'sequence'],
         ascending=[False, True],

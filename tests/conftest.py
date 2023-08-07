@@ -48,6 +48,13 @@ def example_reads_with_exons_fastq_file():
 
 
 @pytest.fixture()
+def example_reads_with_exons_fastq_gz_file():
+    return '{fixture_path}/example_reads_with_exons.fastq.gz'.format(
+        fixture_path=fixture_path,
+    )
+
+
+@pytest.fixture()
 def example_reads_with_exons_filtered_fastq_file():
     return '{snapshot_path}/example_reads_with_exons_maxee0_01.fastq'.format(
         snapshot_path=snapshot_path,

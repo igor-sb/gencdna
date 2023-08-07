@@ -1,0 +1,4 @@
+pipeline:
+
+input.fastq -> expected error filter (need to write to FASTQ.GZ) ->
+

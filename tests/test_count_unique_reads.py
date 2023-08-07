@@ -1,6 +1,5 @@
 """Test for counting unique reads in FASTQ or FASTA file."""
 
-import gzip
 import os
 import pandas as pd
 
@@ -15,8 +14,7 @@ def test_count_unique_sequences_in_fastq(
     example_ccs_sequence_counts_file,
     snapshot,
 ):
-    with gzip.open(example_fastq_file, 'rt') as fq:
-        actual_df = count_unique_sequences_in_fastq(fq)
+    actual_df = count_unique_sequences_in_fastq(example_fastq_file)
     snapshot.snapshot_dir = os.path.dirname(
         example_ccs_sequence_counts_file,
     )
