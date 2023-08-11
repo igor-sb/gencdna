@@ -1,11 +1,16 @@
 """Test for counting unique reads in FASTQ or FASTA file."""
 
 import os
+import tempfile
+
 import pandas as pd
 
 from pacbio_qc.count_unique_reads import (
     count_unique_sequences_in_fastq,
     dump_sequence_counts_to_fasta,
+)
+from pacbio_qc.file_api.fastq_to_fasta import (
+    write_unique_reads_from_fastq_to_fasta,
 )
 
 
@@ -38,3 +43,23 @@ def test_dump_sequence_counts_to_fasta(
         actual_fasta,
         example_ccs_unique_reads_fasta_file,
     )
+
+
+def test_write_unique_reads_from_fastq_to_fasta(
+    example_duplicated_reads_fastq,
+    example_duplicated_reads_dedup_fasta,
+    snapshot,
+):
+    with tempfile.NamedTemporaryFile('wt') as actual_fasta_file:
+        write_unique_reads_from_fastq_to_fasta(
+            example_duplicated_reads_fastq,
+            actual_fasta_file.name,
+        )
+        with open(actual_fasta_file.name, 'rt') as actual_fasta:
+            snapshot.snapshot_dir = os.path.dirname(
+                example_duplicated_reads_dedup_fasta,
+            )
+            snapshot.assert_match(
+                actual_fasta.read(),
+                example_duplicated_reads_dedup_fasta,
+            )
