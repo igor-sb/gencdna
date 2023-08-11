@@ -78,13 +78,10 @@ process export_unique_reads_to_fasta {
 
 workflow {
     filtered_ch = filter_reads_with_low_expected_errors(params.test_file)
-    filtered_ch.view()
     flagged_ch = flag_reads_with_low_quality_repeated_bases(filtered_ch)
-    flagged_ch.view()
     pcr_filtered_ch = filter_reads_without_pcr_primers(
         flagged_ch,
         params.forward_primer,
         params.reverse_primer
     )
-    pcr_filtered_ch.view()
 }
