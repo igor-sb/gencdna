@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO)
 LOG = logging.getLogger(__name__)
 
 
-def flag_low_quality_repeated_bases(
+def flag_reads_with_low_quality_repeated_bases(
     input_fastq_file: str,
     output_fastq_file: str,
     quality_score_threshold: int = 30,
@@ -41,4 +41,4 @@ def flag_low_quality_repeated_bases(
 
 
 if __name__ == '__main__':
-    fire.Fire(flag_low_quality_repeated_bases)
+    fire.Fire(flag_reads_with_low_quality_repeated_bases)

@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO)
 LOG = logging.getLogger(__name__)
 
 
-def filter_by_expected_errors(
+def filter_reads_with_low_expected_errors(
     input_fastq_file: str,
     output_fastq_file: str,
     maximum_expected_errors: float = 1.0,
@@ -27,4 +27,4 @@ def filter_by_expected_errors(
 
 
 if __name__ == '__main__':
-    fire.Fire(filter_by_expected_errors)
+    fire.Fire(filter_reads_with_low_expected_errors)
