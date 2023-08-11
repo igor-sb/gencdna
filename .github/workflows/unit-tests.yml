@@ -62,10 +62,12 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: Nextflow Integration Test
+      - name: Setup Nextflow
         uses: nf-core/setup-nextflow@v1
         with:
-          version: 23.04.0          
+          version: 23.04.0
+      
+      - name: Run Nextflow Integration Test
         run: |
           make shell
           nextflow run ${GITHUB_WORKSPACE}/workflows/quality_control.nf
