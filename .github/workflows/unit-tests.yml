@@ -1,4 +1,4 @@
-name: Unit Tests
+name: Tests
 
 on:
   workflow_call:
@@ -10,9 +10,11 @@ env:
 jobs:
 
   test-pipeline:
+
     name: Run with code coverage
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v3
         with:
@@ -63,6 +65,7 @@ jobs:
       - name: Nextflow Integration Test
         uses: nf-core/setup-nextflow@v1
         with:
-          version: 23.04.0
-          
-      - run: nextflow run ${GITHUB_WORKSPACE}/workflows/quality_control.nf
+          version: 23.04.0          
+        run: |
+          make shell
+          nextflow run ${GITHUB_WORKSPACE}/workflows/quality_control.nf
