@@ -1,0 +1,15 @@
+name: Integration Test
+
+on:
+  workflow_call:
+
+jobs:
+
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: nf-core/setup-nextflow@v1
+        with:
+          version: 23.04.0
+      - run: nextflow run ${GITHUB_WORKSPACE}
