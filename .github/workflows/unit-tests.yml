@@ -26,6 +26,11 @@ jobs:
           curl -o ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz "ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${{env.BLAST_VERSION}}/ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz"
           sudo tar -xzf ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz --strip-components=2 -C /usr/bin/ ncbi-blast-${{env.BLAST_VERSION}}+/bin/
 
+      - name: Setup Nextflow
+        uses: nf-core/setup-nextflow@v1
+        with:
+          version: 23.04.0
+      
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -47,6 +52,11 @@ jobs:
         if: steps.cache.outputs.cache-hit != true
         run: make install
 
+      - name: Run Nextflow Integration Test
+        run: |
+          poetry env list
+          nextflow run ${GITHUB_WORKSPACE}/workflows/quality_control.nf
+
       - name: Run unit tests
         run: |
           make test
@@ -61,13 +71,3 @@ jobs:
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-
-      - name: Setup Nextflow
-        uses: nf-core/setup-nextflow@v1
-        with:
-          version: 23.04.0
-      
-      - name: Run Nextflow Integration Test
-        run: |
-          make shell
-          nextflow run ${GITHUB_WORKSPACE}/workflows/quality_control.nf
