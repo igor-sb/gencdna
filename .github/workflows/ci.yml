@@ -17,3 +17,7 @@ jobs:
   lint:
     name: Lint
     uses: ./.github/workflows/lint.yml
+
+  integration-test:
+    name: Integration tests
+    uses: ./.github/workflows/nextflow.yml
