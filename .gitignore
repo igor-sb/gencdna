@@ -4,6 +4,10 @@ __pycache__/
 *$py.class
 .python-version
 test.ipynb
+data/
+.nextflow/
+aws/
+work/
 
 # C extensions
 *.so

@@ -4,7 +4,7 @@ from pacbio_qc.bash import BinaryExecWithYamlArgs
 
 
 def find_reads_with_pcr_primers(
-    input_fastx_file: str,
+    fastx_file: str,
     cutadapt_args: dict[str, str],
 ) -> str:
     """Load FASTA/FASTQ file and keep only reads with PCR primers.
@@ -18,7 +18,7 @@ def find_reads_with_pcr_primers(
     """
     cutadapt = BinaryExecWithYamlArgs('cutadapt')
     cutadapt.config['arguments'] = cutadapt_args
-    cutadapt_output = cutadapt.run(input_fastx_file)
+    cutadapt_output = cutadapt.run(fastx_file)
     if cutadapt_output.stderr != b'':
         raise RuntimeError(cutadapt_output.stderr.decode('UTF-8'))
     return cutadapt_output.stdout.decode('UTF-8')
