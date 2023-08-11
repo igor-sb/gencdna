@@ -55,6 +55,7 @@ jobs:
       - name: Run Nextflow Integration Test
         run: |
           poetry env list
+          which python
           nextflow run ${GITHUB_WORKSPACE}/workflows/quality_control.nf
 
       - name: Run unit tests
