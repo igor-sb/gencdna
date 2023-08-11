@@ -28,6 +28,7 @@ process filter_reads_with_low_expected_errors {
 
     script:
     """
+    poetry shell
     $params.python \
         $projectDir/../pacbio_qc/file_api/expected_error_filter.py \
         $raw_reads \
