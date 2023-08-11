@@ -8,7 +8,6 @@ data/
 .nextflow/
 aws/
 work/
-notes\.txt
 
 # C extensions
 *.so
