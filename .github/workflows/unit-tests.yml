@@ -59,3 +59,10 @@ jobs:
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Nextflow Integration Test
+        uses: nf-core/setup-nextflow@v1
+        with:
+          version: 23.04.0
+          
+      - run: nextflow run ${GITHUB_WORKSPACE}/workflows/quality_control.nf
