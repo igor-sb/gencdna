@@ -3,6 +3,9 @@ name: Integration Test
 on:
   workflow_call:
 
+env:
+  PYTHON_VERSION: 3.11.2
+
 jobs:
 
   example:
