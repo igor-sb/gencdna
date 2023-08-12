@@ -18,3 +18,11 @@ help:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+
+prepare-gh-pages:
+	cp gh-pages/.nojekyll "$(BUILDDIR)"
+	cp gh-pages/index.html "$(BUILDDIR)"
+
+clean:
+	rm -rf build
+	rm -rf generated

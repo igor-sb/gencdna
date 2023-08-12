@@ -48,3 +48,10 @@ report-coverage:
 		${POETRY_RUN} coverage report
 		${POETRY_RUN} coverage html
 		${POETRY_RUN} coverage xml
+
+docs:
+	@echo "\n${BLUE}Preparing Sphinx documentation...${NC}\n"
+	@cd docs; make html; make prepare-gh-pages
+
+clean-docs:
+	@cd docs; rm -rf build; rm -rf html
