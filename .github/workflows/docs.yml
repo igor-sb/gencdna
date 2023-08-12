@@ -1,7 +1,7 @@
 name: Docs
 
 on:
-  workflow-call:
+  workflow_call:
     branches:
       - main
     paths:
