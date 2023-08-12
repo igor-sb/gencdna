@@ -2,10 +2,6 @@ name: Docs
 
 on:
   workflow_call:
-    branches:
-      - main
-    paths:
-      - 'docs/**'
 
 env:
   PYTHON_VERSION: 3.11.2
