@@ -9,7 +9,7 @@ env:
 jobs:
 
   integration-test-qc:
-    name: Integration test - Initial QC
+    name: Initial QC
     runs-on: ubuntu-latest
     steps:
 
