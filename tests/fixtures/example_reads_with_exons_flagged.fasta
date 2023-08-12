@@ -1,0 +1,10 @@
+>read1:minQ30:ee0.00526[perfect]_exon1[1-to-14]_exon2[1-to-14]_exon3[1-to-14]
+ATGGGTCCTATCGGCACCAGCTGGCAATGACTAAGTACGATT
+>read2:minQ30:ee0.00328[flanks]_5'flankGACAGGT_exon1[1-to-14]_exon2[1-to-14]_exon3[1-to-14]_3'flankCAATG
+GACAGGTATGGGTCCTATCGGCACCAGCTGGCAATGACTAAGTACGATTCAATG
+>read3:minQ30:ee0.00366[insertion]_exon1[1-to-14]_insertGTTAGGGCG_exon3[1-to-14]
+ATGGGTCCTATCGGGTTAGGGCGGACTAAGTACGATT
+>read4:minQ30:ee0.00089[truncation]_exon1[1-to-10]_exon3[4-to-14]
+ATGGGTCCTATAAGTACGATT
+>read5:minQ30:ee0.00095[truncation_with_overlap]_exon1[1-to-14]_overlapGG_exon2[9-to-14]
+ATGGGTCCTATCGGCAAT

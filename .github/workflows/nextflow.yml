@@ -5,6 +5,7 @@ on:
 
 env:
   PYTHON_VERSION: 3.11.2
+  BLAST_VERSION: 2.14.0
 
 jobs:
 
@@ -23,7 +24,12 @@ jobs:
         uses: nf-core/setup-nextflow@v1
         with:
           version: 23.04.0
-      
+
+      - name: Install NCBI blast+
+        run: |
+          curl -o ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz "ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${{env.BLAST_VERSION}}/ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz"
+          sudo tar -xzf ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz --strip-components=2 -C /usr/bin/ ncbi-blast-${{env.BLAST_VERSION}}+/bin/
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:

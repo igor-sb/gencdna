@@ -16,3 +16,9 @@ gencDNA finder workflow
 .. code-block:: bash
 
     poetry run python
+
+X. Search for each exon across reads then output a BLAST outfmt 6 output:
+
+.. code-block:: bash
+
+    poetry run python

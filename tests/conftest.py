@@ -41,6 +41,20 @@ def example_ccs_unique_reads_fasta_file():
 
 
 @pytest.fixture()
+def example_exons_fasta_file():
+    return '{fixture_path}/example_exons.fasta'.format(
+        fixture_path=fixture_path,
+    )
+
+
+@pytest.fixture()
+def example_reads_with_exons_yml():
+    return '{fixture_path}/example_reads_with_exons_blast_config.yml'.format(
+        fixture_path=fixture_path,
+    )
+
+
+@pytest.fixture()
 def example_reads_with_exons_fastq_file():
     return '{fixture_path}/example_reads_with_exons.fastq'.format(
         fixture_path=fixture_path,
@@ -51,6 +65,20 @@ def example_reads_with_exons_fastq_file():
 def example_reads_with_exons_fastq_gz_file():
     return '{fixture_path}/example_reads_with_exons.fastq.gz'.format(
         fixture_path=fixture_path,
+    )
+
+
+@pytest.fixture()
+def example_reads_with_exons_flagged_fasta_file():
+    return '{fixture_path}/example_reads_with_exons_flagged.fasta'.format(
+        fixture_path=fixture_path,
+    )
+
+
+@pytest.fixture()
+def example_reads_with_exons_blastout():
+    return '{snapshot_path}/example_reads_with_exons_blastout.csv'.format(
+        snapshot_path=snapshot_path,
     )
 
 
