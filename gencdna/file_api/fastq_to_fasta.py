@@ -5,7 +5,7 @@ import logging
 import fire
 import pandas as pd
 
-from pacbio_qc.count_unique_reads import (
+from gencdna.count_unique_reads import (
     count_unique_sequences_in_fastq,
     dump_sequence_counts_to_fasta,
 )

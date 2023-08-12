@@ -6,8 +6,8 @@ import fire
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 
-from pacbio_qc.fastx import open_fastx_or_fastxgz
-from pacbio_qc.repeated_bases import (
+from gencdna.fastx import open_fastx_or_fastxgz
+from gencdna.repeated_bases import (
     create_repeated_bases_regex,
     flag_lowqual_repeated_bases,
 )

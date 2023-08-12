@@ -3,7 +3,7 @@
 import pandas as pd
 from Bio import SeqIO
 
-from pacbio_qc.fastx import open_fastx_or_fastxgz
+from gencdna.fastx import open_fastx_or_fastxgz
 
 
 def summarize_fasta_read_lengths(fasta_file: str) -> pd.DataFrame:

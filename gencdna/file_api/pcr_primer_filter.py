@@ -4,7 +4,7 @@ import logging
 
 import fire
 
-from pacbio_qc.bash import BinaryExecWithYamlArgs
+from gencdna.bash import BinaryExecWithYamlArgs
 
 logging.basicConfig(level=logging.INFO)
 LOG = logging.getLogger(__name__)

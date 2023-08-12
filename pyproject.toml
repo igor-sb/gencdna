@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "pacbio_qc"
+name = "gencDNA"
 version = "0.1.0"
-description = "PacBio sequencing quality control"
+description = "gencDNA finder from PacBio CCS DNA sequencing data"
 authors = ["igor-sb <84479009+igor-sb@users.noreply.github.com>"]
 readme = "README.md"
 
@@ -27,6 +27,7 @@ pre-commit = "^2.20.0"
 coverage = "^6.5.0"
 ipykernel = "^6.25.0"
 prefect = "^2.11.3"
+sphinx = "^7.1.2"
 
 [build-system]
 requires = ["poetry-core"]

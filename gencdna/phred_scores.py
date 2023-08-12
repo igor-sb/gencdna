@@ -5,7 +5,7 @@ from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from numpy.typing import NDArray
 
-from pacbio_qc.fastx import open_fastx_or_fastxgz
+from gencdna.fastx import open_fastx_or_fastxgz
 
 
 def convert_phred_scores_to_probability(phred_scores: NDArray) -> NDArray:
