@@ -2,9 +2,7 @@
 
 import os
 
-from pacbio_qc.file_api.pcr_primer_filter import (
-    filter_reads_without_pcr_primers,
-)
+from gencdna.file_api.pcr_primer_filter import filter_reads_without_pcr_primers
 
 
 def test_filter_reads_without_pcr_primers(

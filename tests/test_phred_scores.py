@@ -7,7 +7,7 @@ import os
 import pytest
 from Bio import SeqIO
 
-from pacbio_qc.phred_scores import (
+from gencdna.phred_scores import (
     expected_number_of_errors,
     filter_fastq_reads_by_expected_errors,
 )

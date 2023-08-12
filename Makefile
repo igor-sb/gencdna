@@ -1,6 +1,6 @@
 POETRY_RUN := poetry run
-FOLDERS= pacbio_qc
-PROJ= pacbio_qc
+FOLDERS= gencdna
+PROJ= gencdna
 NC=\033[0m # No Color
 
 .PHONY: install autolint lint lint-flake8 shell precommit poetry-precommit \
@@ -48,3 +48,10 @@ report-coverage:
 		${POETRY_RUN} coverage report
 		${POETRY_RUN} coverage html
 		${POETRY_RUN} coverage xml
+
+doc:
+	@echo "\n${BLUE}Preparing Sphinx documentation...${NC}\n"
+	@cd docs; make html; make prepare-gh-pages
+
+clean-docs:
+	@cd docs; rm -rf build; rm -rf html

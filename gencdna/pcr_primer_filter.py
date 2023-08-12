@@ -1,6 +1,6 @@
 """PCR primer filtering from a FASTA/FASTQ file using cutadapt."""
 
-from pacbio_qc.bash import BinaryExecWithYamlArgs
+from gencdna.bash import BinaryExecWithYamlArgs
 
 
 def find_reads_with_pcr_primers(
