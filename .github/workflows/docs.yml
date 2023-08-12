@@ -6,9 +6,6 @@ on:
 env:
   PYTHON_VERSION: 3.11.2
 
-permissions:
-  contents: write
-
 jobs:
   push-docs:
     name: Build and Publish to Github Pages
