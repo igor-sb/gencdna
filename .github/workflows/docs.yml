@@ -6,6 +6,9 @@ on:
 env:
   PYTHON_VERSION: 3.11.2
 
+permissions:
+  contents: write
+
 jobs:
   push-docs:
     name: Build and Publish to Github Pages
@@ -42,3 +45,14 @@ jobs:
       - name: Build docs
         run: |
           make docs
+
+      - name: Copy files
+        run: cp -r docs/build/${{ github.ref_name }}/* docs/build
+      
+      - name: Deploy to Github Pages
+        uses: s0/git-publish-subdir-action@v2.6.0
+        env:
+          REPO: git@github.com:igor-sb/gencdna.git
+          BRANCH: gh-pages
+          FOLDER: docs/build
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
