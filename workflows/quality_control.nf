@@ -63,7 +63,7 @@ process filter_reads_without_pcr_primers {
 
     script:
     """
-    cutadapt \
+    poetry run cutadapt \
         -g $forward_primer...$reverse_primer \
         --trimmed-only \
         --minimum-length 1 \
