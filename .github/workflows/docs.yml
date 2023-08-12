@@ -1,7 +1,9 @@
 name: Docs
 
 on:
-  workflow_call:
+  push:
+    paths:
+      - 'docs/**'
 
 env:
   PYTHON_VERSION: 3.11.2
@@ -43,6 +45,10 @@ jobs:
       - name: Build docs
         run: |
           make doc
+
+      - name: Copy files
+        run: |
+          cp -r docs/build/${{ github.ref_name }}/* docs/build
 
       - name: Deploy to Github Pages
         uses: s0/git-publish-subdir-action@v2.6.0

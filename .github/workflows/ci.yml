@@ -21,7 +21,3 @@ jobs:
   integration-tests:
     name: Integration tests
     uses: ./.github/workflows/nextflow.yml
-
-  docs:
-    name: Github Pages
-    uses: ./.github/workflows/docs.yml
