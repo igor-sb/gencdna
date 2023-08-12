@@ -43,13 +43,10 @@ jobs:
         run: |
           make docs
 
-      - name: Copy files
-        run: cp -r docs/build/${{ github.ref_name }}/* docs/build
-      
       - name: Deploy to Github Pages
         uses: s0/git-publish-subdir-action@v2.6.0
         env:
-          REPO: git@github.com:igor-sb/gencdna.git
+          REPO: self
           BRANCH: gh-pages
           FOLDER: docs/build
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
