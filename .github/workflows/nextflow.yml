@@ -1,0 +1,48 @@
+name: Integration Tests
+
+on:
+  workflow_call:
+
+env:
+  PYTHON_VERSION: 3.11.2
+
+jobs:
+
+  integration-test-qc:
+    name: Initial QC
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.git_ref }}
+          lfs: True
+
+      - name: Setup Nextflow
+        uses: nf-core/setup-nextflow@v1
+        with:
+          version: 23.04.0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{env.PYTHON_VERSION}}
+
+      - name: Install poetry
+        run: |
+          pip3 install --upgrade poetry
+          poetry config virtualenvs.in-project true
+
+      - name: Load Cached Virtualenv
+        id: cache
+        uses: actions/cache@v2.1.3
+        with:
+          path: .venv
+          key: venv-${{ env.PYTHON_VERSION }}-${{ runner.os }}-${{ hashFiles('**/pyproject.toml', '**/poetry.lock') }}
+
+      - uses: nf-core/setup-nextflow@v1
+        with:
+          version: 23.04.0
+
+      - run: nextflow run ${GITHUB_WORKSPACE}/workflows/integration-test-qc.nf

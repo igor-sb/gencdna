@@ -6,6 +6,18 @@ params.forward_primer = "ATGG"
 params.reverse_primer = "GATT"
 
 
+workflow {
+    filtered_ch = filter_reads_with_low_expected_errors(params.test_file)
+    flagged_ch = flag_reads_with_low_quality_repeated_bases(filtered_ch)
+    pcr_filtered_ch = filter_reads_without_pcr_primers(
+        flagged_ch,
+        params.forward_primer,
+        params.reverse_primer
+    )
+    fasta_export_ch = export_unique_reads_to_fasta(pcr_filtered_ch)
+}
+
+
 process filter_reads_with_low_expected_errors {
     input:
     path raw_reads
@@ -15,7 +27,7 @@ process filter_reads_with_low_expected_errors {
 
     script:
     """
-    python \
+    poetry run python \
         $projectDir/../pacbio_qc/file_api/expected_error_filter.py \
         $raw_reads \
         filtered_reads.fastq.gz \
@@ -32,7 +44,7 @@ process flag_reads_with_low_quality_repeated_bases {
 
     script:
     """
-    python \
+    poetry run python \
         $projectDir/../pacbio_qc/file_api/low_quality_repeated_base_flagger.py \
         filtered_reads.fastq.gz \
         flagged_reads.fastq.gz
@@ -51,7 +63,7 @@ process filter_reads_without_pcr_primers {
 
     script:
     """
-    cutadapt \
+    poetry run cutadapt \
         -g $forward_primer...$reverse_primer \
         --trimmed-only \
         --minimum-length 1 \
@@ -65,23 +77,16 @@ process filter_reads_without_pcr_primers {
 
 process export_unique_reads_to_fasta {
     input:
-    "pcr_filtered_reads.fastq.gz"
+    path "pcr_filtered_reads.fastq.gz"
 
     output:
-    "unique_reads.fasta"
+    path "unique_reads.fasta"
 
     script:
     """
+    poetry run python \
+        $projectDir/../pacbio_qc/file_api/fastq_to_fasta.py \
+        pcr_filtered_reads.fastq.gz \
+        unique_reads.fasta
     """
-}
-
-
-workflow {
-    filtered_ch = filter_reads_with_low_expected_errors(params.test_file)
-    flagged_ch = flag_reads_with_low_quality_repeated_bases(filtered_ch)
-    pcr_filtered_ch = filter_reads_without_pcr_primers(
-        flagged_ch,
-        params.forward_primer,
-        params.reverse_primer
-    )
 }

@@ -1,4 +1,4 @@
-name: Unit Tests
+name: Unit tests
 
 on:
   workflow_call:
@@ -10,9 +10,11 @@ env:
 jobs:
 
   test-pipeline:
+
     name: Run with code coverage
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v3
         with:
