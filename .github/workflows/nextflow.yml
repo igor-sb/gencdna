@@ -1,4 +1,4 @@
-name: Integration Test
+name: Integration Tests
 
 on:
   workflow_call:
@@ -8,7 +8,8 @@ env:
 
 jobs:
 
-  example:
+  integration-test-qc:
+    name: Integration test - Initial QC
     runs-on: ubuntu-latest
     steps:
 
