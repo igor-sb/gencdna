@@ -28,7 +28,7 @@ process filter_reads_with_low_expected_errors {
     script:
     """
     poetry run python \
-        $projectDir/../pacbio_qc/file_api/expected_error_filter.py \
+        $projectDir/../gencdna/file_api/expected_error_filter.py \
         $raw_reads \
         filtered_reads.fastq.gz \
         0.01
@@ -45,7 +45,7 @@ process flag_reads_with_low_quality_repeated_bases {
     script:
     """
     poetry run python \
-        $projectDir/../pacbio_qc/file_api/low_quality_repeated_base_flagger.py \
+        $projectDir/../gencdna/file_api/low_quality_repeated_base_flagger.py \
         filtered_reads.fastq.gz \
         flagged_reads.fastq.gz
     """
@@ -85,7 +85,7 @@ process export_unique_reads_to_fasta {
     script:
     """
     poetry run python \
-        $projectDir/../pacbio_qc/file_api/fastq_to_fasta.py \
+        $projectDir/../gencdna/file_api/fastq_to_fasta.py \
         pcr_filtered_reads.fastq.gz \
         unique_reads.fasta
     """

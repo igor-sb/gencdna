@@ -1,8 +1,8 @@
 """Test blastn subprocess calls and output parsing."""
 import os
 
-from pacbio_qc.bash import BinaryExecWithYamlArgs
-from pacbio_qc.blast import BlastOutputParser
+from gencdna.bash import BinaryExecWithYamlArgs
+from gencdna.blast import BlastOutputParser
 
 
 def test_blast_run(

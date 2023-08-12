@@ -1,6 +1,6 @@
 POETRY_RUN := poetry run
-FOLDERS= pacbio_qc
-PROJ= pacbio_qc
+FOLDERS= gencdna
+PROJ= gencdna
 NC=\033[0m # No Color
 
 .PHONY: install autolint lint lint-flake8 shell precommit poetry-precommit \

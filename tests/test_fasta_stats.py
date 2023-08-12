@@ -2,7 +2,7 @@
 
 import os
 
-from pacbio_qc.fasta_stats import summarize_fasta_read_lengths
+from gencdna.fasta_stats import summarize_fasta_read_lengths
 
 
 def test_summarize_fasta_read_lengths(
