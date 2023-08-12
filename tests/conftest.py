@@ -111,6 +111,13 @@ def mock_pcr_experiment_pcr_filtered_fasta_file():
 
 
 @pytest.fixture()
+def mock_pcr_experiment_read_lengths_file():
+    return '{snapshot_path}/mock_pcr_experiment_read_lengths.csv'.format(
+        snapshot_path=snapshot_path,
+    )
+
+
+@pytest.fixture()
 def example_duplicated_reads_fastq():
     return '{fixture_path}/example_with_duplicated_reads.fastq'.format(
         fixture_path=fixture_path,
