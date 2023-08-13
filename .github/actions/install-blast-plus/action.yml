@@ -13,7 +13,7 @@ runs:
       id: blast-cache
       uses: actions/cache@v3
       with:
-        path: /usr/bin/blastn
+        path: /home/runner/.local/bin/blastn
         key: blastn-${{ runner.os }}-${{ inputs.BLAST_VERSION }}
         
     - name: Install NCBI blast+
@@ -27,6 +27,6 @@ runs:
         sudo tar -xzf \
           ncbi-blast-${{ inputs.BLAST_VERSION }}+-x64-linux.tar.gz \
           --strip-components=2 \
-          --directory /usr/bin/ \
+          --directory /home/runner/.local/bin/ \
           ncbi-blast-${{ inputs.BLAST_VERSION }}+/bin/blastn
       shell: bash
