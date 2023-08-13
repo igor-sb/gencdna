@@ -1,25 +1,27 @@
 name: Install NCBI blast+ toolkit
 
-env:
-  BLAST_VERSION: 2.14.0
+inputs:
+  BLAST_VERSION:
+    required: true
 
 runs:
+  using: "composite"
   steps:
     - name: Load Cached NCBI blast+ download
       id: blast-cache
       uses: actions/cache@v3
       with:
-        path: /usr/bin/ncbi-blast-${{env.BLAST_VERSION}}+/bin/
+        path: /usr/bin/ncbi-blast-${{inputs.BLAST_VERSION}}+/bin/
         key: ${{ runner.os }}-${{ hashFiles('**') }}
         
     - name: Install NCBI blast+
       if: steps.blast-cache.outputs.cache-hit != true
       run: |
         curl \
-          -o ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz \
-          "ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${{env.BLAST_VERSION}}/ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz"
+          -o ncbi-blast-${{inputs.BLAST_VERSION}}+-x64-linux.tar.gz \
+          "ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${{inputs.BLAST_VERSION}}/ncbi-blast-${{inputs.BLAST_VERSION}}+-x64-linux.tar.gz"
         sudo tar -xzf \
-          ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz \
+          ncbi-blast-${{inputs.BLAST_VERSION}}+-x64-linux.tar.gz \
           --strip-components=2 \
           -C /usr/bin/ \
-          ncbi-blast-${{env.BLAST_VERSION}}+/bin/
+          ncbi-blast-${{inputs.BLAST_VERSION}}+/bin/

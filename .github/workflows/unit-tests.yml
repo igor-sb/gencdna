@@ -22,6 +22,8 @@ jobs:
       
       - name: Install NCBI blast+ toolkit
         uses: ./.github/workflows/install-blast.yml
+        with:
+          BLAST_VERSION: ${{ env.BLAST_VERSION }}
 
       - name: Set up Python
         uses: actions/setup-python@v4
