@@ -9,7 +9,12 @@ env:
 
 jobs:
 
+  install-blast:
+    name: Install NCBI blast+ toolkit
+    uses: ./.github/workflows/install-blast.yml
+
   test-pipeline:
+    needs: [install-blast]
 
     name: Run with code coverage
     runs-on: ubuntu-latest
@@ -20,11 +25,6 @@ jobs:
         with:
           ref: ${{ inputs.git_ref }}
           lfs: True
-
-      - name: Install NCBI blast+
-        run: |
-          curl -o ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz "ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${{env.BLAST_VERSION}}/ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz"
-          sudo tar -xzf ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz --strip-components=2 -C /usr/bin/ ncbi-blast-${{env.BLAST_VERSION}}+/bin/
 
       - name: Set up Python
         uses: actions/setup-python@v4

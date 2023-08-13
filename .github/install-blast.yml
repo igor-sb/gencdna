@@ -1,0 +1,31 @@
+name: Install NCBI blast+ toolkit
+
+on:
+  workflow_call:
+
+env:
+  BLAST_VERSION: 2.14.0
+
+jobs:
+
+  install-blast:
+
+    - name: Load Cached NCBI blast+ download
+      id: blast-cache
+      uses: actions/cache@v3
+      with:
+        path: /usr/bin/ncbi-blast-${{env.BLAST_VERSION}}+/bin/
+        key: ${{ runner.os }}-${{ hashFiles('**') }}
+        
+    - name: Install NCBI blast+
+      if: steps.blast-cache.outputs.cache-hit != true
+      run: |
+        curl \
+          -o ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz \
+          "ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${{env.BLAST_VERSION}}/ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz"
+        sudo tar -xzf \
+          ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz \
+          --strip-components=2 \
+          -C /usr/bin/ \
+          ncbi-blast-${{env.BLAST_VERSION}}+/bin/
+      
