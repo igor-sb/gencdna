@@ -26,6 +26,11 @@ jobs:
         with:
           BLAST_VERSION: ${{ env.BLAST_VERSION }}
 
+      - name: Install USEARCH
+        uses: ./.github/actions/install-usearch
+        with:
+          USEARCH_VERSION: ${{ env.USEARCH_VERSION }}
+
       - name: Install and setup Python, Poetry, virtual env
         uses: ./.github/actions/install-python
         with:
