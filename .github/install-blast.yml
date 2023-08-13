@@ -28,4 +28,5 @@ jobs:
           --strip-components=2 \
           -C /usr/bin/ \
           ncbi-blast-${{env.BLAST_VERSION}}+/bin/
+
       
