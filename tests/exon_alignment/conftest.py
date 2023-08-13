@@ -13,20 +13,21 @@ snapshot_path = '{base_path}/tests/exon_alignment/snapshots'.format(
 
 @pytest.fixture()
 def blast_config():
-    return '{fixture_path}/blast_config.yml'.format(
-        fixture_path=fixture_path,
-    )
+    return '{fixture_path}/blast_config.yml'.format(fixture_path=fixture_path)
 
 
 @pytest.fixture()
 def exons_fasta_file():
-    return '{fixture_path}/exons.fasta'.format(
-        fixture_path=fixture_path,
-    )
+    return '{fixture_path}/exons.fasta'.format(fixture_path=fixture_path)
 
 
 @pytest.fixture()
 def reads_fasta_file():
-    return '{fixture_path}/reads.fasta'.format(
-        fixture_path=fixture_path,
+    return '{fixture_path}/read1.fasta'.format(fixture_path=fixture_path)
+
+
+@pytest.fixture()
+def blast_output():
+    return '{snapshot_path}/read1_blastout.csv'.format(
+        snapshot_path=snapshot_path,
     )
