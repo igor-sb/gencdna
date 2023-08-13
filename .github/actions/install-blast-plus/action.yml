@@ -1,0 +1,34 @@
+name: Install NCBI blast+ toolkit
+description: Action for installing NCBI blast+ toolkit
+
+inputs:
+  BLAST_VERSION:
+    description: "Version of BLAST+ to install"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Load Cached NCBI blast+ download
+      id: blast-cache
+      uses: actions/cache@v3
+      with:
+        path: /home/runner/.local/bin/blastn
+        key: blastn-${{ runner.os }}-${{ inputs.BLAST_VERSION }}
+        
+    - name: Install NCBI blast+
+      if: steps.blast-cache.outputs.cache-hit != 'true'
+      run: |
+        base_url="ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+"
+        filename="ncbi-blast-${{ inputs.BLAST_VERSION }}+-x64-linux.tar.gz"
+        curl \
+          -o ncbi-blast-${{ inputs.BLAST_VERSION }}+-x64-linux.tar.gz \
+          "$base_url/${{ inputs.BLAST_VERSION }}/$filename"
+
+        [ ! -d "/home/runner/.local/bin/" ] && mkdir -p /home/runner/.local/bin/
+        sudo tar -xzf \
+          ncbi-blast-${{ inputs.BLAST_VERSION }}+-x64-linux.tar.gz \
+          --strip-components=2 \
+          --directory /home/runner/.local/bin/ \
+          ncbi-blast-${{ inputs.BLAST_VERSION }}+/bin/blastn
+      shell: bash

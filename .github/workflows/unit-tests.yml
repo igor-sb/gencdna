@@ -6,11 +6,11 @@ on:
 env:
   PYTHON_VERSION: 3.11.2
   BLAST_VERSION: 2.14.0
+  USEARCH_VERSION: 11.0.667
 
 jobs:
 
   test-pipeline:
-
     name: Run with code coverage
     runs-on: ubuntu-latest
     steps:
@@ -21,31 +21,20 @@ jobs:
           ref: ${{ inputs.git_ref }}
           lfs: True
 
-      - name: Install NCBI blast+
-        run: |
-          curl -o ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz "ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${{env.BLAST_VERSION}}/ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz"
-          sudo tar -xzf ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz --strip-components=2 -C /usr/bin/ ncbi-blast-${{env.BLAST_VERSION}}+/bin/
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Install NCBI blast+ toolkit
+        uses: ./.github/actions/install-blast-plus
         with:
-          python-version: ${{env.PYTHON_VERSION}}
+          BLAST_VERSION: ${{ env.BLAST_VERSION }}
 
-      - name: Install poetry
-        run: |
-          pip3 install --upgrade poetry
-          poetry config virtualenvs.in-project true
-
-      - name: Load Cached Virtualenv
-        id: cache
-        uses: actions/cache@v2.1.3
+      - name: Install USEARCH
+        uses: ./.github/actions/install-usearch
         with:
-          path: .venv
-          key: venv-${{ env.PYTHON_VERSION }}-${{ runner.os }}-${{ hashFiles('**/pyproject.toml', '**/poetry.lock') }}
+          USEARCH_VERSION: ${{ env.USEARCH_VERSION }}
 
-      - name: Install dependencies and project in dev mode
-        if: steps.cache.outputs.cache-hit != true
-        run: make install
+      - name: Install and setup Python, Poetry, virtual env
+        uses: ./.github/actions/install-python
+        with:
+          PYTHON_VERSION: ${{ env.PYTHON_VERSION }}
 
       - name: Run unit tests
         run: |

@@ -1,0 +1,28 @@
+name: Install USEARCH
+description: Action for installing USEARCH
+
+inputs:
+  USEARCH_VERSION:
+    description: "Version of USEARCH to install"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Load Cached USEARCH download
+      id: usearch-cache
+      uses: actions/cache@v3
+      with:
+        path: /home/runner/.local/bin/usearch
+        key: usearch-${{ runner.os }}-${{ inputs.USEARCH_VERSION }}
+        
+    - name: Install USEARCH
+      if: steps.usearch-cache.outputs.cache-hit != 'true'
+      run: |
+        filename="usearch${{ inputs.USEARCH_VERSION }}_i86linux32.gz"
+        url="https://www.drive5.com/downloads/$filename"
+        curl -o usearch.gz "$url"
+        [ ! -d "/home/runner/.local/bin/" ] && mkdir -p /home/runner/.local/bin/
+        gunzip usearch.gz
+        mv usearch /home/runner/.local/bin/
+      shell: bash
