@@ -1,6 +1,8 @@
-import os
-import pytest
+"""Test fixtures."""
 
+import os
+
+import pytest
 
 fixture_path = '{base_path}/tests/exon_alignment/fixtures'.format(
     base_path=os.path.abspath('.'),

@@ -20,7 +20,6 @@ def test_filter_reads_without_pcr_primers(
     snapshot.snapshot_dir = os.path.dirname(
         mock_pcr_filtered_fasta_file,
     )
-    print(actual_fasta_output)
     snapshot.assert_match(
         actual_fasta_output,
         mock_pcr_filtered_fasta_file,

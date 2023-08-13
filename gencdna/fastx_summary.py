@@ -9,7 +9,7 @@ from gencdna.fastx_io import open_fastx_or_fastxgz
 def count_unique_sequences(fastx_file: str, file_type: str) -> pd.DataFrame:
     sequence_counts: dict[str, int] = {}
     with open_fastx_or_fastxgz(fastx_file) as fastx_handle:
-        for record in SeqIO.parse(fastx_file, file_type):
+        for record in SeqIO.parse(fastx_handle, file_type):
             sequence = str(record.seq)
             sequence_counts[sequence] = sequence_counts.get(sequence, 0) + 1
         sequence_counts_df = pd.DataFrame(

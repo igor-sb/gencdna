@@ -7,21 +7,28 @@ import tempfile
 import pytest
 from Bio import SeqIO
 
+from gencdna.expected_error_filter import expected_number_of_errors
 from gencdna.file_api.expected_error_filter import (
     filter_reads_with_low_expected_errors,
 )
-from gencdna.expected_error_filter import expected_number_of_errors
 
 
-def test_expected_number_of_errors(reads_with_known_errors):
+def test_expected_number_of_errors(
+    reads_with_known_errors,
+    tolerance=0.00001,
+):
     with open(reads_with_known_errors, 'rt') as fq:
         for fq_record in SeqIO.parse(fq, 'fastq'):
             actual_error = expected_number_of_errors(fq_record)
             record_id = str(fq_record.id)
-            reference_error = float(
-                re.sub('.*expected_error_(.*)$', '\\1', record_id)
+            ref_error = float(
+                re.sub(
+                    '.*expected_error_(.*)$',
+                    '\\1',  # noqa: WPS342
+                    record_id,
+                ),
             )
-            assert reference_error == pytest.approx(actual_error, abs=0.00001)
+            assert ref_error == pytest.approx(actual_error, abs=tolerance)
 
 
 def test_filter_fastq_reads_by_expected_errors(

@@ -1,6 +1,7 @@
+"""Test fixtures."""
 import os
-import pytest
 
+import pytest
 
 fixture_path = '{base_path}/tests/pcr_primer_filtering/fixtures'.format(
     base_path=os.path.abspath('.'),
@@ -9,7 +10,6 @@ fixture_path = '{base_path}/tests/pcr_primer_filtering/fixtures'.format(
 snapshot_path = '{base_path}/tests/pcr_primer_filtering/snapshots'.format(
     base_path=os.path.abspath('.'),
 )
-
 
 
 @pytest.fixture()
