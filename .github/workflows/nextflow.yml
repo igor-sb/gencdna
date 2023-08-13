@@ -20,25 +20,17 @@ jobs:
           ref: ${{ inputs.git_ref }}
           lfs: True
 
-      - name: Setup Nextflow
+      - name: Install Nextflow
         uses: nf-core/setup-nextflow@v1
         with:
           version: 23.04.0
 
-      - name: Load Cached NCBI blast+ download
-        id: blast-cache
-        uses: actions/cache@v3
+      - name: Install NCBI blast+ toolkit
+        uses: ./.github/actions/install-blast-plus
         with:
-          path: /usr/bin/ncbi-blast-${{env.BLAST_VERSION}}+/bin/
-          key: ${{ runner.os }}-${{ hashFiles('**') }}
+          BLAST_VERSION: ${{ env.BLAST_VERSION }}
 
-      - name: Install NCBI blast+
-        if: steps.blast-cache.outputs.cache-hit != true
-        run: |
-          curl -o ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz "ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${{env.BLAST_VERSION}}/ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz"
-          sudo tar -xzf ncbi-blast-${{env.BLAST_VERSION}}+-x64-linux.tar.gz --strip-components=2 -C /usr/bin/ ncbi-blast-${{env.BLAST_VERSION}}+/bin/
-
-      - name: Set up Python
+      - name: Install Python
         uses: actions/setup-python@v4
         with:
           python-version: ${{env.PYTHON_VERSION}}
@@ -59,8 +51,5 @@ jobs:
         if: steps.venv-cache.outputs.cache-hit != true
         run: make install
 
-      - uses: nf-core/setup-nextflow@v1
-        with:
-          version: 23.04.0
-
-      - run: nextflow run ${GITHUB_WORKSPACE}/workflows/integration-test-qc.nf
+      - name: Run Nextflow Integration test
+        run: nextflow run ${GITHUB_WORKSPACE}/workflows/integration-test-qc.nf
