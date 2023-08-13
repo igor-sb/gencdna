@@ -24,8 +24,15 @@ def exons_fasta_file():
 
 
 @pytest.fixture()
-def reads_fasta_file():
+def single_read_fasta_file():
     return '{fixture_path}/read1_with_repeat_base_flags.fasta'.format(
+        fixture_path=fixture_path,
+    )
+
+
+@pytest.fixture()
+def reads_fasta_file():
+    return '{fixture_path}/reads_with_repeat_base_flags.fasta'.format(
         fixture_path=fixture_path,
     )
 

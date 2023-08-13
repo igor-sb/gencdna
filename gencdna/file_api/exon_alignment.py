@@ -1,15 +1,18 @@
 """Code for aligning all exons to each of the reads."""
 
+import tempfile
+
 import fire
 import pandas as pd
+from Bio import SeqIO
 
 from gencdna.blast_parsing import BlastOutputParser
 from gencdna.external_calls import BinaryExecutable
 
 
-def align_exons_vs_reads(
+def align_exons_vs_single_read(
     exons_fasta_file: str,
-    reads_fasta_file: str,
+    read_fasta_file: str,
     blast_config: str = 'config/blast.yml',
 ) -> pd.DataFrame:
     blast = BinaryExecutable('blastn', blast_config)
@@ -18,7 +21,7 @@ def align_exons_vs_reads(
         '-query',
         exons_fasta_file,
         '-subject',
-        reads_fasta_file,
+        read_fasta_file,
     )
     return (
         BlastOutputParser(blast_output)
@@ -27,15 +30,34 @@ def align_exons_vs_reads(
     )
 
 
+def align_exons_vs_reads(
+    exons_fasta_file: str,
+    reads_fasta_file: str,
+    blast_config: str = 'config/blast/yml',
+) -> pd.DataFrame:
+    blast_outputs: list[pd.DataFrame] = []
+    for read in SeqIO.parse(reads_fasta_file, 'fasta'):
+        with tempfile.NamedTemporaryFile() as single_read_fasta:
+            SeqIO.write(read, single_read_fasta.name, 'fasta')
+            blast_outputs.append(
+                align_exons_vs_single_read(
+                    exons_fasta_file=exons_fasta_file,
+                    read_fasta_file=single_read_fasta.name,
+                    blast_config=blast_config,
+                ),
+            )
+    return pd.concat(blast_outputs)
+
+
 def main(
     input_exons_fasta: str,
     input_reads_fasta: str,
     output_blast: str,
     blast_config: str = 'config/blast.yml',
 ) -> None:
-    blast_output_df = align_exons_vs_reads(
+    blast_output_df = align_exons_vs_single_read(
         exons_fasta_file=input_exons_fasta,
-        reads_fasta_file=input_reads_fasta,
+        read_fasta_file=input_reads_fasta,
         blast_config=blast_config,
     )
     blast_output_df.to_csv(output_blast, sep='\t', index=False)
