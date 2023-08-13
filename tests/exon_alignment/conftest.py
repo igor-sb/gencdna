@@ -20,16 +20,18 @@ def blast_config():
 
 @pytest.fixture()
 def exons_fasta_file():
-    return '{fixture_path}/exons.fasta'.format(fixture_path=fixture_path)
+    return '{fixture_path}/exons_14nt.fasta'.format(fixture_path=fixture_path)
 
 
 @pytest.fixture()
 def reads_fasta_file():
-    return '{fixture_path}/read1.fasta'.format(fixture_path=fixture_path)
+    return '{fixture_path}/read1_with_repeat_base_flags.fasta'.format(
+        fixture_path=fixture_path,
+    )
 
 
 @pytest.fixture()
 def blast_output():
-    return '{snapshot_path}/read1_blastout.csv'.format(
+    return '{snapshot_path}/read1_with_repeat_base_flags_blastout.csv'.format(
         snapshot_path=snapshot_path,
     )
