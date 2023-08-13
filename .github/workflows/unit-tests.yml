@@ -10,8 +10,6 @@ env:
 jobs:
 
   test-pipeline:
-    needs: [install-blast]
-
     name: Run with code coverage
     runs-on: ubuntu-latest
     steps:
