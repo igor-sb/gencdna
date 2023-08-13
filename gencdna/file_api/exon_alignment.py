@@ -3,8 +3,8 @@
 import fire
 import pandas as pd
 
-from gencdna.bash import BinaryExecWithYamlArgs
-from gencdna.blast import BlastOutputParser
+from gencdna.external_calls import BinaryExecWithYamlArgs
+from gencdna.blast_parsing import BlastOutputParser
 
 
 def align_exons_vs_reads(

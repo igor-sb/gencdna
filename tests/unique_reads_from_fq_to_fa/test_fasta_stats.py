@@ -2,7 +2,7 @@
 
 import os
 
-from gencdna.fasta_stats import summarize_fasta_read_lengths
+from gencdna.fasta_summary import summarize_fasta_read_lengths
 
 
 def test_summarize_fasta_read_lengths(

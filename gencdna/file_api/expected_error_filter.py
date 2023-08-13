@@ -6,8 +6,8 @@ import fire
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 
-from gencdna.fastx import open_fastx_or_fastxgz
-from gencdna.phred_scores import filter_fastq_reads_by_expected_errors
+from gencdna.fastx_io import open_fastx_or_fastxgz
+from gencdna.expected_error_filter import filter_fastq_reads_by_expected_errors
 
 logging.basicConfig(level=logging.INFO)
 LOG = logging.getLogger(__name__)

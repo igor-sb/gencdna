@@ -4,7 +4,7 @@ import logging
 
 import fire
 
-from gencdna.bash import BinaryExecWithYamlArgs
+from gencdna.external_calls import BinaryExecWithYamlArgs
 
 logging.basicConfig(level=logging.INFO)
 LOG = logging.getLogger(__name__)

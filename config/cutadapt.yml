@@ -3,3 +3,4 @@ arguments:
   --minimum-length: 1
   --revcomp: ''
   --quiet: ''
+  --action: 'none'

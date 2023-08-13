@@ -1,0 +1,11 @@
+This folder tests exon-to-read alignment.
+
+There are 3 exons in exons.fasta and 7 reads in reads.fastq. The metadata line
+in the fastq file describes what exons and other sequences are in each read.
+
+For example: exon1[1-to-14][Q61,91,57] means there is exon1 from position 1
+to position 14, with repeat bases whose first quality scores are 61, 91 and
+57.
+
+minQXX refers to the minimum quality score used to randomly generate the
+quality scores for each read. 

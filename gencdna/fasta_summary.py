@@ -3,10 +3,10 @@
 import pandas as pd
 from Bio import SeqIO
 
-from gencdna.fastx import open_fastx_or_fastxgz
+from gencdna.fastx_io import open_fastx_or_fastxgz
 
 
-def summarize_fasta_read_lengths(fasta_file: str) -> pd.DataFrame:
+def summarize_read_lengths(fasta_file: str) -> pd.DataFrame:
     read_length_counts: dict[int, int] = {}
     with open_fastx_or_fastxgz(fasta_file, 'rt') as fasta_handle:
         for fasta_record in SeqIO.parse(fasta_handle, 'fasta'):

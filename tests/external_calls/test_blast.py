@@ -1,8 +1,8 @@
 """Test blastn subprocess calls and output parsing."""
 import os
 
-from gencdna.bash import BinaryExecWithYamlArgs
-from gencdna.blast import BlastOutputParser
+from gencdna.external_calls import BinaryExecWithYamlArgs
+from gencdna.blast_parsing import BlastOutputParser
 
 
 def test_blast_run(

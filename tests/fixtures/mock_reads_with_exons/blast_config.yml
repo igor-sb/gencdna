@@ -1,7 +1,7 @@
 arguments:
   -reward: 1
   -penalty: -2
-  -word_size: 25
+  -word_size: 4
   -gapopen: 0
   -gapextend: 2
   -dust: 'no'
