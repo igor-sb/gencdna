@@ -10,8 +10,8 @@ env:
 jobs:
 
   install-blast:
-    name: Install NCBI blast+ toolkit
-    uses: ./.github/workflows/install-blast.yml
+    - name: Install NCBI blast+ toolkit
+      uses: ./.github/workflows/install-blast.yml
 
   test-pipeline:
     needs: [install-blast]
