@@ -1,0 +1,17 @@
+query_id,subject_id,alignment_overlap_length,n_mismatches,n_gapopen,query_start,query_end,subject_start,subject_end,query_sequence,subject_sequence
+exon_01,read1:minQ30:ee0.00526[perfect]_exon1[1-to-14]_exon2[1-to-14]_exon3[1-to-14],14,0,0,1,14,1,14,ATGGGTCCTATCGG,ATGGGTCCTATCGG
+exon_02,read1:minQ30:ee0.00526[perfect]_exon1[1-to-14]_exon2[1-to-14]_exon3[1-to-14],14,0,0,1,14,15,28,CACCAGCTGGCAAT,CACCAGCTGGCAAT
+exon_02,read1:minQ30:ee0.00526[perfect]_exon1[1-to-14]_exon2[1-to-14]_exon3[1-to-14],4,0,0,9,12,13,16,GGCA,GGCA
+exon_03,read1:minQ30:ee0.00526[perfect]_exon1[1-to-14]_exon2[1-to-14]_exon3[1-to-14],14,0,0,1,14,29,42,GACTAAGTACGATT,GACTAAGTACGATT
+exon_01,read2:minQ30:ee0.00328[flanks]_5'flankGACAGGT_exon1[1-to-14]_exon2[1-to-14]_exon3[1-to-14]_3'flankCAATG,14,0,0,1,14,8,21,ATGGGTCCTATCGG,ATGGGTCCTATCGG
+exon_02,read2:minQ30:ee0.00328[flanks]_5'flankGACAGGT_exon1[1-to-14]_exon2[1-to-14]_exon3[1-to-14]_3'flankCAATG,14,0,0,1,14,22,35,CACCAGCTGGCAAT,CACCAGCTGGCAAT
+exon_02,read2:minQ30:ee0.00328[flanks]_5'flankGACAGGT_exon1[1-to-14]_exon2[1-to-14]_exon3[1-to-14]_3'flankCAATG,4,0,0,9,12,20,23,GGCA,GGCA
+exon_02,read2:minQ30:ee0.00328[flanks]_5'flankGACAGGT_exon1[1-to-14]_exon2[1-to-14]_exon3[1-to-14]_3'flankCAATG,4,0,0,11,14,50,53,CAAT,CAAT
+exon_03,read2:minQ30:ee0.00328[flanks]_5'flankGACAGGT_exon1[1-to-14]_exon2[1-to-14]_exon3[1-to-14]_3'flankCAATG,14,0,0,1,14,36,49,GACTAAGTACGATT,GACTAAGTACGATT
+exon_01,read3:minQ30:ee0.00366[insertion]_exon1[1-to-14]_insertGTTAGGGCG_exon3[1-to-14],14,0,0,1,14,1,14,ATGGGTCCTATCGG,ATGGGTCCTATCGG
+exon_01,read3:minQ30:ee0.00366[insertion]_exon1[1-to-14]_insertGTTAGGGCG_exon3[1-to-14],4,0,0,3,6,13,16,GGGT,GGGT
+exon_03,read3:minQ30:ee0.00366[insertion]_exon1[1-to-14]_insertGTTAGGGCG_exon3[1-to-14],14,0,0,1,14,24,37,GACTAAGTACGATT,GACTAAGTACGATT
+exon_01,read4:minQ30:ee0.00089[truncation]_exon1[1-to-10]_exon3[4-to-14],11,0,0,1,11,1,11,ATGGGTCCTAT,ATGGGTCCTAT
+exon_03,read4:minQ30:ee0.00089[truncation]_exon1[1-to-10]_exon3[4-to-14],11,0,0,4,14,11,21,TAAGTACGATT,TAAGTACGATT
+exon_01,read5:minQ30:ee0.00095[truncation_with_overlap]_exon1[1-to-14]_overlapGG_exon2[9-to-14],14,0,0,1,14,1,14,ATGGGTCCTATCGG,ATGGGTCCTATCGG
+exon_02,read5:minQ30:ee0.00095[truncation_with_overlap]_exon1[1-to-14]_overlapGG_exon2[9-to-14],6,0,0,9,14,13,18,GGCAAT,GGCAAT

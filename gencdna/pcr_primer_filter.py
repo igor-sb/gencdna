@@ -1,6 +1,6 @@
 """PCR primer filtering from a FASTA/FASTQ file using cutadapt."""
 
-from gencdna.bash import BinaryExecWithYamlArgs
+from gencdna.external_calls import BinaryExecutable
 
 
 def find_reads_with_pcr_primers(
@@ -16,7 +16,7 @@ def find_reads_with_pcr_primers(
     Raises:
         RuntimeError: If cutadapt throws a standard error.
     """
-    cutadapt = BinaryExecWithYamlArgs('cutadapt')
+    cutadapt = BinaryExecutable('cutadapt')
     cutadapt.config['arguments'] = cutadapt_args
     cutadapt_output = cutadapt.run(fastx_file)
     if cutadapt_output.stderr != b'':

@@ -2,7 +2,7 @@
 
 from Bio import SeqIO
 
-from gencdna.repeated_bases import (
+from gencdna.repeat_base_flagging import (
     create_repeated_bases_regex,
     flag_lowqual_repeated_bases,
 )

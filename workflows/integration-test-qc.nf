@@ -1,9 +1,9 @@
 nextflow.enable.dsl = 2
 
-params.test_file = "$projectDir/../tests/fixtures/example_reads_with_exons.fastq.gz"
-params.exons = "$projectDir/../tests/fixtures/example_exons.fasta"
-params.blast_config = "$projectDir/../tests/fixtures/example_reads_with_exons_blast_config.yml"
-params.test_filtered_file = "$projectDir/../tests/fixtures/"
+params.test_file = "$projectDir/../tests/expected_error_filtering/fixtures/reads.fastq"
+params.exons = "$projectDir/../tests/exon_alignment/fixtures/exons_14nt.fasta"
+params.blast_config = "$projectDir/../tests/exon_alignment/fixtures/blast_config.yml"
+// params.test_filtered_file = "$projectDir/../tests/fixtures/"
 params.forward_primer = "ATGG"
 params.reverse_primer = "GATT"
 
@@ -52,7 +52,7 @@ process flag_reads_with_low_quality_repeated_bases {
     script:
     """
     poetry run python \
-        $projectDir/../gencdna/file_api/low_quality_repeated_base_flagger.py \
+        $projectDir/../gencdna/file_api/repeat_base_flagging.py \
         filtered_reads.fastq.gz \
         flagged_reads.fastq.gz
     """

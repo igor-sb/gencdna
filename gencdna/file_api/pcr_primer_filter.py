@@ -4,7 +4,7 @@ import logging
 
 import fire
 
-from gencdna.bash import BinaryExecWithYamlArgs
+from gencdna.external_calls import BinaryExecutable
 
 logging.basicConfig(level=logging.INFO)
 LOG = logging.getLogger(__name__)
@@ -17,7 +17,7 @@ def filter_reads_without_pcr_primers(
     reverse_primer: str,
     config_yml: str = 'config/cutadapt.yml',
 ) -> str:
-    cutadapt = BinaryExecWithYamlArgs('cutadapt', config_yml)
+    cutadapt = BinaryExecutable('cutadapt', config_yml)
     cutadapt.config['arguments'] = {
         '-g': '{forward_primer}...{reverse_primer}'.format(
             forward_primer=forward_primer,

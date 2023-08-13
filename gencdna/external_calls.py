@@ -4,11 +4,11 @@ import subprocess  # noqa: S404
 import yaml
 
 
-class BinaryExecWithYamlArgs(object):
+class BinaryExecutable(object):
 
     def __init__(self, executable: str, config_yml: str = '') -> None:
         if config_yml == '':
-            self.config = {}
+            self.config: dict[str, dict] = {'arguments': {}}
         else:
             with open(config_yml) as config_file:
                 self.config = yaml.safe_load(config_file)

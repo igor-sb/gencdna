@@ -8,6 +8,7 @@ data/
 .nextflow/
 aws/
 work/
+tmp/
 
 # C extensions
 *.so

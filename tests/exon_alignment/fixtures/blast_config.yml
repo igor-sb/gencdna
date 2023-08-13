@@ -1,9 +1,9 @@
 arguments:
   -reward: 1
-  -penalty: -2
+  -penalty: -1
   -word_size: 4
   -gapopen: 0
   -gapextend: 2
   -dust: 'no'
   -strand: 'plus'
-  -outfmt: 6
+  -outfmt: '6 qseqid sseqid length mismatch gapopen qstart qend sstart send qseq sseq'
