@@ -55,9 +55,9 @@ def main(
     output_blast: str,
     blast_config: str = 'config/blast.yml',
 ) -> None:
-    blast_output_df = align_exons_vs_single_read(
+    blast_output_df = align_exons_vs_reads(
         exons_fasta_file=input_exons_fasta,
-        read_fasta_file=input_reads_fasta,
+        reads_fasta_file=input_reads_fasta,
         blast_config=blast_config,
     )
     blast_output_df.to_csv(output_blast, sep='\t', index=False)
