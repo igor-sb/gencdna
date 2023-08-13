@@ -4,7 +4,7 @@ import subprocess  # noqa: S404
 import yaml
 
 
-class BinaryExecWithYamlArgs(object):
+class BinaryExecutable(object):
 
     def __init__(self, executable: str, config_yml: str = '') -> None:
         if config_yml == '':

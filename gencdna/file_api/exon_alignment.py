@@ -4,7 +4,7 @@ import fire
 import pandas as pd
 
 from gencdna.blast_parsing import BlastOutputParser
-from gencdna.external_calls import BinaryExecWithYamlArgs
+from gencdna.external_calls import BinaryExecutable
 
 
 def align_exons_vs_reads(
@@ -12,7 +12,7 @@ def align_exons_vs_reads(
     reads_fasta_file: str,
     blast_config: str = 'config/blast.yml',
 ) -> pd.DataFrame:
-    blast = BinaryExecWithYamlArgs('blastn', blast_config)
+    blast = BinaryExecutable('blastn', blast_config)
     blast_output = blast.run(
         '-lcase_masking',
         '-query',
