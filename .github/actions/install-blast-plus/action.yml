@@ -19,6 +19,7 @@ runs:
     - name: Install NCBI blast+
       if: ${{ steps.blast-cache.outputs.cache-hit != true }}
       run: |
+        echo "${{ steps.blast-cache.outputs.cache-hit }}"
         base_url="ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+"
         filename="ncbi-blast-${{ inputs.BLAST_VERSION }}+-x64-linux.tar.gz"
         curl \
