@@ -24,6 +24,8 @@ runs:
         curl \
           -o ncbi-blast-${{ inputs.BLAST_VERSION }}+-x64-linux.tar.gz \
           "$base_url/${{ inputs.BLAST_VERSION }}/$filename"
+
+        [ ! -d "/home/runner/.local/bin/" ] && mkdir -p /home/runner/.local/bin/
         sudo tar -xzf \
           ncbi-blast-${{ inputs.BLAST_VERSION }}+-x64-linux.tar.gz \
           --strip-components=2 \
