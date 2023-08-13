@@ -9,10 +9,6 @@ env:
 
 jobs:
 
-  install-blast:
-    name: Install NCBI blast+ toolkit
-    uses: ./.github/workflows/install-blast.yml
-
   test-pipeline:
     needs: [install-blast]
 
@@ -25,6 +21,9 @@ jobs:
         with:
           ref: ${{ inputs.git_ref }}
           lfs: True
+      
+      - name: Install NCBI blast+ toolkit
+        uses: ./.github/workflows/install-blast.yml
 
       - name: Set up Python
         uses: actions/setup-python@v4
