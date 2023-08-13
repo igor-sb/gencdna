@@ -19,6 +19,8 @@ jobs:
         with:
           ref: ${{ inputs.git_ref }}
           lfs: True
+
+      - run: echo $PATH
       
       - name: Install NCBI blast+ toolkit
         uses: ./.github/actions/install-blast-plus
