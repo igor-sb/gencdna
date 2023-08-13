@@ -21,7 +21,7 @@ jobs:
           lfs: True
       
       - name: Install NCBI blast+ toolkit
-        uses: igor-sb/install-blast-plus-action@v0.1
+        uses: igor-sb/install-blast-plus-action@v0.1.1
         with:
           BLAST_VERSION: ${{ env.BLAST_VERSION }}
 
