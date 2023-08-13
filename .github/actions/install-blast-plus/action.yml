@@ -13,8 +13,8 @@ runs:
       id: blast-cache
       uses: actions/cache@v3
       with:
-        path: /usr/bin/ncbi-blast-${{ inputs.BLAST_VERSION }}+/bin/
-        key: ${{ runner.os }}-${{ inputs.BLAST_VERSION }}
+        path: /usr/bin/blastn
+        key: blastn-${{ runner.os }}-${{ inputs.BLAST_VERSION }}
         
     - name: Install NCBI blast+
       if: steps.blast-cache.outputs.cache-hit != true
@@ -27,6 +27,6 @@ runs:
         sudo tar -xzf \
           ncbi-blast-${{ inputs.BLAST_VERSION }}+-x64-linux.tar.gz \
           --strip-components=2 \
-          -C /usr/bin/ \
-          ncbi-blast-${{ inputs.BLAST_VERSION }}+/bin/
+          --directory /usr/bin/ \
+          ncbi-blast-${{ inputs.BLAST_VERSION }}+/bin/blastn
       shell: bash
