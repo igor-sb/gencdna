@@ -2,7 +2,7 @@
 
 import os
 
-from gencdna.file_api.exon_alignment import align_exons_vs_single_read
+from gencdna.file_api.align_exons_to_reads import align_exons_vs_single_read
 
 
 def test_align_exons_vs_reads(

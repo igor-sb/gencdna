@@ -3,11 +3,11 @@
 import os
 import pytest
 
-fixture_path = '{base_path}/tests/repeated_base_flagging/fixtures'.format(
+fixture_path = '{base_path}/tests/repeat_bases/fixtures'.format(
     base_path=os.path.abspath('.'),
 )
 
-snapshot_path = '{base_path}/tests/repeated_base_flagging/snapshots'.format(
+snapshot_path = '{base_path}/tests/repeat_bases/snapshots'.format(
     base_path=os.path.abspath('.'),
 )
 

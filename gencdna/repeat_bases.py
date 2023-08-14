@@ -3,7 +3,7 @@
 import re
 from typing import Any
 
-from Bio.Seq import Seq
+from Bio.Seq import MutableSeq, Seq
 from Bio.SeqRecord import SeqRecord
 
 
@@ -74,3 +74,17 @@ def construct_seq_record(metadata, sequence_list, quality_scores_list):
         description='',
         letter_annotations={'phred_quality': quality_scores_list},
     )
+
+
+def fill_flagged_repeat_bases(
+    sequence: Seq,
+    flags: tuple[str, str] = ('([ACGT])N-*', '-+([ACGT])N'),
+) -> Seq:
+    filled_sequence = MutableSeq(sequence)
+    for flag in flags:
+        for repeat_match in re.finditer(flag, str(sequence)):
+            repeat_length = len(repeat_match.group(0))
+            filled_sequence[  # noqa: WPS362
+                repeat_match.start():(repeat_match.start() + repeat_length)
+            ] = repeat_match.group(1) * repeat_length
+    return Seq(filled_sequence)
