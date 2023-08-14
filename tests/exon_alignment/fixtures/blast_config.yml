@@ -1,4 +1,5 @@
 arguments:
+  -task: 'blastn-short'
   -reward: 1
   -penalty: -1
   -word_size: 4
