@@ -2,10 +2,11 @@ nextflow.enable.dsl = 2
 
 params.test_file = "$projectDir/../tests/expected_error_filtering/fixtures/reads.fastq"
 params.exons = "$projectDir/../tests/exon_alignment/fixtures/exons_14nt.fasta"
-params.blast_config = "$projectDir/../tests/exon_alignment/fixtures/blast_config.yml"
+params.alignment_config = "$projectDir/../tests/exon_alignment/fixtures/usearch_config.yml"
 // params.test_filtered_file = "$projectDir/../tests/fixtures/"
 params.forward_primer = "ATGG"
 params.reverse_primer = "GATT"
+params.out_dir = ""
 
 
 workflow {
@@ -20,7 +21,7 @@ workflow {
     exon_align_ch = align_exons(
         fasta_export_ch,
         params.exons,
-        params.blast_config
+        params.alignment_config
     )
 }
 
@@ -89,6 +90,8 @@ process export_unique_reads_to_fasta {
     output:
     path "unique_reads.fasta"
 
+    publishDir "$params.out_dir"
+
     script:
     """
     poetry run python $projectDir/../gencdna/file_api/fastq_to_fasta.py \
@@ -102,17 +105,19 @@ process align_exons {
     input:
     path "unique_reads.fasta"
     path exons_fasta
-    path blast_config
+    path alignment_config
 
     output:
-    path "blast_output.tsv"
+    path "alignment_output.tsv"
+
+    publishDir "$params.out_dir"
 
     script:
     """
     poetry run python $projectDir/../gencdna/file_api/exon_alignment.py \
         $exons_fasta \
         unique_reads.fasta \
-        blast_output.tsv \
-        -b $blast_config 
+        alignment_output.tsv \
+        --config $alignment_config 
     """
 }

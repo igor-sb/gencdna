@@ -7,3 +7,4 @@ arguments:
   -dust: 'no'
   -strand: 'plus'
   -outfmt: '6 qseqid sseqid length mismatch gapopen qstart qend sstart send qseq sseq'
+  -subject_besthit: ''

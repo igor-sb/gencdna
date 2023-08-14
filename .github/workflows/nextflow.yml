@@ -6,6 +6,7 @@ on:
 env:
   PYTHON_VERSION: 3.11.2
   BLAST_VERSION: 2.14.0
+  USEARCH_VERSION: 11.0.667
 
 jobs:
 
@@ -30,6 +31,11 @@ jobs:
         with:
           BLAST_VERSION: ${{ env.BLAST_VERSION }}
 
+      - name: Install USEARCH
+        uses: ./.github/actions/install-usearch
+        with:
+          USEARCH_VERSION: ${{ env.USEARCH_VERSION }}
+
       - name: Install Python
         uses: actions/setup-python@v4
         with:
@@ -52,4 +58,8 @@ jobs:
         run: make install
 
       - name: Run Nextflow Integration test
-        run: nextflow run ${GITHUB_WORKSPACE}/workflows/integration-test-qc.nf
+        run: |
+          out_dir="${GITHUB_WORKSPACE}/data/"
+          mkdir -p $out_dir
+          nextflow run ${GITHUB_WORKSPACE}/workflows/integration-test-qc.nf \
+            --out_dir $out_dir

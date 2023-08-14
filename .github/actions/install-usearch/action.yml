@@ -25,4 +25,5 @@ runs:
         [ ! -d "/home/runner/.local/bin/" ] && mkdir -p /home/runner/.local/bin/
         gunzip usearch.gz
         mv usearch /home/runner/.local/bin/
+        chmod +x /home/runner/.local/bin/usearch
       shell: bash
