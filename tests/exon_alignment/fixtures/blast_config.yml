@@ -5,5 +5,6 @@ arguments:
   -gapopen: 0
   -gapextend: 2
   -dust: 'no'
-  -strand: 'plus'
+  -strand: 'both'
   -outfmt: '6 qseqid sseqid length mismatch gapopen qstart qend sstart send qseq sseq'
+  -subject_besthit: ''
