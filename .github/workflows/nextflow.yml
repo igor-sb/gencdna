@@ -52,4 +52,8 @@ jobs:
         run: make install
 
       - name: Run Nextflow Integration test
-        run: nextflow run ${GITHUB_WORKSPACE}/workflows/integration-test-qc.nf
+        run: |
+          out_dir="${GITHUB_WORKSPACE}/data/"
+          mkdir -p $out_dir
+          nextflow run ${GITHUB_WORKSPACE}/workflows/integration-test-qc.nf \
+            --out_dir $out_dir
