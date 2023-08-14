@@ -30,6 +30,11 @@ jobs:
         with:
           BLAST_VERSION: ${{ env.BLAST_VERSION }}
 
+      - name: Install USEARCH
+        uses: ./.github/actions/install-usearch
+        with:
+          USEARCH_VERSION: ${{ env.USEARCH_VERSION }}
+
       - name: Install Python
         uses: actions/setup-python@v4
         with:
