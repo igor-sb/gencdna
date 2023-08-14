@@ -6,6 +6,7 @@ on:
 env:
   PYTHON_VERSION: 3.11.2
   BLAST_VERSION: 2.14.0
+  USEARCH_VERSION: 11.0.667
 
 jobs:
 
