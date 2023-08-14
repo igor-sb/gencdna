@@ -36,14 +36,15 @@ class UsearchOutputParser(AlignmentOutputParser):
             header=None,
             names=self.column_names,
         )
-        df['query_sequence'] = df.apply(
-            lambda row: self._extract_substring(row, 'query'),
-            axis=1,
-        )
-        df['subject_sequence'] = df.apply(
-            lambda row: self._extract_substring(row, 'subject'),
-            axis=1,
-        )
+        if not df.empty:
+            df['query_sequence'] = df.apply(
+                lambda row: self._extract_substring(row, 'query'),
+                axis=1,
+            )
+            df['subject_sequence'] = df.apply(
+                lambda row: self._extract_substring(row, 'subject'),
+                axis=1,
+            )
         return df
 
     def _extract_substring(self, row: pd.Series, col: str) -> pd.Series:

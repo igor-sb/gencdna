@@ -52,7 +52,7 @@ def align_exons_vs_reads(
 def main(
     input_exons_fasta: str,
     input_reads_fasta: str,
-    output_blast: str,
+    alignment_output: str,
     config: str = 'config/usearch.yml',
 ) -> None:
     alignment_output_df = align_exons_vs_reads(
@@ -60,7 +60,7 @@ def main(
         reads_fasta_file=input_reads_fasta,
         config=config,
     )
-    alignment_output_df.to_csv(output_blast, sep='\t', index=False)
+    alignment_output_df.to_csv(alignment_output, sep='\t', index=False)
 
 
 if __name__ == '__main__':
