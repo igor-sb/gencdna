@@ -1,0 +1,12 @@
+>fix_read_1_with_GN--
+AAGCGGGCCGCAAGCAGTG
+>fix_read_2_with_CN_and_TN---
+CACCAGCTTTTGGCAAT
+>fix_read_3_with_--CN
+GGCTGAACCCCAGATTGCCA
+>nofix_read_4_without_Ns
+TTCTGAGCAGATGCAGAACTAG
+>nofix_read_5_without_Ns_or_-s
+TTCTGAGCAGATGCAGAACTAG
+>fix_read_6_with_-CN_and_AN-_and_TN
+GGCTGAACCCCAGATTGCCAAAAAGTTC
