@@ -24,6 +24,6 @@ runs:
         curl -o usearch.gz "$url"
         [ ! -d "/home/runner/.local/bin/" ] && mkdir -p /home/runner/.local/bin/
         gunzip usearch.gz
-        chmod +x usearch
         mv usearch /home/runner/.local/bin/
+        chmod +x /home/runner/.local/bin/usearch
       shell: bash
