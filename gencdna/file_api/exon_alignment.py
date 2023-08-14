@@ -6,7 +6,7 @@ import fire
 import pandas as pd
 from Bio import SeqIO
 
-from gencdna.alignment_output import UsearchOutputParser
+from gencdna.alignment_output import AlignmentOutputParser
 from gencdna.config.alignment_output import USEARCH_COLUMN_NAMES
 from gencdna.external_calls import BinaryExecutable
 
@@ -24,7 +24,7 @@ def align_exons_vs_single_read(
         read_fasta_file,
     )
     return (
-        UsearchOutputParser(USEARCH_COLUMN_NAMES, align_output)
+        AlignmentOutputParser(USEARCH_COLUMN_NAMES, align_output)
         .output_as_dataframe()
         .sort_values(by=['subject_id', 'query_id'])
     )
