@@ -14,8 +14,10 @@ snapshot_path = '{base_path}/tests/exon_alignment/snapshots'.format(
 
 
 @pytest.fixture()
-def blast_config():
-    return '{fixture_path}/blast_config.yml'.format(fixture_path=fixture_path)
+def usearch_config():
+    return '{fixture_path}/usearch_config.yml'.format(
+        fixture_path=fixture_path,
+    )
 
 
 @pytest.fixture()
@@ -38,7 +40,9 @@ def reads_fasta_file():
 
 
 @pytest.fixture()
-def blast_output():
-    return '{snapshot_path}/read1_with_repeat_base_flags_blastout.csv'.format(
-        snapshot_path=snapshot_path,
+def alignment_output():
+    return (
+        '{snapshot_path}/read1_with_repeat_base_flags_usearchout.csv'.format(
+            snapshot_path=snapshot_path,
+        )
     )

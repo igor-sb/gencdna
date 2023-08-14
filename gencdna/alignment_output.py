@@ -46,7 +46,7 @@ class UsearchOutputParser(AlignmentOutputParser):
         )
         return df
 
-    def _extract_substring(self, row: pd.Series, col: str):
+    def _extract_substring(self, row: pd.Series, col: str) -> pd.Series:
         start_index: int = row['{col}_start'.format(col=col)] - 1
-        stop_index: int = row['{col}_stop'.format(col=col)]
+        stop_index: int = row['{col}_end'.format(col=col)]
         return row['{col}_sequence'.format(col=col)][start_index:stop_index]

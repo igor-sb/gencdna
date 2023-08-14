@@ -18,7 +18,7 @@ def align_exons_vs_single_read(
 ) -> pd.DataFrame:
     align = BinaryExecutable('usearch', config)
     align_output = align.run(
-        '-query',
+        '-usearch_local',
         exons_fasta_file,
         '-db',
         read_fasta_file,

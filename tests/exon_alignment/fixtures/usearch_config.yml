@@ -1,0 +1,9 @@
+arguments:
+  -strand: 'plus'
+  -id: 0.75
+  -fulldp: ''
+  -lext: 0.1
+  -lopen: 1
+  -userfields: 'query+target+qlo+qhi+tlo+thi+qseq+tseq'
+  -quiet: ''
+  -userout: '/dev/stdout'

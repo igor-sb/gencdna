@@ -8,14 +8,19 @@ from gencdna.exon_map import create_exon_map
 
 def test_create_exon_map(blast_output):
     blast_out_df = pd.read_csv(blast_output)
-    actual_exon_map = create_exon_map(blast_out_df)
+    actual_exon_map = (
+        create_exon_map(blast_out_df)
+        .sort_values(by=['subject_id'])
+    )
     reference_exon_map = pd.DataFrame({
         'subject_id': [
             'read_exons1,2,3_but_revcomp_exon2',
+            'read_exons1,2,3_with_repeat_base_error',
             'read_exons1,2,3_with_repeat_base_flags_and_flanks',
         ],
         'exon_map': [
             "1 2' 3",
+            '1 2 3',
             '1 2 3',
         ],
     })
