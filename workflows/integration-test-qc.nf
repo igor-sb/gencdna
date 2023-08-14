@@ -6,6 +6,7 @@ params.blast_config = "$projectDir/../tests/exon_alignment/fixtures/blast_config
 // params.test_filtered_file = "$projectDir/../tests/fixtures/"
 params.forward_primer = "ATGG"
 params.reverse_primer = "GATT"
+params.out_dir = ""
 
 
 workflow {
@@ -106,6 +107,8 @@ process align_exons {
 
     output:
     path "blast_output.tsv"
+
+    publishDir "$params.out_dir"
 
     script:
     """

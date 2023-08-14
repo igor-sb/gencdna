@@ -1,0 +1,7 @@
+query_id,subject_id,query_start,query_end,subject_start,subject_end
+exon_01,"read_exons1,2,3_but_revcomp_exon2",1,14,1,14
+exon_02,"read_exons1,2,3_but_revcomp_exon2",1,14,28,15
+exon_03,"read_exons1,2,3_but_revcomp_exon2",1,14,29,42
+exon_01,"read_exons1,2,3_with_repeat_base_flags_and_flanks",6,14,12,20
+exon_02,"read_exons1,2,3_with_repeat_base_flags_and_flanks",1,14,21,34
+exon_03,"read_exons1,2,3_with_repeat_base_flags_and_flanks",1,13,35,47
