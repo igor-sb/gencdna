@@ -8,19 +8,19 @@ from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
-from gencdna.repeat_bases import fill_alignment_output_sequences
+from gencdna.repeat_bases import fill_alignment_table_sequences
 
 logging.basicConfig(level=logging.INFO)
 LOG = logging.getLogger(__name__)
 
 
-def write_filled_alignment_output(
+def write_filled_alignment_table(
     flagged_alignment_table: str,
     filled_alignment_table: str,
     read_prefix: str = 'subject',
 ) -> None:
     align_out_df = pd.read_csv(flagged_alignment_table)
-    filled_align_out_df = fill_alignment_output_sequences(
+    filled_align_out_df = fill_alignment_table_sequences(
         align_out_df,
         read_prefix=read_prefix,
     )
@@ -36,7 +36,12 @@ def write_filled_sequences_fasta(
     read_seq = '{read_prefix}_sequence'.format(read_prefix=read_prefix)
     filled_align_out_df = pd.read_csv(filled_alignment_table)
     fasta_records: list[SeqRecord] = filled_align_out_df.apply(
-        lambda row: SeqRecord(Seq(row[read_seq]), row[read_id]),
+        lambda row: SeqRecord(
+            seq=Seq(row[read_seq]),
+            id=row[read_id],
+            description='',
+        ),
+        axis=1,
     )
     SeqIO.write(fasta_records, fasta_file, 'fasta')
 
@@ -47,7 +52,7 @@ def write_outputs(
     output_fasta: str,
     read_prefix: str = 'subject',
 ) -> None:
-    write_filled_alignment_output(
+    write_filled_alignment_table(
         input_alignment_table,
         output_alignment_table,
         read_prefix=read_prefix,

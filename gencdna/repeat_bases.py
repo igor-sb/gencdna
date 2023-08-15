@@ -91,12 +91,12 @@ def fill_flagged_repeat_bases(
     return str(filled_sequence)
 
 
-def fill_alignment_output_sequences(
-    align_out_df: pd.DataFrame,
+def fill_alignment_table_sequences(
+    alignment_df: pd.DataFrame,
     read_prefix: str = 'subject',
 ) -> pd.DataFrame:
     seq_column = '{read_prefix}_sequence'.format(read_prefix=read_prefix)
-    align_out_df[seq_column] = align_out_df[seq_column].apply(
+    alignment_df[seq_column] = alignment_df[seq_column].apply(
         fill_flagged_repeat_bases,
     )
-    return align_out_df
+    return alignment_df
