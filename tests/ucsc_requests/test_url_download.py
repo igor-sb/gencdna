@@ -15,5 +15,7 @@ def fixture_mock_requests_get():
 
 def test_exons_and_introns_fasta_from_url(mock_requests_get):
     with patch('requests.get', mock_requests_get):
-        fasta_content = exons_and_introns_fasta_from_url('https://genome.ucsc.edu/cgi-bin/hgc')
+        fasta_content = exons_and_introns_fasta_from_url(
+            'https://genome.ucsc.edu/cgi-bin/hgc',
+        )
         assert fasta_content == 'FASTA content'
