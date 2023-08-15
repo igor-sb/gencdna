@@ -2,7 +2,7 @@
 
 import os
 
-from gencdna.file_api.pcr_primer_filter import filter_reads_without_pcr_primers
+from gencdna.file_api import filter_pcr_primers
 
 
 def test_filter_reads_without_pcr_primers(
@@ -11,7 +11,7 @@ def test_filter_reads_without_pcr_primers(
     snapshot,
 ):
 
-    actual_fasta_output = filter_reads_without_pcr_primers(
+    actual_fasta_output = filter_pcr_primers.filter_reads(
         input_file=mock_pcr_fasta_file,
         output_file='',
         forward_primer='ATGG',

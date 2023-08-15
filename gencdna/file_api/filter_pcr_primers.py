@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 LOG = logging.getLogger(__name__)
 
 
-def filter_reads_without_pcr_primers(
+def filter_reads(
     input_file: str,
     output_file: str,
     forward_primer: str,
@@ -34,4 +34,4 @@ def filter_reads_without_pcr_primers(
 
 
 if __name__ == '__main__':
-    fire.Fire(filter_reads_without_pcr_primers)
+    fire.Fire(filter_reads)

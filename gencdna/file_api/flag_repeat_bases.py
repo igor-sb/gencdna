@@ -7,7 +7,7 @@ from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 
 from gencdna.fastx_io import open_fastx_or_fastxgz
-from gencdna.repeat_base_flagging import (
+from gencdna.repeat_bases import (
     create_repeated_bases_regex,
     flag_lowqual_repeated_bases,
 )

@@ -25,29 +25,3 @@ class AlignmentOutputParser(object):
             header=None,
             names=self.column_names,
         )
-
-
-class UsearchOutputParser(AlignmentOutputParser):
-
-    def output_as_dataframe(self) -> pd.DataFrame:
-        df = pd.read_csv(
-            io.StringIO(self.standard_output),
-            delimiter='\t',
-            header=None,
-            names=self.column_names,
-        )
-        if not df.empty:
-            df['query_sequence'] = df.apply(
-                lambda row: self._extract_substring(row, 'query'),
-                axis=1,
-            )
-            df['subject_sequence'] = df.apply(
-                lambda row: self._extract_substring(row, 'subject'),
-                axis=1,
-            )
-        return df
-
-    def _extract_substring(self, row: pd.Series, col: str) -> pd.Series:
-        start_index: int = row['{col}_start'.format(col=col)] - 1
-        stop_index: int = row['{col}_end'.format(col=col)]
-        return row['{col}_sequence'.format(col=col)][start_index:stop_index]

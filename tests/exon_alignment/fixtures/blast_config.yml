@@ -1,11 +1,9 @@
 arguments:
-  -task: 'blastn-short'
   -reward: 1
-  -penalty: -1
+  -penalty: -2
   -word_size: 4
   -gapopen: 0
   -gapextend: 2
   -dust: 'no'
-  -strand: 'both'
-  -outfmt: '6 qseqid sseqid length mismatch gapopen qstart qend sstart send qseq sseq'
-  -subject_besthit: ''
+  -strand: 'plus'
+  -outfmt: '6 qseqid sseqid qstart qend sstart send qseq sseq'
