@@ -2,8 +2,7 @@
 
 from unittest.mock import Mock, patch
 import pytest
-from gencdna.ucsc.requests import exons_and_introns_fasta_from_url
-
+from gencdna.genome_browser_api.url import fasta_record_from_url
 
 @pytest.fixture(name='mock_requests_get')
 def fixture_mock_requests_get():
@@ -15,7 +14,9 @@ def fixture_mock_requests_get():
 
 def test_exons_and_introns_fasta_from_url(mock_requests_get):
     with patch('requests.get', mock_requests_get):
-        fasta_content = exons_and_introns_fasta_from_url(
+        fasta_content = fasta_record_from_url(
             'https://genome.ucsc.edu/cgi-bin/hgc',
         )
         assert fasta_content == 'FASTA content'
+
+
