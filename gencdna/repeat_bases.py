@@ -3,7 +3,8 @@
 import re
 from typing import Any
 
-from Bio.Seq import Seq
+import pandas as pd
+from Bio.Seq import MutableSeq, Seq
 from Bio.SeqRecord import SeqRecord
 
 
@@ -74,3 +75,28 @@ def construct_seq_record(metadata, sequence_list, quality_scores_list):
         description='',
         letter_annotations={'phred_quality': quality_scores_list},
     )
+
+
+def fill_flagged_repeat_bases(
+    sequence: str,
+    flags: tuple[str, str] = ('([ACGT])N-*', '-+([ACGT])N'),
+) -> str:
+    filled_sequence = MutableSeq(sequence)
+    for flag in flags:
+        for repeat_match in re.finditer(flag, str(sequence)):
+            repeat_length = len(repeat_match.group(0))
+            filled_sequence[  # noqa: WPS362
+                repeat_match.start():(repeat_match.start() + repeat_length)
+            ] = repeat_match.group(1) * repeat_length
+    return str(filled_sequence)
+
+
+def fill_alignment_table_sequences(
+    alignment_df: pd.DataFrame,
+    read_prefix: str = 'subject',
+) -> pd.DataFrame:
+    seq_column = '{read_prefix}_sequence'.format(read_prefix=read_prefix)
+    alignment_df[seq_column] = alignment_df[seq_column].apply(
+        fill_flagged_repeat_bases,
+    )
+    return alignment_df

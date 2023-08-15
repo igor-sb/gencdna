@@ -13,7 +13,7 @@ snapshot_path = '{base_path}/tests/exon_map/snapshots'.format(
 
 
 @pytest.fixture()
-def blast_output():
-    return '{fixture_path}/blast_output.csv'.format(
+def alignment_output():
+    return '{fixture_path}/alignment_output.csv'.format(
         fixture_path=fixture_path,
     )

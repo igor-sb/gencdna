@@ -6,7 +6,7 @@ params.alignment_config = "$projectDir/../tests/exon_alignment/fixtures/usearch_
 // params.test_filtered_file = "$projectDir/../tests/fixtures/"
 params.forward_primer = "ATGG"
 params.reverse_primer = "GATT"
-params.out_dir = ""
+params.out_dir = "tmp"
 
 
 workflow {
@@ -36,7 +36,7 @@ process filter_reads_with_low_expected_errors {
     script:
     """
     poetry run python \
-        $projectDir/../gencdna/file_api/expected_error_filter.py \
+        $projectDir/../gencdna/file_api/filter_by_expected_error.py \
         $raw_reads \
         filtered_reads.fastq.gz \
         0.01
@@ -53,7 +53,7 @@ process flag_reads_with_low_quality_repeated_bases {
     script:
     """
     poetry run python \
-        $projectDir/../gencdna/file_api/repeat_base_flagging.py \
+        $projectDir/../gencdna/file_api/flag_repeat_bases.py \
         filtered_reads.fastq.gz \
         flagged_reads.fastq.gz
     """
@@ -114,7 +114,7 @@ process align_exons {
 
     script:
     """
-    poetry run python $projectDir/../gencdna/file_api/exon_alignment.py \
+    poetry run python $projectDir/../gencdna/file_api/align_exons_to_reads.py \
         $exons_fasta \
         unique_reads.fasta \
         alignment_output.tsv \

@@ -2,8 +2,10 @@ arguments:
   -strand: 'plus'
   -id: 0.75
   -fulldp: ''
+  -match: 3
+  -mismatch: -2
   -lext: 0.1
-  -lopen: 0.5
-  -userfields: 'query+target+qlo+qhi+tlo+thi+qseq+tseq'
+  -lopen: 1
+  -userfields: 'query+target+qlo+qhi+tlo+thi+qrow+trow'
   -quiet: ''
   -userout: '/dev/stdout'

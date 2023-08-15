@@ -6,7 +6,7 @@ import fire
 import pandas as pd
 from Bio import SeqIO
 
-from gencdna.alignment_output import UsearchOutputParser
+from gencdna.alignment_output import AlignmentOutputParser
 from gencdna.config.alignment_output import USEARCH_COLUMN_NAMES
 from gencdna.external_calls import BinaryExecutable
 
@@ -14,17 +14,18 @@ from gencdna.external_calls import BinaryExecutable
 def align_exons_vs_single_read(
     exons_fasta_file: str,
     read_fasta_file: str,
-    config: str = 'config/usearch.yml',
+    config: str,
 ) -> pd.DataFrame:
-    align = BinaryExecutable('usearch', config)
+    align = BinaryExecutable('blastn', config)
     align_output = align.run(
-        '-usearch_local',
+        '-subject_besthit',
+        '-query',
         exons_fasta_file,
-        '-db',
+        '-subject',
         read_fasta_file,
     )
     return (
-        UsearchOutputParser(USEARCH_COLUMN_NAMES, align_output)
+        AlignmentOutputParser(USEARCH_COLUMN_NAMES, align_output)
         .output_as_dataframe()
         .sort_values(by=['subject_id', 'query_id'])
     )
@@ -33,7 +34,7 @@ def align_exons_vs_single_read(
 def align_exons_vs_reads(
     exons_fasta_file: str,
     reads_fasta_file: str,
-    config: str = 'config/usearch.yml',
+    config: str = 'config/blast.yml',
 ) -> pd.DataFrame:
     alignment_outputs: list[pd.DataFrame] = []
     for read in SeqIO.parse(reads_fasta_file, 'fasta'):
@@ -53,7 +54,7 @@ def main(
     input_exons_fasta: str,
     input_reads_fasta: str,
     alignment_output: str,
-    config: str = 'config/usearch.yml',
+    config: str = 'config/blast.yml',
 ) -> None:
     alignment_output_df = align_exons_vs_reads(
         exons_fasta_file=input_exons_fasta,

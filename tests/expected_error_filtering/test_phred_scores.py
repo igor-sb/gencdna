@@ -8,7 +8,7 @@ import pytest
 from Bio import SeqIO
 
 from gencdna.expected_error_filter import expected_number_of_errors
-from gencdna.file_api.expected_error_filter import (
+from gencdna.file_api.filter_by_expected_error import (
     filter_reads_with_low_expected_errors,
 )
 
