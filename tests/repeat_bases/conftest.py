@@ -21,7 +21,7 @@ def repeated_bases_fastq_file():
 
 @pytest.fixture()
 def repeated_bases_flagged_fastq_file():
-    return '{snapshot_path}/reads_flagged.fastq'.format(
+    return '{snapshot_path}/flagged_reads.fastq'.format(
         snapshot_path=snapshot_path,
     )
 

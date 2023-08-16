@@ -59,7 +59,7 @@ process flag_reads_with_low_quality_repeated_bases {
     """
 }
 
-
+// make this optional
 process filter_reads_without_pcr_primers {
     input:
     path "flagged_reads.fastq.gz"

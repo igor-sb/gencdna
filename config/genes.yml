@@ -1,0 +1,36 @@
+genes:
+
+  - APP:
+    id: ENST00000346798.8
+    chromosome: chr21
+    left: 25880549
+    right: 26170770
+    url: "https://genome.ucsc.edu/cgi-bin/hgc?hgsid=1675269598_JsyRGx7QQs3Shj5LJ6kjXImYEki7&g=htcDnaNearGene&i=ENST00000346798.8&c=chr21&l=25880549&r=26170770&o=knownGene&boolshad.hgSeq.promoter=0&hgSeq.promoterSize=1000&hgSeq.utrExon5=on&boolshad.hgSeq.utrExon5=0&hgSeq.cdsExon=on&boolshad.hgSeq.cdsExon=0&hgSeq.utrExon3=on&boolshad.hgSeq.utrExon3=0&hgSeq.intron=on&boolshad.hgSeq.intron=0&boolshad.hgSeq.downstream=0&hgSeq.downstreamSize=1000&hgSeq.granularity=feature&hgSeq.padding5=0&hgSeq.padding3=0&boolshad.hgSeq.splitCDSUTR=0&hgSeq.casing=exon&boolshad.hgSeq.maskRepeats=0&hgSeq.repMasking=lower&submit=submit"
+
+  - MAPT:
+    id: ENST00000262410.10
+    chromosome: chr17
+    left: 45894553
+    right: 46028334
+    url: "https://genome.ucsc.edu/cgi-bin/hgc?hgsid=1675269598_JsyRGx7QQs3Shj5LJ6kjXImYEki7&g=htcDnaNearGene&i=ENST00000262410.10&c=chr17&l=45894553&r=46028334&o=knownGene&boolshad.hgSeq.promoter=0&hgSeq.promoterSize=1000&hgSeq.utrExon5=on&boolshad.hgSeq.utrExon5=0&hgSeq.cdsExon=on&boolshad.hgSeq.cdsExon=0&hgSeq.utrExon3=on&boolshad.hgSeq.utrExon3=0&hgSeq.intron=on&boolshad.hgSeq.intron=0&boolshad.hgSeq.downstream=0&hgSeq.downstreamSize=1000&hgSeq.granularity=feature&hgSeq.padding5=0&hgSeq.padding3=0&boolshad.hgSeq.splitCDSUTR=0&hgSeq.casing=exon&boolshad.hgSeq.maskRepeats=0&hgSeq.repMasking=lower&submit=submit"
+
+  - TARDBP:
+    id: ENST00000240185.8
+    chromosome: chr1
+    left: 11012653
+    right: 11025492
+    url: "https://genome.ucsc.edu/cgi-bin/hgc?hgsid=1675269598_JsyRGx7QQs3Shj5LJ6kjXImYEki7&g=htcDnaNearGene&i=ENST00000240185.8&c=chr1&l=11012653&r=11025492&o=knownGene&boolshad.hgSeq.promoter=0&hgSeq.promoterSize=1000&hgSeq.utrExon5=on&boolshad.hgSeq.utrExon5=0&hgSeq.cdsExon=on&boolshad.hgSeq.cdsExon=0&hgSeq.utrExon3=on&boolshad.hgSeq.utrExon3=0&hgSeq.intron=on&boolshad.hgSeq.intron=0&boolshad.hgSeq.downstream=0&hgSeq.downstreamSize=1000&hgSeq.granularity=feature&hgSeq.padding5=0&hgSeq.padding3=0&boolshad.hgSeq.splitCDSUTR=0&hgSeq.casing=exon&boolshad.hgSeq.maskRepeats=0&hgSeq.repMasking=lower&submit=submit"
+
+  - GRN:
+    id: ENST00000053867.8
+    chromosome: chr17
+    left: 44345301
+    right: 44353106
+    url: "https://genome.ucsc.edu/cgi-bin/hgc?hgsid=1675280066_5Gaw8iw7fFonTvA3PunN9Lqgzeqs&g=htcDnaNearGene&i=ENST00000053867.8&c=chr17&l=44345301&r=44353106&o=knownGene&boolshad.hgSeq.promoter=0&hgSeq.promoterSize=1000&hgSeq.utrExon5=on&boolshad.hgSeq.utrExon5=0&hgSeq.cdsExon=on&boolshad.hgSeq.cdsExon=0&hgSeq.utrExon3=on&boolshad.hgSeq.utrExon3=0&hgSeq.intron=on&boolshad.hgSeq.intron=0&boolshad.hgSeq.downstream=0&hgSeq.downstreamSize=1000&hgSeq.granularity=feature&hgSeq.padding5=0&hgSeq.padding3=0&boolshad.hgSeq.splitCDSUTR=0&hgSeq.casing=exon&boolshad.hgSeq.maskRepeats=0&hgSeq.repMasking=lower&submit=submit"
+    
+  - C9ORF72:
+    id: ENST00000380003.8
+    chromosome: chr9
+    left: 27546545
+    right: 27573481
+    url: "https://genome.ucsc.edu/cgi-bin/hgc?hgsid=1675280066_5Gaw8iw7fFonTvA3PunN9Lqgzeqs&g=htcDnaNearGene&i=ENST00000380003.8&c=chr9&l=27546545&r=27573481&o=knownGene&boolshad.hgSeq.promoter=0&hgSeq.promoterSize=1000&hgSeq.utrExon5=on&boolshad.hgSeq.utrExon5=0&hgSeq.cdsExon=on&boolshad.hgSeq.cdsExon=0&hgSeq.utrExon3=on&boolshad.hgSeq.utrExon3=0&hgSeq.intron=on&boolshad.hgSeq.intron=0&boolshad.hgSeq.downstream=0&hgSeq.downstreamSize=1000&hgSeq.granularity=feature&hgSeq.padding5=0&hgSeq.padding3=0&boolshad.hgSeq.splitCDSUTR=0&hgSeq.casing=exon&boolshad.hgSeq.maskRepeats=0&hgSeq.repMasking=lower&submit=submit"
