@@ -43,7 +43,7 @@ def construct_url(
 def get_url_contents(url: str, timeout_seconds: int = 60) -> str:
     response = requests.get(url, timeout=timeout_seconds)
     if response.status_code == 200:  # noqa: WPS432
-        return str(response.content)
+        return response.content.decode('UTF-8')
     raise IOError('Error: {code}'.format(code=response.status_code))
 
 

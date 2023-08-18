@@ -11,8 +11,6 @@ get_args:
   boolshad.hgSeq.splitCDSUTR: 0
   boolshad.hgSeq.maskRepeats: 0
   hgSeq.promoterSize: 1000
-  hgSeq.utrExon5: 'on'
-  hgSeq.utrExon3: 'on'
   hgSeq.cdsExon: 'on'
   hgSeq.intron: 'on'
   hgSeq.downstreamSize: 1000
