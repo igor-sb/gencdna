@@ -19,7 +19,7 @@ def app_gene_html():
 
 
 @pytest.fixture()
-def ref_app_gene_exons_and_introns_fasta():
-    return '{snapshot_path}/app_exons_and_introns.fasta'.format(
+def ref_app_exons_fasta():
+    return '{snapshot_path}/app_exons.fasta'.format(
         snapshot_path=snapshot_path,
     )

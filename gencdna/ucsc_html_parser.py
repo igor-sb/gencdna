@@ -1,8 +1,30 @@
 """Exon/intron parsing from URL."""
 
+import io
 import re
 
+from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
+from bs4 import BeautifulSoup
+
+
+def parse_fasta_string(url_contents: str) -> str:
+    soup = BeautifulSoup(url_contents, 'html.parser')
+    pre_tag = soup.find('pre')
+    if not pre_tag:
+        raise ValueError('<pre> tag not found.')
+    return pre_tag.text.strip()
+
+
+def parse_fasta_records(
+    url_contents: str,
+) -> list[SeqRecord]:
+    fasta_string = parse_fasta_string(url_contents)
+    fasta_records: list[SeqRecord] = []
+    with io.StringIO(fasta_string) as fasta:
+        for fasta_record in SeqIO.parse(fasta, 'fasta'):
+            fasta_records.append(fasta_record)
+    return fasta_records
 
 
 def parse_exons_introns(
