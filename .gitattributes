@@ -2,4 +2,4 @@
 *.pkl filter=lfs diff=lfs merge=lfs -text
 tests/fixtures/*.csv filter=lfs diff=lfs merge=lfs -text
 tests/genome_browser/fixtures/app.html filter=lfs diff=lfs merge=lfs -text
-tests/genome_browser/snapshots/app_exons_and_introns.fasta filter=lfs diff=lfs merge=lfs -text
+tests/genome_browser/snapshots/*.fasta filter=lfs diff=lfs merge=lfs -text
