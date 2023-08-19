@@ -9,6 +9,7 @@ data/
 aws/
 work/
 tmp/
+ucsc_html/
 
 # C extensions
 *.so
