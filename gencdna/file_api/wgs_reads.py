@@ -2,6 +2,7 @@
 
 import re
 
+import fire
 import pandas as pd
 from Bio import SeqIO
 
@@ -38,3 +39,7 @@ def fastx_extension(filename: str) -> str:
             'Invalid extension: {filename}'.format(filename=filename),
         )
     return regex.group(1)
+
+
+if __name__ == '__main__':
+    fire.Fire(concatenate)
