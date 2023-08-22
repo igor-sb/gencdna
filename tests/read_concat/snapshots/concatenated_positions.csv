@@ -1,0 +1,4 @@
+read_id,start,end
+read1,0,8
+read2,9,21
+read3,22,31
