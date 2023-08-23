@@ -3,7 +3,7 @@
 import os
 import tempfile
 
-from gencdna.file_api.wgs_reads import concatenate
+from gencdna.wgs.concatenate import concatenate
 
 
 def test_concate_fastq_reads(

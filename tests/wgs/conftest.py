@@ -1,14 +1,20 @@
 """Test fixtures."""
 import os
+
 import pytest
 
-fixture_path = '{base_path}/tests/read_concat/fixtures'.format(
+fixture_path = '{base_path}/tests/wgs/fixtures'.format(
     base_path=os.path.abspath('.'),
 )
 
-snapshot_path = '{base_path}/tests/read_concat/snapshots'.format(
+snapshot_path = '{base_path}/tests/wgs/snapshots'.format(
     base_path=os.path.abspath('.'),
 )
+
+
+@pytest.fixture()
+def ref_fastq_reads():
+    return '{snapshot_path}/reads.fastq'.format(snapshot_path=snapshot_path)
 
 
 @pytest.fixture()
