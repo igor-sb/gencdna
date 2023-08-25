@@ -33,11 +33,6 @@ jobs:
         with:
           USEARCH_VERSION: ${{ env.USEARCH_VERSION }}
       
-      - name: Install micromamba
-        uses: ./.github/actions/install-micromamba
-        with:
-          MICROMAMBA_VERSION: ${{ env.MICROMAMBA_VERSION }}
-      
       - name: Install bowtie2
         uses: ./.github/actions/install-bowtie2
         with:

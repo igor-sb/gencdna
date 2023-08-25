@@ -19,6 +19,10 @@ runs:
     - name: Install bowtie2
       if: steps.bowtie2-cache.outputs.cache-hit != 'true'
       run: |
-        micromamba install -y -c bioconda bowtie2=${{ inputs.BOWTIE2_VERSION }}
-        cp /home/runner/micromamba/bin/bowtie2* /home/runner/.local/bin/
+        filename="bowtie2-${{ inputs.BOWTIE2_VERSION }}-linux-x86_64"
+        baseurl="https://github.com/BenLangmead/bowtie2/releases/download"
+        url="$baseurl/v${{ inputs.BOWTIE2_VERSION }}/${filename}.zip"
+        curl -o "$filename" "$url"
+        [ ! -d "/home/runner/.local/bin/" ] && mkdir -p /home/runner/.local/bin/
+        sudo unzip -j $filename "$filename/bowtie2*" -d /home/runner/.local/bin/
       shell: bash
