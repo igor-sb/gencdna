@@ -1,0 +1,24 @@
+name: Install micromamba
+description: Action for installing micromamba
+
+inputs:
+  MICROMAMBA_VERSION:
+    description: "Version of micromamba to install"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Load Cached Download
+      id: micromamba-cache
+      uses: actions/cache@v3
+      with:
+        path: /home/runner/.local/bin/micromamba
+        key: micromamba-${{ runner.os }}-${{ inputs.BLAST_VERSION }}
+        
+    - name: Install micromamba
+      if: steps.micromamba-cache.outputs.cache-hit != 'true'
+      run: |
+        "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
+        micromamba self-update --version ${{ MICROMAMBA_VERSION }}
+      shell: bash

@@ -1,0 +1,7 @@
+read_id,start,end
+read1_40random_exon1_exon2_exon3_40randomm,0,124
+read2_40random_exon2_40random_exon3withoutlast3nt_40random,125,269
+read3_exon3rc_ATG_exon1_40random,270,343
+read4_80random,344,423
+read5_40random_exon1_7random,424,486
+read6_40random,487,526
