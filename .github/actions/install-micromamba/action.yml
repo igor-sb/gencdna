@@ -20,5 +20,5 @@ runs:
       if: steps.micromamba-cache.outputs.cache-hit != 'true'
       run: |
         "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
-        micromamba self-update --version ${{ MICROMAMBA_VERSION }}
+        micromamba self-update --version ${{ inputs.MICROMAMBA_VERSION }}
       shell: bash
