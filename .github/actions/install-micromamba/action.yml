@@ -14,11 +14,10 @@ runs:
       uses: actions/cache@v3
       with:
         path: /home/runner/.local/bin/micromamba
-        key: micromamba-${{ runner.os }}-${{ inputs.BLAST_VERSION }}
+        key: micromamba-${{ runner.os }}-${{ inputs.MICROMAMBA_VERSION }}
         
     - name: Install micromamba
       if: steps.micromamba-cache.outputs.cache-hit != 'true'
       run: |
         "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
-        micromamba self-update --version ${{ inputs.MICROMAMBA_VERSION }}
       shell: bash
