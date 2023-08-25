@@ -22,7 +22,7 @@ runs:
         filename="bowtie2-${{ inputs.BOWTIE2_VERSION }}-linux-x86_64"
         baseurl="https://github.com/BenLangmead/bowtie2/releases/download"
         url="$baseurl/v${{ inputs.BOWTIE2_VERSION }}/${filename}.zip"
-        curl -o "$filename" "$url"
+        curl -L -o "$filename" "$url"
         [ ! -d "/home/runner/.local/bin/" ] && mkdir -p /home/runner/.local/bin/
         sudo unzip -j $filename "$filename/bowtie2*" -d /home/runner/.local/bin/
       shell: bash
