@@ -19,6 +19,6 @@ runs:
     - name: Install bowtie2
       if: steps.bowtie2-cache.outputs.cache-hit != 'true'
       run: |
-        micromamba install -c -y bioconda bowtie2=${{ BOWTIE2_VERSION }}
+        micromamba install -c -y bioconda bowtie2=${{ inputs.BOWTIE2_VERSION }}
         cp /home/runner/micromamba/bin/bowtie2* /home/runner/.local/bin/
       shell: bash
