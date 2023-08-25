@@ -37,6 +37,11 @@ jobs:
         uses: ./.github/actions/install-micromamba
         with:
           MICROMAMBA_VERSION: ${{ env.MICROMAMBA_VERSION }}
+      
+      - name: Install bowtie2
+        uses: ./.github/actions/install-bowtie2
+        with:
+          BOWTIE2_VERSION: ${{ env.BOWTIE2_VERSION }}
 
       - name: Install and setup Python, Poetry, virtual env
         uses: ./.github/actions/install-python

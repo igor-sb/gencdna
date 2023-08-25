@@ -14,7 +14,7 @@ runs:
       uses: actions/cache@v3
       with:
         path: /home/runner/.local/bin/bowtie2*
-        key: bowtie2-${{ runner.os }}-${{ inputs.BLAST_VERSION }}
+        key: bowtie2-${{ runner.os }}-${{ inputs.BOWTIE2_VERSION }}
         
     - name: Install bowtie2
       if: steps.bowtie2-cache.outputs.cache-hit != 'true'
