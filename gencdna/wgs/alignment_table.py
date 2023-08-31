@@ -14,7 +14,7 @@ def find_read_alignments(
     input_alignment_sam: str,
     input_read_positions_csv: str,
     output_alignment_table_csv: str,
-    max_gap_len: int = 20,
+    max_gap_len: int = 20_000,
 ) -> None:
     alignments_df = read_sam_to_dataframe(input_alignment_sam)
     reads_coords_df = pd.read_csv(input_read_positions_csv)
