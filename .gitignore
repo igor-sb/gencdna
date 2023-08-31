@@ -5,6 +5,7 @@ __pycache__/
 .python-version
 test.ipynb
 data/
+.vscode/
 .nextflow/
 aws/
 work/

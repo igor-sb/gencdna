@@ -1,6 +1,6 @@
 """SAM alignment export to data frame."""
 
-import fire
+import numpy as np
 import pandas as pd
 from Bio.Align import sam
 
@@ -91,18 +91,25 @@ def convert_genome_to_read_alignments(
     )
 
 
-def find_read_alignments(
-    input_alignment_sam: str,
-    input_read_positions_csv: str,
-    output_alignment_table_csv: str,
-) -> None:
-    alignments_df = read_sam_to_dataframe(input_alignment_sam)
-    reads_coords_df = pd.read_csv(input_read_positions_csv)
-    convert_genome_to_read_alignments(
-        alignments_df,
-        reads_coords_df,
-    ).to_csv(output_alignment_table_csv, index=False)
+def calculate_exon_gap(df):
+    start_positions = df['read_start'].to_numpy()[1:]
+    end_positions = df['read_end'].to_numpy()[:-1]
+    start = np.concatenate(([np.nan], start_positions))
+    end = np.concatenate(([np.nan], end_positions))
+    df.loc[:, 'exon_gap'] = start - end
+    return df
 
 
-if __name__ == '__main__':
-    fire.Fire(find_read_alignments)
+def filter_gapped_exons(
+    alignments_reads_df: pd.DataFrame,
+    max_gap_len: int,
+) -> pd.DataFrame:
+    alignments_with_gaps_df = (
+        alignments_reads_df
+        .groupby('read_id', group_keys=False)
+        .apply(calculate_exon_gap)
+        .sort_values(['read_id', 'read_start'])
+    )
+    exon_gaps = alignments_with_gaps_df['exon_gap']
+    filter_mask = exon_gaps.isna() | (exon_gaps <= max_gap_len)  # noqa: WPS465
+    return alignments_with_gaps_df[filter_mask]
