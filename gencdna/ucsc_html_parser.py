@@ -29,6 +29,7 @@ def parse_fasta_records(
 
 def parse_exons_introns(
     fasta_records: list[SeqRecord],
+    prefix: str = '',
 ) -> tuple[list[SeqRecord], list[SeqRecord]]:
     exons, introns = [], []
     exon_index, intron_index = 0, 0
@@ -37,7 +38,10 @@ def parse_exons_introns(
             exon_index += 1
             exons.append(SeqRecord(
                 seq=fasta_record.seq,
-                id='exon_{index:02}'.format(index=exon_index),
+                id='{prefix}exon_{index:02}'.format(
+                    prefix=prefix,
+                    index=exon_index,
+                ),
                 name='',
                 description='',
             ))
