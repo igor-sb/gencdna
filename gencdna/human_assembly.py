@@ -51,12 +51,3 @@ def save_tabulated_exons_to_bed(
         )
     )
     df.to_csv(bed_file, sep='\t', header=False, index=False)
-
-
-def gff3_to_bed(
-    input_gff3_file: str,
-    output_bed_file: str,
-    bed_score: int = 1000,
-) -> None:
-    exons_df = tabulate_exons_from_gff3(input_gff3_file)
-    save_tabulated_exons_to_bed(exons_df, output_bed_file, bed_score)

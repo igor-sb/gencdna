@@ -3,7 +3,7 @@
 import os
 import tempfile
 
-from gencdna.human_assembly import gff3_to_bed
+from gencdna.file_api.extract_exons_from_gff3 import gff3_to_bed
 
 
 def test_gff3_to_bed(
