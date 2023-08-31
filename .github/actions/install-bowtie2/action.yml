@@ -1,0 +1,28 @@
+name: Install bowtie2
+description: Action for installing bowtie2
+
+inputs:
+  BOWTIE2_VERSION:
+    description: "Version to install"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Load Cached Download
+      id: bowtie2-cache
+      uses: actions/cache@v3
+      with:
+        path: /home/runner/.local/bin/bowtie2*
+        key: bowtie2-${{ runner.os }}-${{ inputs.BOWTIE2_VERSION }}
+        
+    - name: Install bowtie2
+      if: steps.bowtie2-cache.outputs.cache-hit != 'true'
+      run: |
+        filename="bowtie2-${{ inputs.BOWTIE2_VERSION }}-linux-x86_64"
+        baseurl="https://github.com/BenLangmead/bowtie2/releases/download"
+        url="$baseurl/v${{ inputs.BOWTIE2_VERSION }}/${filename}.zip"
+        curl -L -o "$filename" "$url"
+        [ ! -d "/home/runner/.local/bin/" ] && mkdir -p /home/runner/.local/bin/
+        sudo unzip -j $filename "$filename/bowtie2*" -d /home/runner/.local/bin/
+      shell: bash

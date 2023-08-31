@@ -3,7 +3,7 @@
 import os
 import tempfile
 
-from gencdna.file_api.fastq_to_fasta import (
+from gencdna.file_api.fastq_unique_to_fasta import (
     write_unique_reads_from_fastq_to_fasta,
 )
 

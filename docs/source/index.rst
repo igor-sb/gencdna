@@ -53,6 +53,7 @@ There are couple of ways to use the code. From Python for example:
    :caption: Contents:
 
    workflow
+   wgs
 
 
 
