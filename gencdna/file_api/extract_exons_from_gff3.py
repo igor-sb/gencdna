@@ -2,7 +2,7 @@
 
 import fire
 
-from gencdna.human_assembly import (
+from gencdna.exon_parser import (
     save_tabulated_exons_to_bed,
     tabulate_exons_from_gff3,
 )

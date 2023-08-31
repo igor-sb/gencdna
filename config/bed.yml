@@ -1,0 +1,7 @@
+columns:
+  - "chrom"
+  - "chromStart"
+  - "chromEnd"
+  - "name"
+  - "score"
+  - "strand"
