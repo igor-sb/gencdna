@@ -1,0 +1,28 @@
+name: Install bedtools
+description: Action for installing bedtools
+
+inputs:
+  BEDTOOLS_VERSION:
+    description: "Version to install"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Load Cached Download
+      id: bedtools-cache
+      uses: actions/cache@v3
+      with:
+        path: /home/runner/.local/bin/bedtools
+        key: bedtools-${{ runner.os }}-${{ inputs.BEDTOOLS_VERSION }}
+        
+    - name: Install bedtools
+      if: steps.bedtools-cache.outputs.cache-hit != 'true'
+      run: |
+        filename="bedtools.static"
+        baseurl="https://github.com/arg5x/bedtools2/releases/download"
+        url="$baseurl/v${{ inputs.BEDTOOLS_VERSION }}/$filename"
+        curl -L -o "$filename" "$url"
+        [ ! -d "/home/runner/.local/bin/" ] && mkdir -p /home/runner/.local/bin/
+        mv $filename /home/runner/.local/bin/bedtools
+      shell: bash

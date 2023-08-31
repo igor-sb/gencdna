@@ -20,6 +20,8 @@ requests = "^2.31.0"
 beautifulsoup4 = "^4.12.2"
 types-beautifulsoup4 = "^4.12.0.6"
 types-requests = "^2.31.0.2"
+gff3-parser = "^0.0.5"
+tqdm = "^4.66.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2.0"
