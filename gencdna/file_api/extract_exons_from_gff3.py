@@ -3,18 +3,29 @@
 import fire
 
 from gencdna.exon_parser import (
-    save_tabulated_exons_to_bed,
+    find_unique_exon_seqs_and_annotations,
     tabulate_exons_from_gff3,
 )
 
 
 def gff3_to_bed(
-    input_gff3_file: str,
-    output_bed_file: str,
+    input_full_gff3: str,
+    output_unique_seqs_bed: str,
+    output_annotation_csv: str,
     bed_score: int = 1000,
 ) -> None:
-    exons_df = tabulate_exons_from_gff3(input_gff3_file)
-    save_tabulated_exons_to_bed(exons_df, output_bed_file, bed_score)
+    exons_df = tabulate_exons_from_gff3(input_full_gff3)
+    unique_seqs_df, annotations_df = find_unique_exon_seqs_and_annotations(
+        exons_df,
+        bed_score,
+    )
+    unique_seqs_df.to_csv(
+        output_unique_seqs_bed,
+        sep='\t',
+        header=None,
+        index=False,
+    )
+    annotations_df.to_csv(output_annotation_csv, index=False)
 
 
 if __name__ == '__main__':

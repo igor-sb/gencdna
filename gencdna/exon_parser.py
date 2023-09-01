@@ -5,49 +5,67 @@ from gff3_parser import parse_gff3
 
 
 def tabulate_exons_from_gff3(gff3_file: str) -> pd.DataFrame:
-    df = (
+    return (
         parse_gff3(gff3_file, parse_attributes=True)
         .query('Type == "exon"')
+        [[
+            'Seqid',
+            'Start',
+            'End',
+            'Strand',
+            'gene_name',
+            'transcript_name',
+            'exon_number',
+        ]]
+        .rename(columns={'Seqid': 'chrom'})
     )
-    return df[[
-        'Seqid',
-        'Start',
-        'End',
-        'Strand',
-        'gene_name',
-        'exon_number',
-        'gene_type',
-    ]]
 
 
-def build_gene_exon_annotation(df: pd.DataFrame) -> list[str]:
-    gene_exon_annotations: list[str] = []
-    for gene, exon_num in zip(df['gene_name'], df['exon_number']):
-        gene_exon_annotations.append(
-            '{gene}_exon_{exon_num:02}'.format(
-                gene=gene,
-                exon_num=int(exon_num),
-            ),
-        )
-    return gene_exon_annotations
+def add_annotations(df: pd.DataFrame) -> list[str]:
+    df['Start'] = pd.to_numeric(df['Start'])
+    df['End'] = pd.to_numeric(df['End'])
+    df['exon_number'] = df['exon_number'].str.zfill(2)
+    df['name'] = (
+        df['transcript_name'] +  # noqa: W504
+        ';' + df['gene_name'] +  # noqa: W504
+        ';exon-' + df['exon_number']
+    )
+    df['sequence_id'] = (
+        df
+        .groupby(['chrom', 'Start', 'End'])
+        .ngroup()
+    )
+    return df.sort_values(
+        by=['chrom', 'Start', 'End', 'transcript_name'],
+    )
 
 
-def save_tabulated_exons_to_bed(
+def find_unique_exon_seqs_and_annotations(
     df: pd.DataFrame,
-    bed_file: str,
     bed_score: int = 1000,
-) -> None:
-    df['name'] = build_gene_exon_annotation(df)
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    df = add_annotations(df)
     df['score'] = bed_score
-    df = (
-        df[['Seqid', 'Start', 'End', 'name', 'score', 'Strand']]
-        .rename(
-            columns={
-                'Seqid': 'chrom',
-                'Start': 'chromStart',
-                'End': 'chromEnd',
-                'Strand': 'strand',
-            },
-        )
+    unique_seqs_df = (
+        df[['chrom', 'Start', 'End', 'sequence_id', 'score', 'Strand']]
+        .drop_duplicates()
     )
-    df.to_csv(bed_file, sep='\t', header=False, index=False)
+    annotation_df = (
+        df[['sequence_id', 'gene_name', 'exon_number', 'transcript_name']]
+        .drop_duplicates()
+    )
+    return (unique_seqs_df, annotation_df)
+
+
+def save_unique_exon_sequences_to_bed(
+    unique_seqs_df: pd.DataFrame,
+    output_bed_file: str,
+) -> None:
+    unique_seqs_df.to_csv(output_bed_file, sep='\t', header=None, index=False)
+
+
+def save_unique_exon_annotations(
+    annotation_df: pd.DataFrame,
+    output_annotation_file: str,
+) -> None:
+    annotation_df.to_csv(output_annotation_file, sep='\t', index=False)
