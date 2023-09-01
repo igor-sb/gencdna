@@ -1,5 +1,5 @@
-Download exons for all human genes
-==================================
+Download ane extract exons for all human genes
+==============================================
 
 First, download the Human Genome FASTA file and GFF3 file with annotations. We
 will use Gencode release 44 from: https://www.gencodegenes.org/human/release_44.html
@@ -21,3 +21,50 @@ The plan here is to convert the goofy GFF3 format, where gene names are buried i
 
 We want to organize it in a bed file:
 
+.. code-block:: bash
+
+    python gencdna/file_api/extract_exons_from_gff3.py \
+        gencode.v44.basic.annotation.gff3 \
+        all_exons.bed \
+        all_exons_positions.csv
+
+BED file is a simple tab-delimited file, without a header row, which contains
+the columns:
+
+- chromosome ID
+- chromosome start position
+- chromosome end position
+- sequence ID (used to cross-reference FASTA and BED files)
+- sequence score (used for UCSC Genome Browser plotting)
+- strand (+ or -)
+
+Then use `bedtools <https://bedtools.readthedocs.io/en/latest/>`:
+
+.. code-block:: bash
+
+    bedtools getfasta -nameOnly -s \
+        -fi GRCh38.p14.genome.fa \
+        -bed all_exons.bed \
+        -fo all_exons.fasta
+
+This will use genomic locations from bed file and DNA sequences from a FASTA
+file to pull out sequences in those genomic locations and store them in 
+``all_exons.fasta``. This is the file we will use for bowtie2 alignment.
+
+Resulting FASTA file shoud look like this::
+
+    >0(+)
+    TTAACTTGCCGT...
+    >1(+)
+    TGTCTGACTTCG...
+    >2(-)
+    TGGAGGAAAGAT...
+
+Where (+) or (-) indicate the strand bedtools used and the number is the
+sequence ID number in the BED file and in the ``all_exons_positions.csv`` file::
+
+    sequence_idgene_name,exon_number,transcript_name
+    0,DDX11L2,01,DDX11L2-202
+    1,DDX11L1,01,DDX11L1-201
+    2,DDX11L1,02,DDX11L1-201
+    ...
