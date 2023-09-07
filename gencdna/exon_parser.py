@@ -61,7 +61,7 @@ def find_unique_exon_seqs_and_annotations(
 def filter_short_and_long_exons(
     df: pd.DataFrame,
     min_len: int = 30,
-    max_len: int = 500,
+    max_len: int = 2000,
 ) -> pd.DataFrame:
     return (
         df
