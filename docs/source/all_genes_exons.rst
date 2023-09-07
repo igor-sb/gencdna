@@ -1,4 +1,4 @@
-Download ane extract exons for all human genes
+Download and extract exons for all human genes
 ==============================================
 
 First, download the Human Genome FASTA file and GFF3 file with annotations. We
@@ -19,7 +19,11 @@ The plan here is to convert the goofy GFF3 format, where gene names are buried i
 
     ID=ENSG00000223972.6;gene_id=ENSG00000223972.6;gene_type=transcribed_unprocessed_pseudogene;gene_name=DDX11L1;level=2;hgnc_id=HGNC:37102;havana_gene=OTTHUMG00000000961.2
 
-We want to organize it in a bed file:
+into a tab-delimited file or a csv where we can link the gene names, transcript
+name, and other meta-data to the unique sequence on the chromosome. 
+
+First, we will organize the chromosomal positions in a bed file and other meta-data
+in a csv file:
 
 .. code-block:: bash
 
@@ -38,7 +42,7 @@ the columns:
 - sequence score (used for UCSC Genome Browser plotting)
 - strand (+ or -)
 
-Then use `bedtools <https://bedtools.readthedocs.io/en/latest/>`:
+Then use `bedtools <https://bedtools.readthedocs.io/en/latest/>`_:
 
 .. code-block:: bash
 
