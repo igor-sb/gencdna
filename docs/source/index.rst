@@ -55,6 +55,7 @@ There are couple of ways to use the code. From Python for example:
    workflow
    wgs
    exons
+   all_genes_exons
 
 
 

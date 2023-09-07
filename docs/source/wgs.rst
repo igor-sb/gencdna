@@ -47,13 +47,14 @@ Align exon sequences to the bowtie2 index
 
 .. code-block:: bash
 
-    bowtie2 -a --no-unal -L 10 \
+    bowtie2 -a --no-unal -L 15 \
         -x bowtie_index \
         -f exons.fasta \
         -S alignments.sam 
 
 Alignment notes:
 
+- ``-L``: length of the seed substrings: https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#multiseed-heuristic
 - ``-a`` keeps all alignments (by default on the best one is kept)
 - ``--no-unal`` does not keep track of unaligned reads
 - ``-f`` is the filename of the input fasta file with exons

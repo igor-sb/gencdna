@@ -1197,6 +1197,17 @@ ssh = ["paramiko"]
 tqdm = ["tqdm"]
 
 [[package]]
+name = "gff3-parser"
+version = "0.0.5"
+description = "A package for parsing gff3 (general feature format) files into pandas  dataframes"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "gff3_parser-0.0.5-py3-none-any.whl", hash = "sha256:7e6b9ffb7b5a1153d01ed7ce3bdc2daafacf5c5736ed11138fcf0b040c564017"},
+    {file = "gff3_parser-0.0.5.tar.gz", hash = "sha256:459269031331d5f9e6d6c91b1cc2ee4b9f0791f749ff93c8e2bcd0443cd5e2c8"},
+]
+
+[[package]]
 name = "gitdb"
 version = "4.0.10"
 description = "Git Object Database"
@@ -3677,6 +3688,26 @@ files = [
 ]
 
 [[package]]
+name = "tqdm"
+version = "4.66.1"
+description = "Fast, Extensible Progress Meter"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "tqdm-4.66.1-py3-none-any.whl", hash = "sha256:d302b3c5b53d47bce91fea46679d9c3c6508cf6332229aa1e7d8653723793386"},
+    {file = "tqdm-4.66.1.tar.gz", hash = "sha256:d88e651f9db8d8551a62556d3cff9e3034274ca5d66e93197cf2490e2dcb69c7"},
+]
+
+[package.dependencies]
+colorama = {version = "*", markers = "platform_system == \"Windows\""}
+
+[package.extras]
+dev = ["pytest (>=6)", "pytest-cov", "pytest-timeout", "pytest-xdist"]
+notebook = ["ipywidgets (>=6)"]
+slack = ["slack-sdk"]
+telegram = ["requests"]
+
+[[package]]
 name = "traitlets"
 version = "5.9.0"
 description = "Traitlets Python configuration system"
@@ -4049,4 +4080,4 @@ zstd = ["zstandard (<1)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "366efb286942a0168935ed118bfb673fcdbf05f28a9596d36922600ac41520b2"
+content-hash = "605c08578c4f39b28ada7c3528b16d294d7afecc66e85990b6f962bc6a7ce6fd"
