@@ -45,6 +45,7 @@ def find_unique_exon_seqs_and_annotations(
     bed_score: int = 1000,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     df = add_annotations(df)
+    df = filter_short_and_long_exons(df)
     df['score'] = bed_score
     unique_seqs_df = (
         df[['chrom', 'Start', 'End', 'sequence_id', 'score', 'Strand']]
@@ -55,6 +56,18 @@ def find_unique_exon_seqs_and_annotations(
         .drop_duplicates()
     )
     return (unique_seqs_df, annotation_df)
+
+
+def filter_short_and_long_exons(
+    df: pd.DataFrame,
+    min_len: int = 30,
+    max_len: int = 500,
+) -> pd.DataFrame:
+    return (
+        df
+        .query('abs(End - Start) <= {max_len}'.format(max_len=max_len))
+        .query('abs(End - Start) >= {min_len}'.format(min_len=min_len))
+    )
 
 
 def save_unique_exon_sequences_to_bed(
