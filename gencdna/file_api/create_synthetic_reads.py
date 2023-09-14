@@ -4,10 +4,11 @@ import random
 
 import fire
 
-from gencdna.synthetic_reads import (
-    create_intron_exonblock_intron_read,
-    random_exons,
+from gencdna.synthetic_reads.combinations import (
+    create_intron_exonblocks_intron_elements,
 )
+from gencdna.synthetic_reads.introns_and_exons import create_synthetic_exons
+from gencdna.synthetic_reads.read_element import ReadElement
 
 
 def main(
@@ -17,32 +18,29 @@ def main(
     number_of_read_replicates: int = 3,
 ) -> None:
     rng = random.Random(seed)
-    exons = random_exons(rng, number_of_exons)
-    reads = []
+    exons = create_synthetic_exons(rng, number_of_exons)
+    reads: list[ReadElement] = []
     for _ in range(number_of_read_replicates):
         reads.append(
-            create_intron_exonblock_intron_read(
+            create_intron_exonblocks_intron_elements(
                 exons,
                 rng,
-                number_of_exon_blocks=1,
-                number_of_exons_per_block=1,
+                number_of_blocks=1,
+                number_of_exons_in_block=1,
             ),
         )
     for _ in range(number_of_read_replicates):
         reads.append(
-            create_intron_exonblock_intron_read(
+            create_intron_exonblocks_intron_elements(
                 exons,
                 rng,
-                number_of_exon_blocks=2,
-                number_of_exons_per_block=3,
+                number_of_blocks=2,
+                number_of_exons_in_block=3,
             ),
         )
     with open(output_fasta_filename, 'wt') as output_fasta:
         for read in reads:
-            output_fasta.write('>{label}\n{sequence}\n'.format(
-                label=read['label'],
-                sequence=read['sequence'],
-            ))
+            output_fasta.write(read.to_fasta_str())
 
 
 if __name__ == '__main__':
