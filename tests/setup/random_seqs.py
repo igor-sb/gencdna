@@ -3,13 +3,21 @@
 import random
 
 
-def generate_random_dna_sequence(length):
+def random_sequence(
+    rng: random.Random,
+    length: int,
+):
     bases = ['A', 'C', 'G', 'T']
-    return ''.join(random.choices(bases, k=length))
+    return ''.join(rng.choices(bases, k=length))
 
 
-def generate_random_quality_characters(length, min_score=0, max_score=93):
-    quality_scores = random.choices(range(min_score, max_score + 1), k=length)
+def random_quality_characters(
+    rng: random.Random,
+    length: int,
+    min_score: int = 0,
+    max_score: int = 93,
+):
+    quality_scores = rng.choices(range(min_score, max_score + 1), k=length)
     return ''.join(
         quality_score_to_character(qscore) for qscore in quality_scores
     )
