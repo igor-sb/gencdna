@@ -33,16 +33,20 @@ def random_synthetic_intron(
 
 def random_synthetic_intron_length(
     rng: random.Random,
-) -> str:
+) -> int:
     return rng.sample(synthetic_intron_lengths(), 1)[0]
 
 
 def create_synthetic_exons(
     rng: random.Random,
     number_of_length_variants: int = 1,
+    only_exon_id: Optional[str] = None,
 ) -> list[ReadElement]:
     exons: list[ReadElement] = []
-    for _, row in synthetic_exon_lengths().iterrows():
+    exon_lengths_df = synthetic_exon_lengths()
+    if only_exon_id:
+        exon_lengths_df = exon_lengths_df.query(f'element == "{only_exon_id}"')
+    for _, row in exon_lengths_df.iterrows():
         for variant_number in range(number_of_length_variants):
             exons.append(
                 ReadElement(

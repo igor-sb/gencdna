@@ -11,6 +11,31 @@ from gencdna.synthetic_reads.read_element import (
 )
 
 
+def create_reads_with_exonblocks(
+    exons: list[ReadElement],
+    rng: random.Random,
+    intron_length: Optional[int] = None,
+    number_of_blocks_per_read: int = 1,
+    number_of_exons_in_block: int = 1,
+) -> list[ReadElement]:
+    exon_blocks = create_all_exonblocks_combinations(
+        exons,
+        number_of_exons_in_block,
+    )
+    exon_intron_blocks = concat_introns_to_ends(
+        exon_blocks,
+        rng,
+        intron_length,
+        ends=(False, True),
+    )
+    partitioned_blocks = partition_list(
+        exon_intron_blocks,
+        number_of_blocks_per_read,
+    )
+    reads = [concat_read_elements(blocks) for blocks in partitioned_blocks]
+    return concat_introns_to_ends(reads, rng, intron_length, (True, False))
+
+
 def create_all_exonblocks_combinations(
     exons: list[ReadElement],
     number_of_exons_in_block: int = 1,
@@ -19,18 +44,6 @@ def create_all_exonblocks_combinations(
         concat_read_elements(list(block_of_exons))
         for block_of_exons in product(exons, repeat=number_of_exons_in_block)
     ]
-
-
-def partition_list(
-    list_of_objects: list[Any],
-    partition_size: int,
-) -> list[list]:
-    partitioned_list: list[list[Any]] = []
-    for list_index in range(0, len(list_of_objects), partition_size):
-        partitioned_list.append(
-            list_of_objects[list_index:list_index + partition_size],
-        )
-    return partitioned_list
 
 
 def concat_introns_to_ends(
@@ -51,26 +64,13 @@ def concat_introns_to_ends(
     return elements
 
 
-def create_reads_with_exonblocks(
-    exons: list[ReadElement],
-    rng: random.Random,
-    intron_length: Optional[int] = None,
-    number_of_blocks_per_read: int = 1,
-    number_of_exons_in_block: int = 1,
-) -> list[ReadElement]:
-    exon_blocks = create_all_exonblocks_combinations(
-        exons,
-        number_of_exons_in_block,
-    )
-    exon_intron_blocks = concat_introns_to_ends(
-        exon_blocks,
-        rng,
-        intron_length,
-        ends=(False, True),
-    )
-    exon_intron_blocks = partition_list(
-        exon_intron_blocks,
-        number_of_blocks_per_read,
-    )
-    reads = [concat_read_elements(blocks) for blocks in exon_intron_blocks]
-    return concat_introns_to_ends(reads, rng, intron_length, (True, False))
+def partition_list(
+    list_of_objects: list[Any],
+    partition_size: int,
+) -> list[list]:
+    partitioned_list: list[list[Any]] = []
+    for list_index in range(0, len(list_of_objects), partition_size):
+        partitioned_list.append(
+            list_of_objects[list_index:list_index + partition_size],
+        )
+    return partitioned_list

@@ -4,3 +4,5 @@ tests/fixtures/*.csv filter=lfs diff=lfs merge=lfs -text
 tests/genome_browser/fixtures/app.html filter=lfs diff=lfs merge=lfs -text
 tests/genome_browser/snapshots/*.fasta filter=lfs diff=lfs merge=lfs -text
 reference/** filter=lfs diff=lfs merge=lfs -text
+tests/synthetic_reads/snapshots/synthetic_exons.txt filter=lfs diff=lfs merge=lfs -text
+tests/synthetic_reads/snapshots/synthetic_reads.fasta filter=lfs diff=lfs merge=lfs -text
