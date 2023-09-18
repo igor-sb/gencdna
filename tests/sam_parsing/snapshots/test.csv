@@ -1,0 +1,7 @@
+query_id,subject_id,query_start,query_end,subject_start,subject_end
++r001/1,ref,0,16,6,21
++r002,ref,3,13,8,17
++r003,ref,5,10,8,13
++r004,ref,0,24,15,39
+-r003,ref,6,10,28,32
+-r001/2,ref,0,8,36,44
