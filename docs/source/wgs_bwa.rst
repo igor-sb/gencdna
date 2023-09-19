@@ -17,7 +17,18 @@ Run circular consensus tool ``ccs``, where the default parameters are:
 
 .. code-block:: bash
 
-    ccs filename.bam filename_ccs.fastq
+    ccs filename.bam filename.subreads.fastq
+
+
+FASTQ to FASTA
+--------------
+
+.. code-block:: bash
+
+    python gencdna/file_api/fastq_to_fasta.py \
+        filename.subsread.fastq \
+        reads.fasta
+
 
 BWA index
 ---------
@@ -28,7 +39,7 @@ an index directly from FASTA file form pre-processed reads:
 
 .. code-block:: bash
 
-    bwa index -t <num_cores> -p <bwa_index_prefix> <reads_fasta>
+    bwa index -p <bwa_index_prefix> reads.fasta
 
 
 BWA alignment
@@ -37,7 +48,7 @@ BWA alignment
 
 .. code-block:: bash
 
-    bwa mem -t <num_cores> -a <bwa_index_prefix> <exons_fasta> > <output_sam>
+    bwa mem -t <num_cores> -a <bwa_index_prefix> <exons_fasta> > <exons_sam>
 
 
 Filter unmapped exons from SAM
@@ -45,10 +56,10 @@ Filter unmapped exons from SAM
 
 .. code-block:: bash
 
-    samtools view -F 4 -o <output_mapped_sam> <output_sam>
+    samtools view -F 4 -o <mapped_exons_sam> <exons_sam>
 
 
--F flag filters out all reads that do not match 4 in the flag field. In bitwise
+``-F`` flag filters out all reads that do not match 4 in the flag field. In bitwise
 representation 4 represents unmapped reads. See page 7 at https://samtools.github.io/hts-specs/SAMv1.pdf
 for details.
 
@@ -57,4 +68,8 @@ Alignment coordinates from SAM
 ------------------------------
 
 .. code-block:: bash
+
+    python gencdna/file_api/alignment_coords.py \
+        <mapped_exons_sam> \
+        <mapped_exons_coords_csv>
 
