@@ -53,7 +53,8 @@ There are couple of ways to use the code. From Python for example:
    :caption: Contents:
 
    workflow
-   wgs
+   wgs_bowtie
+   wgs_bwa
    exons
    all_genes_exons
 
