@@ -3,7 +3,7 @@
 import fire
 from Bio import SeqIO
 
-from gencdna.ucsc_html_parser import parse_exons_introns, parse_fasta_records
+from gencdna.ucsc.ucsc_html_parser import parse_exons_introns, parse_fasta_records
 
 
 def write_exons_introns(

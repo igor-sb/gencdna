@@ -4,7 +4,7 @@ import logging
 
 import fire
 
-from gencdna.sam import alignment_coordinates, read_sam
+from gencdna.sam.sam import alignment_coordinates, read_sam
 
 logging.basicConfig(level=logging.INFO)
 LOG = logging.getLogger(__name__)

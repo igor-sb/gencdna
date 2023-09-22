@@ -3,7 +3,7 @@
 import pandas as pd
 from Bio import SeqIO
 
-from gencdna.fastx_io import open_fastx_or_fastxgz
+from gencdna.fastx.io import open_fastx_or_fastxgz
 
 
 def count_unique_sequences(fastx_file: str, file_type: str) -> pd.DataFrame:

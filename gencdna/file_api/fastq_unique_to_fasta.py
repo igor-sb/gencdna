@@ -5,7 +5,7 @@ import logging
 import fire
 import pandas as pd
 
-from gencdna.fastx_summary import (
+from gencdna.fastx.summary import (
     count_unique_sequences,
     dump_sequence_counts_to_fasta,
 )

@@ -21,12 +21,6 @@ instructions. Then run this:
 This will create an indentical Python virtual environment as what was used to
 create this code and greatly minimize possible errors.
 
-Python library structure
-------------------------
-
-`gencdna` is a Python library with various tools used to find gencDNAs.
-
-
 Running the code
 ----------------
 
@@ -63,6 +57,7 @@ There are couple of ways to use the code. From Python for example:
    wgs_bwa
    exons
    all_genes_exons
+   package_structure
 
 
 
