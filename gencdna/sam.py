@@ -120,7 +120,7 @@ def alignment_coordinates(
 ) -> pd.DataFrame:
     sam_records_coords: list[pd.DataFrame] = []
     for row_id, row in sam_records.iterrows():
-        if logger and row_id % 10000 == 0:
+        if logger and row_id % 10000 == 0:  # noqa: WPS432
             logger.info(f'  processed {row_id} rows')
         sam_records_coords.append(SamAlignment(row).as_dataframe())
     return pd.concat(sam_records_coords, ignore_index=True)

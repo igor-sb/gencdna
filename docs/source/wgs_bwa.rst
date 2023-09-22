@@ -72,4 +72,3 @@ Alignment coordinates from SAM
     python gencdna/file_api/alignment_coords.py \
         <mapped_exons_sam> \
         <mapped_exons_coords_csv>
-
