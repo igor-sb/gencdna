@@ -9,7 +9,8 @@ Installation
 ------------
 
 You need to have Python with `Poetry <https://python-poetry.org/>`_ installed.
-Then run this:
+See `Poetry Installation <https://python-poetry.org/docs/#installation>`_ 
+instructions. Then run this:
 
 .. code-block:: bash
 
@@ -19,6 +20,11 @@ Then run this:
 
 This will create an indentical Python virtual environment as what was used to
 create this code and greatly minimize possible errors.
+
+Python library structure
+------------------------
+
+`gencdna` is a Python library with various tools used to find gencDNAs.
 
 
 Running the code
