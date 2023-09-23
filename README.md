@@ -1,7 +1,7 @@
-# gencDNA finder for PacBio Circular Consensus QC
+# gencDNA library toolkit
 
-[![CI](https://github.com/igor-sb/pacbio_qc/actions/workflows/ci.yml/badge.svg)](https://github.com/igor-sb/pacbio_qc/actions)
-[![codecov](https://codecov.io/gh/igor-sb/pacbio_qc/branch/PD-17-initial-setup/graph/badge.svg?token=AJ97Y57FVK)](https://codecov.io/gh/igor-sb/pacbio_qc)
+[![CI](https://github.com/igor-sb/gencdna/actions/workflows/ci.yml/badge.svg)](https://github.com/igor-sb/gencdna/actions)
+[![codecov](https://codecov.io/gh/igor-sb/gencdna/branch/PD-17-initial-setup/graph/badge.svg?token=AJ97Y57FVK)](https://codecov.io/gh/igor-sb/gencdna)
 
 Code for detecting genomic cDNAs (gencDNAs) from various WGS or PCR-based DNA
 sequencing data. Many of these scripts are ran in a pipeline together with
