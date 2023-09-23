@@ -56,3 +56,9 @@ def calculate_exon_gaps(exons_df: pd.DataFrame) -> pd.DataFrame:
         .where(~exons_df['index'].isin(first_indexes), np.NaN)
     )
     return exons_df.drop(columns=['index'])
+
+
+def find_exon_exon_joins(exons_df: pd.DataFrame) -> pd.DataFrame:
+    exons_pre_join = exons_df['exon_gap'].shift(-1) == 0
+    exons_post_join = exons_df['exon_gap'] == 0
+    return exons_df[exons_pre_join | exons_post_join]

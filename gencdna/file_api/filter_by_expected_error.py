@@ -6,7 +6,9 @@ import fire
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 
-from gencdna.fastx.expected_error_filter import filter_fastq_reads_by_expected_errors
+from gencdna.fastx.expected_error_filter import (
+    filter_fastq_reads_by_expected_errors,
+)
 from gencdna.fastx.io import open_fastx_or_fastxgz
 
 logging.basicConfig(level=logging.INFO)
