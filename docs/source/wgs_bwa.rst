@@ -1,12 +1,22 @@
 WGS BWA pipeline
 ================
 
-The WGS Bowtie2 pipeline does not work for all genes. Some exons cause bowtie
-to search for the alignment for very long time (I am not sure exactly why), but
-BWA MEM does not have that issue and runs much quicker anyway.
+The goal of this pipeline is to find gencDNAs among WGS reads. We look for
+gencDNAs by aligning exons to reads then inspecting if the gap between two
+subsequent exons is zero.
 
-Preprocess
-----------
+This pipeline proceeds by constructing a "genome" out of all reads in a sample,
+then indexing that sample genome. With ``bwa index`` running single-threaded
+(no idea how to multithread this?), this takes about 10 hours per sample.
+However, multiple samples can be run in parallel.
+
+I switched from Bowtie2 to BWA since the Bowtie2 pipeline did not work for all
+genes. Some exons caused bowtie to search for the alignment for very long time
+(I do not know why) and it never seemed to finish. BWA MEM does not have this
+issue.
+
+Circular consensus
+------------------
 
 Run circular consensus tool ``ccs``, where the default parameters are:
 
@@ -19,9 +29,14 @@ Run circular consensus tool ``ccs``, where the default parameters are:
 
     ccs filename.bam filename.subreads.fastq
 
+This is the only QC - because we want to try not to miss any rare reads that
+may contain gencDNA.
 
-FASTQ to FASTA
---------------
+
+Sample FASTQ to FASTA
+---------------------
+
+To create an index, we convert the FASTQ to a FASTA file:
 
 .. code-block:: bash
 
@@ -30,8 +45,8 @@ FASTQ to FASTA
         reads.fasta
 
 
-BWA index
----------
+Sample genome index
+-------------------
 
 When supplied with a FASTA file containing multiple sequences, BWA does 
 concatenation behind the scenes (and parses everything back), so we can build
@@ -42,8 +57,12 @@ an index directly from FASTA file form pre-processed reads:
     bwa index -p <bwa_index_prefix> reads.fasta
 
 
-BWA alignment
--------------
+This is helpful, since I previously created code to do this manually with
+bowtie2. 
+
+
+Exon alignment
+--------------
 
 
 .. code-block:: bash
@@ -51,8 +70,12 @@ BWA alignment
     bwa mem -t <num_cores> -a <bwa_index_prefix> <exons_fasta> > <exons_sam>
 
 
-Filter unmapped exons from SAM
-------------------------------
+Filtering unmapped exons from SAM
+---------------------------------
+
+Unlike in bowtie2, there does not seem to be an option in ``bwa`` to omit
+storing exons in the alignment SAM file that did not match any read. Therefore,
+I added this step to filter those exons out:
 
 .. code-block:: bash
 
@@ -67,8 +90,20 @@ for details.
 Alignment coordinates from SAM
 ------------------------------
 
+Now that SAM file is free from exons that do not align to any read, we use
+Python parse out SAM alignment and obtain alignment coordinates for each exon
+on each read:
+
 .. code-block:: bash
 
     python gencdna/file_api/alignment_coords.py \
         <mapped_exons_sam> \
         <mapped_exons_coords_csv>
+
+
+Find exon joins
+---------------
+
+This script calculates gaps between adjacent exons then keeps the reads where
+that gap is zero.
+

@@ -53,11 +53,16 @@ There are couple of ways to use the code. From Python for example:
    :caption: Contents:
 
    workflow
-   wgs_bowtie
    wgs_bwa
    exons
    all_genes_exons
    package_structure
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Deprecated:
+
+   wgs_bowtie
 
 
 
