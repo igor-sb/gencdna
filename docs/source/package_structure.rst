@@ -54,3 +54,10 @@ Code-coverage
 
 On each push event, code coverage is uploaded to codecov and a report is
 visible as a comment during a Pull Request.
+
+
+Dependency pinning
+------------------
+
+``gencdna`` library uses ``poetry`` as a dependency management and ensures
+reproducibility using a lock file.
