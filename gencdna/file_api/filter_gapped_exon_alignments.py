@@ -7,6 +7,7 @@ import pandas as pd
 
 from gencdna.wgs.exon_gaps import (
     calculate_exon_gaps,
+    find_zero_gap_joins,
     find_reads_with_multiple_distinct_exons,
     parse_sequence_id_and_strand,
     rename_columns,
@@ -30,11 +31,12 @@ def filter_gapped_alignments(
         .sort_values(['read_id', 'read_start'])
         .reset_index(drop=True)
     )
-    LOG.info('Finding reads with multiple distinct exons')
+    LOG.info('Finding exons and joins')
     exons_df = (
         exons_df
         .pipe(find_reads_with_multiple_distinct_exons)
         .pipe(calculate_exon_gaps)
+        .pipe(find_zero_gap_joins)
     )
     LOG.info('Saving output')
     exons_df.to_csv(exon_gaps_csv, index=False)
