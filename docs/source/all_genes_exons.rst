@@ -64,6 +64,11 @@ Resulting FASTA file shoud look like this::
     >2(-)
     TGGAGGAAAGAT...
 
+Here, each number in the meta-data line of the FASTA file is a sequence ID of
+a unique sequence. Typically, this is an "exon ID" although there are often
+multiple transcripts of a single gene. Some of these transcripts consists of
+the same or similar exons.
+
 Where (+) or (-) indicate the strand bedtools used and the number is the
 sequence ID number in the BED file and in the ``all_exons_positions.csv`` file::
 
@@ -72,3 +77,6 @@ sequence ID number in the BED file and in the ``all_exons_positions.csv`` file::
     1,DDX11L1,01,DDX11L1-201
     2,DDX11L1,02,DDX11L1-201
     ...
+
+This file can be used to backtrack from sequence ID to an actual gene name,
+which is what is ultimately going to be relevant.
