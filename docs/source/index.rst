@@ -52,7 +52,6 @@ There are couple of ways to use the code. From Python for example:
    :maxdepth: 1
    :caption: Contents:
 
-   workflow
    wgs_bwa
    all_genes_exons
    package_structure
