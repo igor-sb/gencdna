@@ -2,23 +2,25 @@ WGS BWA pipeline
 ================
 
 The goal of this pipeline is to find gencDNAs among WGS reads. We look for
-gencDNAs by aligning exons to reads then inspecting if the gap between two
+gencDNAs by aligning exons to reads then checking if the gap between two
 subsequent exons is zero.
 
 This pipeline proceeds by constructing a "genome" out of all reads in a sample,
-then indexing that sample genome. With ``bwa index`` running single-threaded
+then indexing this read-genome. With ``bwa index`` running single-threaded
 (no idea how to multithread this?), this takes about 10 hours per sample.
 However, multiple samples can be run in parallel.
 
-I switched from Bowtie2 to BWA since the Bowtie2 pipeline did not work for all
-genes. Some exons caused bowtie to search for the alignment for very long time
-(I do not know why) and it never seemed to finish. BWA MEM does not have this
-issue.
+Originally, I used Bowtie2, but then switched to BWA since the Bowtie2 pipeline
+did not work for all genes. Some exons caused bowtie to search for the 
+alignment for very long time (I do not know why) and it never seemed to finish. 
+BWA MEM does not have this issue.
 
 Circular consensus
 ------------------
 
-Run circular consensus tool ``ccs``, where the default parameters are:
+The files I start with are BAM files that contain subreads which need to be
+processed using a circular consensus tool ``ccs``. I used the default
+parameters, which are:
 
 - ``--min-passes``: 3
 - ``--min-snr``: 2.5
@@ -27,7 +29,7 @@ Run circular consensus tool ``ccs``, where the default parameters are:
 
 .. code-block:: bash
 
-    ccs filename.bam filename.subreads.fastq
+    ccs subreads.bam reads.fastq
 
 This is the only QC - because we want to try not to miss any rare reads that
 may contain gencDNA.
@@ -36,12 +38,13 @@ may contain gencDNA.
 Sample FASTQ to FASTA
 ---------------------
 
-To create an index, we convert the FASTQ to a FASTA file:
+To create an BWA index, we first need to convert FASTQ to a FASTA file. For
+this I made my own Python script:
 
 .. code-block:: bash
 
     python gencdna/file_api/fastq_to_fasta.py \
-        filename.subsread.fastq \
+        reads.fastq \
         reads.fasta
 
 
@@ -54,7 +57,7 @@ an index directly from FASTA file form pre-processed reads:
 
 .. code-block:: bash
 
-    bwa index -p <bwa_index_prefix> reads.fasta
+    bwa index -p <read_genome_prefix> reads.fasta
 
 
 This is helpful, since I previously created code to do this manually with
@@ -64,10 +67,11 @@ bowtie2.
 Exon alignment
 --------------
 
+I used the default BWA MEM parameters for exon alignment:
 
 .. code-block:: bash
 
-    bwa mem -t <num_cores> -a <bwa_index_prefix> <exons_fasta> > <exons_sam>
+    bwa mem -t <num_cores> -a <read_genome_prefix> <exons_fasta> > <exons_sam>
 
 
 Filtering unmapped exons from SAM
@@ -90,9 +94,8 @@ for details.
 Alignment coordinates from SAM
 ------------------------------
 
-Now that SAM file is free from exons that do not align to any read, we use
-Python parse out SAM alignment and obtain alignment coordinates for each exon
-on each read:
+Now that SAM file is free from exons that did not align to any read, we use
+Python script to obtain alignment coordinates for each exon on each read:
 
 .. code-block:: bash
 
@@ -104,6 +107,6 @@ on each read:
 Find exon joins
 ---------------
 
-This script calculates gaps between adjacent exons then keeps the reads where
-that gap is zero.
+This script calculates gaps between adjacent exons then keeps the adjacent
+reads where that gap is zero.
 
