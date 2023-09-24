@@ -54,7 +54,6 @@ There are couple of ways to use the code. From Python for example:
 
    workflow
    wgs_bwa
-   exons
    all_genes_exons
    package_structure
 
@@ -62,6 +61,7 @@ There are couple of ways to use the code. From Python for example:
    :maxdepth: 1
    :caption: Deprecated:
 
+   exons
    wgs_bowtie
 
 
