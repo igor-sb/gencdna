@@ -7,8 +7,8 @@ import pandas as pd
 
 from gencdna.wgs.exon_gaps import (
     calculate_exon_gaps,
-    find_zero_gap_joins,
     find_reads_with_multiple_distinct_exons,
+    find_zero_gap_joins,
     parse_sequence_id_and_strand,
     rename_columns,
 )

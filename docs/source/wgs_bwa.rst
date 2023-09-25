@@ -1,3 +1,5 @@
+.. _wgs-bwa-pipeline:
+
 WGS BWA pipeline
 ================
 
@@ -108,5 +110,13 @@ Find exon joins
 ---------------
 
 This script calculates gaps between adjacent exons then keeps the adjacent
-reads where that gap is zero.
+reads where that gap is zero:
 
+.. code-block:: bash
+
+    python gencdna/file_api/filter_gapped_exon_alignments.py \
+        <mapped_exons_coords_csv> \
+        <mapped_exons_joins_csv>
+
+
+This file will list each exon for each read in a single row that has a 0 gap.

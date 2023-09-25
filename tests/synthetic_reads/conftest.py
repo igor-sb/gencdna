@@ -16,3 +16,8 @@ def ref_synthetic_exons():
 @pytest.fixture()
 def ref_synthetic_reads_fasta():
     return f'{snapshot_path}/synthetic_reads.fasta'
+
+
+@pytest.fixture()
+def ref_synthetic_exons_fasta():
+    return f'{snapshot_path}/synthetic_exons.fasta'

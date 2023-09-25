@@ -9,8 +9,9 @@ from gencdna.synthetic_reads.combinations import create_reads_with_exonblocks
 from gencdna.synthetic_reads.introns_and_exons import create_synthetic_exons
 
 
-def create_synthetic_reads(  # noqa: WPS211
-    output_fasta_filename: str,
+def create_synthetic_reads(  # noqa: WPS211, WPS210
+    output_reads_fasta: str,
+    output_exons_fasta: str,
     seed: int = 1,
     number_of_length_variants: int = 1,
     number_of_blocks_per_read: int = 1,
@@ -29,9 +30,13 @@ def create_synthetic_reads(  # noqa: WPS211
         number_of_blocks_per_read=number_of_blocks_per_read,
         number_of_exons_in_block=number_of_exons_in_block,
     )
-    with open(output_fasta_filename, 'wt') as output_fasta:
+    with open(output_reads_fasta, 'wt') as reads_fasta:
         for read in reads:
-            output_fasta.write(read.to_fasta_str())
+            reads_fasta.write(read.to_fasta_str())
+
+    with open(output_exons_fasta, 'wt') as exons_fasta:
+        for exon in exons:
+            exons_fasta.write(exon.to_fasta_str())
 
 
 if __name__ == '__main__':

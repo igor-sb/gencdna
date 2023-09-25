@@ -54,6 +54,13 @@ There are couple of ways to use the code. From Python for example:
 
    wgs_bwa
    all_genes_exons
+   next_steps
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Advanced:
+   
+   synthetic_reads
    package_structure
 
 .. toctree::
