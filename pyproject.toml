@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "gencDNA"
 version = "0.1.0"
-description = "gencDNA finder from PacBio CCS DNA sequencing data"
+description = "gencDNA library toolkit"
 authors = ["igor-sb <84479009+igor-sb@users.noreply.github.com>"]
 readme = "README.md"
 

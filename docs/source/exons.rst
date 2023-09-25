@@ -1,5 +1,5 @@
-Obtaining exons in FASTA
-========================
+Obtaining exons from individual genes using UCSC Genome Browser
+===============================================================
 
 
 Download HTML

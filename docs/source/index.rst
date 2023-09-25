@@ -9,7 +9,8 @@ Installation
 ------------
 
 You need to have Python with `Poetry <https://python-poetry.org/>`_ installed.
-Then run this:
+See `Poetry Installation <https://python-poetry.org/docs/#installation>`_ 
+instructions. Then run this:
 
 .. code-block:: bash
 
@@ -19,7 +20,6 @@ Then run this:
 
 This will create an indentical Python virtual environment as what was used to
 create this code and greatly minimize possible errors.
-
 
 Running the code
 ----------------
@@ -52,10 +52,23 @@ There are couple of ways to use the code. From Python for example:
    :maxdepth: 1
    :caption: Contents:
 
-   workflow
-   wgs
-   exons
+   wgs_bwa
    all_genes_exons
+   next_steps
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Advanced:
+   
+   synthetic_reads
+   package_structure
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Deprecated:
+
+   exons
+   wgs_bowtie
 
 
 

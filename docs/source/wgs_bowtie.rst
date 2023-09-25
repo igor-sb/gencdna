@@ -1,5 +1,5 @@
-WGS pipeline
-============
+Deprecated: WGS pipeline using bowtie2
+======================================
 
 Commands and file names shown here are examples. Until I have put together
 a full workflow use sample IDs are filenames or prefix to filenames.

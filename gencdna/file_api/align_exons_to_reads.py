@@ -6,7 +6,7 @@ import fire
 import pandas as pd
 from Bio import SeqIO
 
-from gencdna.alignment_output import AlignmentOutputParser
+from gencdna.blast.alignment_output import AlignmentOutputParser
 from gencdna.config.alignment_output import USEARCH_COLUMN_NAMES
 from gencdna.external_calls import BinaryExecutable
 

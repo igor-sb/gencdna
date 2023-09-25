@@ -2,7 +2,7 @@
 
 import fire
 
-from gencdna.exon_parser import (
+from gencdna.gff3.exon_parser import (
     find_unique_exon_seqs_and_annotations,
     tabulate_exons_from_gff3,
 )

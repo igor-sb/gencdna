@@ -8,7 +8,7 @@ from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
-from gencdna.repeat_bases import fill_alignment_table_sequences
+from gencdna.pcr.repeat_bases import fill_alignment_table_sequences
 
 logging.basicConfig(level=logging.INFO)
 LOG = logging.getLogger(__name__)

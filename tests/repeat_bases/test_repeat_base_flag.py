@@ -4,7 +4,7 @@ import os
 
 from Bio import SeqIO
 
-from gencdna.repeat_bases import (
+from gencdna.pcr.repeat_bases import (
     create_repeated_bases_regex,
     flag_lowqual_repeated_bases,
 )

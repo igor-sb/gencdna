@@ -1,6 +1,8 @@
 """SAM file parsing into a table with 0-based coordinates."""
 
+import logging
 import re
+from typing import Optional
 
 import pandas as pd
 
@@ -112,8 +114,13 @@ def read_sam(filepath: str) -> pd.DataFrame:
     return df
 
 
-def alignment_coordinates(sam_records: pd.DataFrame) -> pd.DataFrame:
+def alignment_coordinates(
+    sam_records: pd.DataFrame,
+    logger: Optional[logging.Logger] = None,
+) -> pd.DataFrame:
     sam_records_coords: list[pd.DataFrame] = []
-    for _, row in sam_records.iterrows():
+    for row_id, row in sam_records.iterrows():
+        if logger and row_id % 10000 == 0:  # noqa: WPS432
+            logger.info(f'  processed {row_id} rows')
         sam_records_coords.append(SamAlignment(row).as_dataframe())
     return pd.concat(sam_records_coords, ignore_index=True)
