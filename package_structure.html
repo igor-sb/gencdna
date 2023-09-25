@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python library structure &mdash; gencdna 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Obtaining exons from individual genes using UCSC Genome Browser" href="exons.html" />
+    <link rel="prev" title="Testing gencDNA finding using synthetic reads" href="synthetic_reads.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            gencdna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="wgs_bwa.html">WGS BWA pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="all_genes_exons.html">Download and extract exons for all human genes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="next_steps.html">Next steps</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="synthetic_reads.html">Testing gencDNA finding using synthetic reads</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python library structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#integration-tests-not-finalized-updated">Integration tests (not finalized / updated)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#code-coverage">Code-coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dependency-pinning">Dependency pinning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#linting-and-type-checking">Linting and type checking</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deprecated:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="exons.html">Obtaining exons from individual genes using UCSC Genome Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wgs_bowtie.html">Deprecated: WGS pipeline using bowtie2</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gencdna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Python library structure</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/package_structure.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python-library-structure">
+<h1>Python library structure<a class="headerlink" href="#python-library-structure" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">gencdna</span></code> is a Python library that implements several components of best
+coding practices:</p>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading"></a></h2>
+<p>Documentation is built using Sphinx and deployed on Github using Conitnuous
+Deployment (CD) using Github Actions. The <code class="docutils literal notranslate"><span class="pre">doc/source</span></code> folder contains the
+restructuredText files with the documentation code. To create a local
+<code class="docutils literal notranslate"><span class="pre">doc/build</span></code> folder with actual HTML files, use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>doc
+</pre></div>
+</div>
+<p>If you want to consume the documentation only online, it will be automatically
+generated on each Push and available at: <a class="reference external" href="https://igor-sb.github.io/gencdna/">https://igor-sb.github.io/gencdna/</a></p>
+</section>
+<section id="unit-tests">
+<h2>Unit tests<a class="headerlink" href="#unit-tests" title="Link to this heading"></a></h2>
+<p>Code for unit testing is in the folder <code class="docutils literal notranslate"><span class="pre">tests/</span></code>. Each subfolder is dedicated
+to test a specific component. Inside each subfolder there are 4 types of files:</p>
+<ul class="simple">
+<li><p>fixtures: these contain manually or programmatically data</p></li>
+<li><p>snapshots: contain snapshots for unit tests that use snapshot testing</p></li>
+<li><p>conftest.py: contains code that loads automatically in each <code class="docutils literal notranslate"><span class="pre">test_*.py</span></code> file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">test_*.py</span></code> files: these are files with code for tests</p></li>
+</ul>
+<p>Unit tests can be executed using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nb">test</span>
+</pre></div>
+</div>
+<p>As number of tests are implemented as snapshot tests, the snapshots can be
+updated using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>--snapshot-update<span class="w"> </span>tests/&lt;folder&gt;/&lt;filename.py&gt;
+</pre></div>
+</div>
+</section>
+<section id="integration-tests-not-finalized-updated">
+<h2>Integration tests (not finalized / updated)<a class="headerlink" href="#integration-tests-not-finalized-updated" title="Link to this heading"></a></h2>
+<p>A full integration test, using mock dataset is performed using Nextflow and
+deployed on Github actions. The Nextflow script containing the integration
+test code is in <code class="docutils literal notranslate"><span class="pre">workflows/integration-test-qc.nf</span></code> (although for PCR data).</p>
+</section>
+<section id="code-coverage">
+<h2>Code-coverage<a class="headerlink" href="#code-coverage" title="Link to this heading"></a></h2>
+<p>On each push event, code coverage is uploaded to codecov and a report will be
+visible as a comment during a Pull Request.</p>
+</section>
+<section id="dependency-pinning">
+<h2>Dependency pinning<a class="headerlink" href="#dependency-pinning" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">gencdna</span></code> library uses <code class="docutils literal notranslate"><span class="pre">poetry</span></code> as a dependency management and ensures
+reproducibility using a lock file. When in a root folder of this repo, you
+can always run <code class="docutils literal notranslate"><span class="pre">poetry</span> <span class="pre">shell</span></code> to enter a Python virtual environment that
+contains exact version of libraries from the lock file.</p>
+</section>
+<section id="linting-and-type-checking">
+<h2>Linting and type checking<a class="headerlink" href="#linting-and-type-checking" title="Link to this heading"></a></h2>
+<p>Code is linted using <a class="reference external" href="https://flake8.pycqa.org/en/latest/">flake8</a> with few
+linting violations ignored. These are listed in the <code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code> file in the
+root folder of this repo. Python type hints are used for type checking using
+<a class="reference external" href="https://github.com/python/mypy">mypy</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="synthetic_reads.html" class="btn btn-neutral float-left" title="Testing gencDNA finding using synthetic reads" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="exons.html" class="btn btn-neutral float-right" title="Obtaining exons from individual genes using UCSC Genome Browser" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Igor Segota.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

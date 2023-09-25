@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deprecated: WGS pipeline using bowtie2 &mdash; gencdna 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Obtaining exons from individual genes using UCSC Genome Browser" href="exons.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            gencdna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="wgs_bwa.html">WGS BWA pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="all_genes_exons.html">Download and extract exons for all human genes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="next_steps.html">Next steps</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_reads.html">Testing gencDNA finding using synthetic reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="package_structure.html">Python library structure</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deprecated:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="exons.html">Obtaining exons from individual genes using UCSC Genome Browser</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Deprecated: WGS pipeline using bowtie2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#preprocess">Preprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bowtie2-index">Bowtie2 index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#align-exon-sequences-to-the-bowtie2-index">Align exon sequences to the bowtie2 index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tabulate-results">Tabulate results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#filter-results">Filter results</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gencdna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Deprecated: WGS pipeline using bowtie2</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/wgs_bowtie.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="deprecated-wgs-pipeline-using-bowtie2">
+<h1>Deprecated: WGS pipeline using bowtie2<a class="headerlink" href="#deprecated-wgs-pipeline-using-bowtie2" title="Link to this heading"></a></h1>
+<p>Commands and file names shown here are examples. Until I have put together
+a full workflow use sample IDs are filenames or prefix to filenames.</p>
+<section id="preprocess">
+<h2>Preprocess<a class="headerlink" href="#preprocess" title="Link to this heading"></a></h2>
+<p>Run circular consensus tool <code class="docutils literal notranslate"><span class="pre">ccs</span></code>, where the default parameters are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--min-passes</span></code>: 3</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--min-snr</span></code>: 2.5</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--top-passes</span></code>: 60</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--min-rq</span></code>: 0.99 (min. predicted accuracy)</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ccs<span class="w"> </span>filename.bam<span class="w"> </span>filename_ccs.fastq
+</pre></div>
+</div>
+</section>
+<section id="bowtie2-index">
+<h2>Bowtie2 index<a class="headerlink" href="#bowtie2-index" title="Link to this heading"></a></h2>
+<p>From each read create a bowtie2 index. We first concatenate all the reads into
+a single FASTA file, ignoring the quality scores:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>gencdna/wgs/concatenate.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>reads.fastq.gz<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>concatenated_reads.fasta<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>concatenated_positions.csv
+</pre></div>
+</div>
+<p>Then build the index using the <code class="docutils literal notranslate"><span class="pre">-a</span></code> flag which is used to keep all the alignments:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bowtie2-build<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>gencdna/concatenated_reads.fasta<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>folder/concatenated_reads
+</pre></div>
+</div>
+</section>
+<section id="align-exon-sequences-to-the-bowtie2-index">
+<h2>Align exon sequences to the bowtie2 index<a class="headerlink" href="#align-exon-sequences-to-the-bowtie2-index" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bowtie2<span class="w"> </span>-a<span class="w"> </span>--no-unal<span class="w"> </span>-L<span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-x<span class="w"> </span>bowtie_index<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-f<span class="w"> </span>exons.fasta<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-S<span class="w"> </span>alignments.sam
+</pre></div>
+</div>
+<p>Alignment notes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-L</span></code>: length of the seed substrings: <a class="reference external" href="https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#multiseed-heuristic">https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#multiseed-heuristic</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-a</span></code> keeps all alignments (by default on the best one is kept)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no-unal</span></code> does not keep track of unaligned reads</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-f</span></code> is the filename of the input fasta file with exons</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-S</span></code> is the filename of the output SAM file with alignments</p></li>
+</ul>
+</section>
+<section id="tabulate-results">
+<h2>Tabulate results<a class="headerlink" href="#tabulate-results" title="Link to this heading"></a></h2>
+<p>This takes the SAM alignment file and <code class="docutils literal notranslate"><span class="pre">concatenated_positions.csv</span></code> as inputs
+and creates an output <code class="docutils literal notranslate"><span class="pre">alignment_table.csv</span></code> that shows which exon was
+successfully aligned to which read.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>gencdna/wgs/alignment_table.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>alignments.sam<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>concatenated_positions.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>alignment_table.csv
+</pre></div>
+</div>
+<p>The table will look like this:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>exon_id</p></th>
+<th class="head"><p>exon_start</p></th>
+<th class="head"><p>exon_end</p></th>
+<th class="head"><p>exon_rc</p></th>
+<th class="head"><p>exon_seq</p></th>
+<th class="head"><p>genome_seq</p></th>
+<th class="head"><p>read_id</p></th>
+<th class="head"><p>read_start</p></th>
+<th class="head"><p>read_end</p></th>
+<th class="head"><p>exon_gap</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>exon_03</p></td>
+<td><p>0</p></td>
+<td><p>66</p></td>
+<td><p>False</p></td>
+<td><p>CTGAAG…</p></td>
+<td><p>CTGAAG…</p></td>
+<td><p>m64098_220714_021535/100991569/ccs</p></td>
+<td><p>1955</p></td>
+<td><p>2021</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>exon_03</p></td>
+<td><p>0</p></td>
+<td><p>66</p></td>
+<td><p>True</p></td>
+<td><p>CTGAAG…</p></td>
+<td><p>CTTGGG…</p></td>
+<td><p>m64098_220714_021535/103154991/ccs</p></td>
+<td><p>243</p></td>
+<td><p>309</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>exon_02</p></td>
+<td><p>0</p></td>
+<td><p>87</p></td>
+<td><p>True</p></td>
+<td><p>AATCTC…</p></td>
+<td><p>CTTCCG…</p></td>
+<td><p>m64098_220714_021535/103154991/ccs</p></td>
+<td><p>6745</p></td>
+<td><p>6832</p></td>
+<td><p>6436.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="filter-results">
+<h2>Filter results<a class="headerlink" href="#filter-results" title="Link to this heading"></a></h2>
+<p>At this point, to detect exon-exon joins, we look through the <code class="docutils literal notranslate"><span class="pre">alignment_table.csv</span></code>
+entries for each <code class="docutils literal notranslate"><span class="pre">read_id</span></code>. If there are multiple exons in each <code class="docutils literal notranslate"><span class="pre">read_id</span></code>,
+and their <code class="docutils literal notranslate"><span class="pre">exon_gap</span></code> is low (ideally zero), then this would be an exon-exon join.</p>
+<p>Keep in mind that the <code class="docutils literal notranslate"><span class="pre">exon_gap</span></code> is <code class="docutils literal notranslate"><span class="pre">exon_start</span></code> on that line minus
+<code class="docutils literal notranslate"><span class="pre">exon_end</span></code> on the previous, line. So in this case: 6745 - 309 = 6436.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="exons.html" class="btn btn-neutral float-left" title="Obtaining exons from individual genes using UCSC Genome Browser" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Igor Segota.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

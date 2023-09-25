@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Next steps &mdash; gencdna 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Testing gencDNA finding using synthetic reads" href="synthetic_reads.html" />
+    <link rel="prev" title="Download and extract exons for all human genes" href="all_genes_exons.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            gencdna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="wgs_bwa.html">WGS BWA pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="all_genes_exons.html">Download and extract exons for all human genes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Next steps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#summarize-results">Summarize results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#human-genome-insertion-sites">Human genome insertion sites</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_reads.html">Testing gencDNA finding using synthetic reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="package_structure.html">Python library structure</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deprecated:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="exons.html">Obtaining exons from individual genes using UCSC Genome Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wgs_bowtie.html">Deprecated: WGS pipeline using bowtie2</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gencdna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Next steps</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/next_steps.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="next-steps">
+<h1>Next steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h1>
+<p>Finish finding exon-exon joins for all samples - last step in
+<a class="reference internal" href="wgs_bwa.html#wgs-bwa-pipeline"><span class="std std-ref">WGS BWA pipeline</span></a>.</p>
+<section id="summarize-results">
+<h2>Summarize results<a class="headerlink" href="#summarize-results" title="Link to this heading"></a></h2>
+<p>Starting from <code class="docutils literal notranslate"><span class="pre">&lt;mapped_exons_joins_csv&gt;</span></code> files and create a summary of all
+exon-exon joins found across the sample.</p>
+</section>
+<section id="human-genome-insertion-sites">
+<h2>Human genome insertion sites<a class="headerlink" href="#human-genome-insertion-sites" title="Link to this heading"></a></h2>
+<p>For each read where we found exon-exon joins, which is two exons on a read
+without a gap, check if this is already present in a reference human genome.
+Generally, we are interested in somatic and not germline exon-exon joins so
+these need to be filtered out.</p>
+<p>Besides creating a custom code for this, it’s worth checking other tools such
+as <a class="reference external" href="https://github.com/fritzsedlazeck/Sniffles">Sniffles</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="all_genes_exons.html" class="btn btn-neutral float-left" title="Download and extract exons for all human genes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="synthetic_reads.html" class="btn btn-neutral float-right" title="Testing gencDNA finding using synthetic reads" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Igor Segota.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

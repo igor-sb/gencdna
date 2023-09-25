@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Download and extract exons for all human genes &mdash; gencdna 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Next steps" href="next_steps.html" />
+    <link rel="prev" title="WGS BWA pipeline" href="wgs_bwa.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            gencdna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="wgs_bwa.html">WGS BWA pipeline</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Download and extract exons for all human genes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="next_steps.html">Next steps</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="synthetic_reads.html">Testing gencDNA finding using synthetic reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="package_structure.html">Python library structure</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deprecated:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="exons.html">Obtaining exons from individual genes using UCSC Genome Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wgs_bowtie.html">Deprecated: WGS pipeline using bowtie2</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gencdna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Download and extract exons for all human genes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/all_genes_exons.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="download-and-extract-exons-for-all-human-genes">
+<h1>Download and extract exons for all human genes<a class="headerlink" href="#download-and-extract-exons-for-all-human-genes" title="Link to this heading"></a></h1>
+<p>First, download the Human Genome FASTA file and GFF3 file with annotations. We
+will use Gencode release 44 from: <a class="reference external" href="https://www.gencodegenes.org/human/release_44.html">https://www.gencodegenes.org/human/release_44.html</a>
+the two files are listed under:</p>
+<ul class="simple">
+<li><p>Basic gene annotation (chr): It contains the basic gene annotation on the reference chromosomes only (GFF3)</p></li>
+<li><p>Genome sequence, primary assembly (GRCh38) (FASTA)</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span><span class="s1">&#39;https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_44/gencode.v44.basic.annotation.gff3.gz&#39;</span>
+wget<span class="w"> </span><span class="s1">&#39;https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_44/GRCh38.primary_assembly.genome.fa.gz&#39;</span>
+gunzip<span class="w"> </span>gencode.v44.basic.annotation.gff3.gz
+gunzip<span class="w"> </span>GRCh38.primary_assembly.genome.fa.gz
+</pre></div>
+</div>
+<p>The plan here is to convert the goofy GFF3 format, where gene names are buried in a string such as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ID</span><span class="o">=</span><span class="n">ENSG00000223972</span><span class="mf">.6</span><span class="p">;</span><span class="n">gene_id</span><span class="o">=</span><span class="n">ENSG00000223972</span><span class="mf">.6</span><span class="p">;</span><span class="n">gene_type</span><span class="o">=</span><span class="n">transcribed_unprocessed_pseudogene</span><span class="p">;</span><span class="n">gene_name</span><span class="o">=</span><span class="n">DDX11L1</span><span class="p">;</span><span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="n">hgnc_id</span><span class="o">=</span><span class="n">HGNC</span><span class="p">:</span><span class="mi">37102</span><span class="p">;</span><span class="n">havana_gene</span><span class="o">=</span><span class="n">OTTHUMG00000000961</span><span class="mf">.2</span>
+</pre></div>
+</div>
+<p>into a tab-delimited file or a csv where we can link the gene names, transcript
+name, and other meta-data to the unique sequence on the chromosome.</p>
+<p>First, we will organize the chromosomal positions in a bed file and other meta-data
+in a csv file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>gencdna/file_api/extract_exons_from_gff3.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>gencode.v44.basic.annotation.gff3<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>all_exons.bed<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>all_exons_positions.csv
+</pre></div>
+</div>
+<p>BED file is a simple tab-delimited file, without a header row, which contains
+the columns:</p>
+<ul class="simple">
+<li><p>chromosome ID</p></li>
+<li><p>chromosome start position</p></li>
+<li><p>chromosome end position</p></li>
+<li><p>sequence ID (used to cross-reference FASTA and BED files)</p></li>
+<li><p>sequence score (used for UCSC Genome Browser plotting)</p></li>
+<li><p>strand (+ or -)</p></li>
+</ul>
+<p>Then use <a class="reference external" href="https://bedtools.readthedocs.io/en/latest/">bedtools</a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bedtools<span class="w"> </span>getfasta<span class="w"> </span>-nameOnly<span class="w"> </span>-s<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-fi<span class="w"> </span>GRCh38.p14.genome.fa<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-bed<span class="w"> </span>all_exons.bed<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-fo<span class="w"> </span>all_exons.fasta
+</pre></div>
+</div>
+<p>This will use genomic locations from bed file and DNA sequences from a FASTA
+file to pull out sequences in those genomic locations and store them in
+<code class="docutils literal notranslate"><span class="pre">all_exons.fasta</span></code>. This is the file we will use for bowtie2 alignment.</p>
+<p>Resulting FASTA file shoud look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="mi">0</span><span class="p">(</span><span class="o">+</span><span class="p">)</span>
+<span class="n">TTAACTTGCCGT</span><span class="o">...</span>
+<span class="o">&gt;</span><span class="mi">1</span><span class="p">(</span><span class="o">+</span><span class="p">)</span>
+<span class="n">TGTCTGACTTCG</span><span class="o">...</span>
+<span class="o">&gt;</span><span class="mi">2</span><span class="p">(</span><span class="o">-</span><span class="p">)</span>
+<span class="n">TGGAGGAAAGAT</span><span class="o">...</span>
+</pre></div>
+</div>
+<p>Here, each number in the meta-data line of the FASTA file is a sequence ID of
+a unique sequence. Typically, this is an “exon ID” although there are often
+multiple transcripts of a single gene. Some of these transcripts consists of
+the same or similar exons.</p>
+<p>Where (+) or (-) indicate the strand bedtools used and the number is the
+sequence ID number in the BED file and in the <code class="docutils literal notranslate"><span class="pre">all_exons_positions.csv</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sequence_idgene_name</span><span class="p">,</span><span class="n">exon_number</span><span class="p">,</span><span class="n">transcript_name</span>
+<span class="mi">0</span><span class="p">,</span><span class="n">DDX11L2</span><span class="p">,</span><span class="mi">01</span><span class="p">,</span><span class="n">DDX11L2</span><span class="o">-</span><span class="mi">202</span>
+<span class="mi">1</span><span class="p">,</span><span class="n">DDX11L1</span><span class="p">,</span><span class="mi">01</span><span class="p">,</span><span class="n">DDX11L1</span><span class="o">-</span><span class="mi">201</span>
+<span class="mi">2</span><span class="p">,</span><span class="n">DDX11L1</span><span class="p">,</span><span class="mi">02</span><span class="p">,</span><span class="n">DDX11L1</span><span class="o">-</span><span class="mi">201</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>This file can be used to backtrack from sequence ID to an actual gene name,
+which is what is ultimately going to be relevant.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="wgs_bwa.html" class="btn btn-neutral float-left" title="WGS BWA pipeline" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="next_steps.html" class="btn btn-neutral float-right" title="Next steps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Igor Segota.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

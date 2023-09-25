@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testing gencDNA finding using synthetic reads &mdash; gencdna 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Python library structure" href="package_structure.html" />
+    <link rel="prev" title="Next steps" href="next_steps.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            gencdna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="wgs_bwa.html">WGS BWA pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="all_genes_exons.html">Download and extract exons for all human genes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="next_steps.html">Next steps</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Testing gencDNA finding using synthetic reads</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#implementation">Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#explanation-of-the-output">Explanation of the output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="package_structure.html">Python library structure</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deprecated:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="exons.html">Obtaining exons from individual genes using UCSC Genome Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wgs_bowtie.html">Deprecated: WGS pipeline using bowtie2</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gencdna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Testing gencDNA finding using synthetic reads</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/synthetic_reads.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="testing-gencdna-finding-using-synthetic-reads">
+<h1>Testing gencDNA finding using synthetic reads<a class="headerlink" href="#testing-gencdna-finding-using-synthetic-reads" title="Link to this heading"></a></h1>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading"></a></h2>
+<p>In order to check the limitations of <a class="reference internal" href="wgs_bwa.html#wgs-bwa-pipeline"><span class="std std-ref">WGS BWA pipeline</span></a>, and other tools
+for detection insertion sites in the host genome, I created a code that
+generates synthetic exon-exon joins of various lengths.</p>
+<p>The code is contained in <code class="docutils literal notranslate"><span class="pre">gencdna/synthetic_reads/</span></code> and is centered around the
+class called <code class="docutils literal notranslate"><span class="pre">ReadElement</span></code>. Each synthetic read is a obtained by concatenating
+various read elements - which are either exons or introns.</p>
+<p>You can use read elements like this in Python, where the first two arguments
+are <code class="docutils literal notranslate"><span class="pre">label</span></code> and <code class="docutils literal notranslate"><span class="pre">sequence</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">ReadElement</span><span class="p">(</span><span class="s1">&#39;seq1&#39;</span><span class="p">,</span> <span class="s1">&#39;ATG&#39;</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">ReadElement</span><span class="p">(</span><span class="s1">&#39;seq2&#39;</span><span class="p">,</span> <span class="s1">&#39;CCTA&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<span class="c1">#&gt; seq1seq2 (7): ATGCCTA</span>
+</pre></div>
+</div>
+<p>so basically <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code> is a new <code class="docutils literal notranslate"><span class="pre">ReadElement</span></code> object with label <code class="docutils literal notranslate"><span class="pre">seq1seq2</span></code>
+and sequence <code class="docutils literal notranslate"><span class="pre">ATGCCTA</span></code>.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>To create a file for testing you can use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>gencdna/file_api/create_synthetic_reads.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>test_synthetic_reads.fasta<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>test_synthetic_exons.fasta
+</pre></div>
+</div>
+<p>For reproducibility, the default seed is 1, but can be changed using
+<code class="docutils literal notranslate"><span class="pre">--seed</span></code> argument. This creates two files.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">test_synthetic_exons.fasta</span></code> file shows synthetic exon sequences.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="p">[</span><span class="n">SH0E1</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">ATTCCCGTAA</span>
+<span class="o">&gt;</span><span class="p">[</span><span class="n">MD0E1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">TCTACGATTAAGTCACAAC</span><span class="o">...</span>
+<span class="o">&gt;</span><span class="p">[</span><span class="n">LG0E1</span><span class="p">:</span><span class="mi">1000</span><span class="p">]</span>
+<span class="n">GCAAAGTTTTCTGAAATAA</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><code class="docutils literal notranslate"><span class="pre">test_synthetic_reads.fasta</span></code> file shows synthetic read sequences.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;-</span><span class="mi">10000</span><span class="o">-</span><span class="p">[</span><span class="n">SH0E1</span><span class="p">:</span><span class="mi">10</span><span class="p">][</span><span class="n">SH0E1</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span><span class="o">-</span><span class="mi">10000</span><span class="o">-</span>
+<span class="n">GTTTGGCATAATATACCGGAGGCTAGGCGTTATGTG</span><span class="o">...</span>
+<span class="o">&gt;-</span><span class="mi">10000</span><span class="o">-</span><span class="p">[</span><span class="n">SH0E1</span><span class="p">:</span><span class="mi">10</span><span class="p">][</span><span class="n">MD0E1</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span><span class="o">-</span><span class="mi">100</span><span class="o">-</span>
+<span class="n">CAGTTCAGAGTAAACGCCTGCAACCAATGCTAAGGA</span><span class="o">...</span>
+<span class="o">&gt;-</span><span class="mi">10</span><span class="o">-</span><span class="p">[</span><span class="n">SH0E1</span><span class="p">:</span><span class="mi">10</span><span class="p">][</span><span class="n">LG0E1</span><span class="p">:</span><span class="mi">1000</span><span class="p">]</span><span class="o">-</span><span class="mi">10000</span><span class="o">-</span>
+<span class="n">CTACCGTAGGATTCCCGTAAGCAAAGTTTTCTGAA</span>
+</pre></div>
+</div>
+</section>
+<section id="explanation-of-the-output">
+<h2>Explanation of the output<a class="headerlink" href="#explanation-of-the-output" title="Link to this heading"></a></h2>
+<p>The meta-data lines describe each read, where <code class="docutils literal notranslate"><span class="pre">-length-</span></code> represent introns of
+length <code class="docutils literal notranslate"><span class="pre">length</span></code>, and <code class="docutils literal notranslate"><span class="pre">[name:length]</span></code> represent exons named <code class="docutils literal notranslate"><span class="pre">name</span></code> and
+having length <code class="docutils literal notranslate"><span class="pre">length</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">-10000-[SH0E1:10][SH0E1:10]-1000-</span></code>
+represents a read of total length 10000 + 10 + 10 + 1000 = 11020. Exons are
+named as: <code class="docutils literal notranslate"><span class="pre">{shortname}:{gene_variant}E{exon_number}</span></code>.</p>
+<p>Genes and exons are generated from this hard-coded table of exon names and
+lengths:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>name</p></th>
+<th class="head"><p>shortname</p></th>
+<th class="head"><p>exon_1</p></th>
+<th class="head"><p>exon_2</p></th>
+<th class="head"><p>exon_3</p></th>
+<th class="head"><p>intron</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>short</p></td>
+<td><p>SH</p></td>
+<td><p>10</p></td>
+<td><p>20</p></td>
+<td><p>30</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-odd"><td><p>medium</p></td>
+<td><p>MD</p></td>
+<td><p>100</p></td>
+<td><p>200</p></td>
+<td><p>300</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-even"><td><p>long</p></td>
+<td><p>LG</p></td>
+<td><p>1000</p></td>
+<td><p>2000</p></td>
+<td><p>3000</p></td>
+<td><p>1000</p></td>
+</tr>
+<tr class="row-odd"><td><p>verylong</p></td>
+<td><p>VL</p></td>
+<td><p>10000</p></td>
+<td><p>20000</p></td>
+<td><p>30000</p></td>
+<td><p>10000</p></td>
+</tr>
+</tbody>
+</table>
+<p>Basically there are 4 synthetic genes named SH, MD, LG and VL. Each has 3
+exons of lengths that are multiple of 10 (short), 100 (medium), 1000 (long) or
+10,000 (verylong). The sequence of each exon for each gene are generated
+randomly, but reproducibly when given the same <code class="docutils literal notranslate"><span class="pre">seed</span></code>. Introns are just
+random sequences that we do not care about for this analysis.</p>
+<p>So, the read labelled as <code class="docutils literal notranslate"><span class="pre">-10000-[SH0E1:10][MD0E1:100]-100-</span></code> contains a
+concatenated sequence of length 20030:</p>
+<ol class="arabic simple">
+<li><p>intron of length 10000</p></li>
+<li><p>exon of length 10 of short gene variant 0</p></li>
+<li><p>exon of length 100 of medium gene variant 0</p></li>
+<li><p>intron of length 100</p></li>
+</ol>
+<p>And the sequences of all exons used in these reads are listed in the
+<code class="docutils literal notranslate"><span class="pre">test_synthetic_reads.fasta</span></code>. So if we want to know what those exon sequences
+are we can check that file and see that that the short gene variant 0, exon 1
+<code class="docutils literal notranslate"><span class="pre">SH0E1</span></code> has a sequence <code class="docutils literal notranslate"><span class="pre">ATTCCCGTAA</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="next_steps.html" class="btn btn-neutral float-left" title="Next steps" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="package_structure.html" class="btn btn-neutral float-right" title="Python library structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Igor Segota.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
