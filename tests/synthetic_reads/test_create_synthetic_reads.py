@@ -34,4 +34,4 @@ def test_create_synthetic_reads(
             snapshot.assert_match(
                 actual_exons.read(),
                 ref_synthetic_exons_fasta,
-            )            
+            )
